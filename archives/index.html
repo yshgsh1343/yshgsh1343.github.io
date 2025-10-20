@@ -1,452 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 
 <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- Minima -->
-  <!-- Hexo theme created by @adisaktijrs -->
+    <meta name="author" content="yshgsh1343">
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
 
-  
-  <title>All Posts - yshgsh1343</title>
-  
-  <link rel="canonical" href="https://yshgsh1343.github.io/archives/">
-  
-  <meta name="description" content="">
-  
-  
-  <meta name="author" content="yshgsh1343">
-  
-  
-  <meta property="og:image" content="https://yshgsh1343.github.io/images/thumbnail.jpg">
-  
-  
-  <meta property="og:site_name" content="yshgsh1343&#39;s blog" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="All Posts - yshgsh1343" />
-  
-  <meta property="og:description" content="">
-  
-  <meta property="og:url" content="https://yshgsh1343.github.io/archives/" />
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="All Posts - yshgsh1343">
-  
-  <meta name="twitter:description" content="">
-  
-  
-  
-  <meta name="twitter:image" content="https://yshgsh1343.github.io/images/thumbnail.jpg">
-  
-  
-  <meta name="twitter:url" content="https://yshgsh1343.github.io/archives/" />
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Preload fonts
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<title>Archives | yshgsh1343&#39;s blog</title>
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  
-<link rel="stylesheet" href="/css/normalize.css">
 
-  
-<link rel="stylesheet" href="/css/skeleton.css">
 
-  
-<link rel="stylesheet" href="/css/custom.css">
+    <link rel="icon" href="/favicon.ico">
 
-  
-<link rel="stylesheet" href="/css/prism-dark.css">
 
-  
-<link rel="stylesheet" href="/css/prism-line-numbers.css">
 
-  <!-- User css -->
-  
-  
-<link rel="stylesheet" href="/css/user.css">
 
-  
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="/images/favicon.png">
 
-  <!-- Custom Theme Color Style
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <style>
-  a:not(.icon) {
-    text-decoration-color: #0FA0CE;
-    background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 50%,
-      #0FA0CE 50%
-    );
-  }
-  blockquote {
-    border-left: 8px solid #0FA0CE;
-  }
-  .nanobar .bar {
-    background: #0FA0CE;
-  }
-  .button.button-primary:hover,
-  button.button-primary:hover,
-  input[type="submit"].button-primary:hover,
-  input[type="reset"].button-primary:hover,
-  input[type="button"].button-primary:hover,
-  .button.button-primary:focus,
-  button.button-primary:focus,
-  input[type="submit"].button-primary:focus,
-  input[type="reset"].button-primary:focus,
-  input[type="button"].button-primary:focus {
-    background-color: #0FA0CE;
-    border-color: #0FA0CE;
-  }
-  input[type="email"]:focus,
-  input[type="number"]:focus,
-  input[type="search"]:focus,
-  input[type="text"]:focus,
-  input[type="tel"]:focus,
-  input[type="url"]:focus,
-  input[type="password"]:focus,
-  textarea:focus,
-  select:focus {
-    border: 1px solid #0FA0CE;
-  }
-</style>
 
-  <!-- Google Analytics (With Privacy Settings On)
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
 
-  
-  <script src="/js/pic.min.js" defer></script>
-  
 
-  
+
+    
+    
+        
+    
+
 
 <meta name="generator" content="Hexo 8.0.0"></head>
 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 <body>
-  <div class="container">
-    <div class="row">
-      <div>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
 
-        <div class="row">
-  <div class="two columns" style="max-width: 50px">
-    <h1 class="mt-2 mode">
-      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
-      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
-      <script >
-        if (localStorage.getItem('preferredTheme') == 'dark') {
-          setDarkMode(true)
-        }
-        function setDarkMode(isDark) {
-          var darkBtn = document.getElementById('darkBtn')
-          var lightBtn = document.getElementById('lightBtn')
-          if (isDark) {
-            lightBtn.style.display = "block"
-            darkBtn.style.display = "none"
-            localStorage.setItem('preferredTheme', 'dark');
-          } else {
-            lightBtn.style.display = "none"
-            darkBtn.style.display = "block"
-            localStorage.removeItem('preferredTheme');
-          }
-          document.body.classList.toggle("darkmode");
-        }
-      </script>
-    </h1>
-  </div>
+            function setTheme(status) {
 
-  <div class="six columns ml-1">
-    <h1 class="mt-2">
-      Hi Folks.
-    </h1>
-  </div>
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
 
-  <div class="twelve columns">
-    <div class="row">
-      <div class="nine columns left">
-        <a href="/">Home</a>
-        
-          
-          <a href="/%E5%BD%92" class="ml">0</a>
-          
-        
-          
-          <a href="/%E6%A1%A3" class="ml">1</a>
-          
-        
-          
-          <a href="/:" class="ml">2</a>
-          
-        
-          
-          <a href="/" class="ml">3</a>
-          
-        
-          
-          <a href="/W" class="ml">4</a>
-          
-        
-          
-          <a href="/o" class="ml">5</a>
-          
-        
-          
-          <a href="/r" class="ml">6</a>
-          
-        
-          
-          <a href="/k" class="ml">7</a>
-          
-        
-          
-          <a href="/s" class="ml">8</a>
-          
-        
-          
-          <a href="/%20" class="ml">9</a>
-          
-        
-          
-          <a href="/%E5%88%86" class="ml">10</a>
-          
-        
-          
-          <a href="/%E7%B1%BB" class="ml">11</a>
-          
-        
-          
-          <a href="/:" class="ml">12</a>
-          
-        
-          
-          <a href="/" class="ml">13</a>
-          
-        
-          
-          <a href="/C" class="ml">14</a>
-          
-        
-          
-          <a href="/a" class="ml">15</a>
-          
-        
-          
-          <a href="/t" class="ml">16</a>
-          
-        
-          
-          <a href="/e" class="ml">17</a>
-          
-        
-          
-          <a href="/g" class="ml">18</a>
-          
-        
-          
-          <a href="/o" class="ml">19</a>
-          
-        
-          
-          <a href="/r" class="ml">20</a>
-          
-        
-          
-          <a href="/i" class="ml">21</a>
-          
-        
-          
-          <a href="/e" class="ml">22</a>
-          
-        
-          
-          <a href="/s" class="ml">23</a>
-          
-        
-          
-          <a href="/%20" class="ml">24</a>
-          
-        
-          
-          <a href="/%E6%A0%87" class="ml">25</a>
-          
-        
-          
-          <a href="/%E7%AD%BE" class="ml">26</a>
-          
-        
-          
-          <a href="/:" class="ml">27</a>
-          
-        
-          
-          <a href="/" class="ml">28</a>
-          
-        
-          
-          <a href="/T" class="ml">29</a>
-          
-        
-          
-          <a href="/a" class="ml">30</a>
-          
-        
-          
-          <a href="/g" class="ml">31</a>
-          
-        
-          
-          <a href="/s" class="ml">32</a>
-          
-        
-          
-          <a href="/%20" class="ml">33</a>
-          
-        
-          
-          <a href="/%E5%85%B3" class="ml">34</a>
-          
-        
-          
-          <a href="/%E4%BA%8E" class="ml">35</a>
-          
-        
-          
-          <a href="/:" class="ml">36</a>
-          
-        
-          
-          <a href="/" class="ml">37</a>
-          
-        
-          
-          <a href="/A" class="ml">38</a>
-          
-        
-          
-          <a href="/b" class="ml">39</a>
-          
-        
-          
-          <a href="/o" class="ml">40</a>
-          
-        
-          
-          <a href="/u" class="ml">41</a>
-          
-        
-          
-          <a href="/t" class="ml">42</a>
-          
-        
-        
-      </div>
-    </div>
-    <hr style="margin-bottom: 2.6rem">
-  </div>
-</div>
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
 
-        <div class="trans">
-          
-<h2>All Posts</h2>
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
 
-
-  
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">Oct 15, 2025</p>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">云水归山的博客</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">归档</a>
+                
+                <a class="menu-item" href="/category">分类</a>
+                
+                <a class="menu-item" href="/tag">标签</a>
+                
+                <a class="menu-item" href="/about">关于</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
         </div>
-        <div class="nine columns left mb-3">
-          <a href="/2025/10/15/hello-world/" class="">
-            
-              Hello World
-            
-          </a>
-        </div>
-      </div>
-    </article>
+    </nav>
 
-<div class="pagination-bar">
-  <ul class="pagination">
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">云水归山的博客</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">归档</a>
+                
+                <a class="menu-item" href="/category">分类</a>
+                
+                <a class="menu-item" href="/tag">标签</a>
+                
+                <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="post-wrap archive">
     
     
-  </ul>
-</div>
-
-  
-        </div>
-        <div class="row mt-2">
-  <h3>Search</h3>
-  <div><input id="search-text" title="search" class="search-text" type="text" placeholder="search......"></div>
-  <div style="margin-top: 1.5rem;">
-    <ul id="result"></ul>
-  </div>
-</div>
-        <div class="row mt-2">
-  
-    <div class="eight columns">
-      <p id="madewith">Made with ❤ and
-        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
-        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
-        </a>
         
-        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+
         
-    </div>
+            <h3>2025</h3>
+        
 
-    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
-    <div class="four columns mb-3 posisi" >
-      
-      <a class="ml-0 footer-link icon" href="https://github.com/yshgsh1343" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
-        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      
-
-      
-
-      
-
-      
-
-      
-
-    </div>
-  
+        <article class="archive-item">
+            <a class="archive-item-link" href="/2025/10/15/hello-world/">Hello World</a>
+            <span class="archive-item-date">十月 15, 2025</span>
+        </article>
+    
+    
 </div>
+            </div>
+            <footer class="site-footer">
+  
+  <div class="footer-item">
+    <span>&copy; 2025 yshgsh1343</span>
+  </div>
 
-      </div>
+  
+  <div class="footer-item">
+    <span>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+  </div>
+
+  
+  
+</footer>
 
     </div>
-
-  </div>
-  <script src="/js/nanobar.min.js"></script>
-
-  <script>
-    var options = {
-      classname: 'nanobar',
-      id: 'myNanobar'
-    };
-    var nanobar = new Nanobar(options);
-    nanobar.go(30);
-    nanobar.go(76);
-    nanobar.go(100);
-  </script>
-
 </body>
 
 </html>
