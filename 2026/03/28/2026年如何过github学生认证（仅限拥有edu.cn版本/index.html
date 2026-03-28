@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="yshgsh1343">
+
+
+
+
+
+<title>yshgsh1343&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">云水归山的博客</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">归档</a>
+                
+                <a class="menu-item" href="/category">分类</a>
+                
+                <a class="menu-item" href="/tag">标签</a>
+                
+                <a class="menu-item" href="/about">关于</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">云水归山的博客</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">归档</a>
+                
+                <a class="menu-item" href="/category">分类</a>
+                
+                <a class="menu-item" href="/tag">标签</a>
+                
+                <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">yshgsh1343</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 28, 2026&nbsp;&nbsp;20:23:28</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于近两年github学生认证逐渐收紧<del>到真学生都过不去认证</del>，且国内直连 GitHub 本就困难，而审核要求关闭 VPN 并共享地理位置。用校园网网页刷不出来用VPN则IP 地址对不上。于是即使是真学生也需要采取特殊手段，下面是个人通过截图证明。</p>
+<p><img src="D:\marktest\image\2026-03-28-15-54-38-image.png"></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li><p>edu邮箱</p>
+</li>
+<li><p>可以使用加密DNS服务的浏览器，不推荐Edge。</p>
+</li>
+<li><p>一根数据线与Irium Webcam，手机需要前往Play商店下载。电脑端<a target="_blank" rel="noopener" href="https://iriun.com/">https://iriun.com/</a></p>
+</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>全程避免任何VPN工具使用，不要在申请过程中反复开关 VPN</p>
+</li>
+<li><p>Github实名较为关键不可省略。<del>痛失网名</del></p>
+</li>
+</ol>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h4 id="1-修改DoH"><a href="#1-修改DoH" class="headerlink" title="1.修改DoH"></a>1.修改DoH</h4><p>修改DoH使得可以在国内环境免VPN工具直连Github。笔者此处使用为Brave浏览器，设置-隐私与安全-高级，打开使用安全DNS把DNS提供商改为Cloudfare（1.1.1.1）。</p>
+<p><img src="D:\marktest\image\2026-03-28-16-23-51-image.png"></p>
+<p>Chorme浏览器位置</p>
+<p><img src="D:\marktest\image\2026-03-28-16-39-26-image.png"></p>
+<p><strong>Tips</strong>：如果 Chrome 提示“浏览器由贵单位管理”导致无法修改，请：</p>
+<ol>
+<li><p><code>Win+R </code>输入 <code>RegEdit</code> 运行注册表。</p>
+</li>
+<li><p>删除<code> \HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome </code>整个目录。</p>
+<h4 id="2-修改个人信息-（Profile易忽略）"><a href="#2-修改个人信息-（Profile易忽略）" class="headerlink" title="2. 修改个人信息 （Profile易忽略）"></a>2. 修改个人信息 （Profile易忽略）</h4><h6 id="2-1-修改姓名"><a href="#2-1-修改姓名" class="headerlink" title="2.1 修改姓名"></a>2.1 修改姓名</h6></li>
+</ol>
+<img src="file:///D:/marktest/image/2026-03-28-16-01-00-image.png" title="" alt="" width="230">
+
+<p>下面的name一定要改真实姓名。</p>
+<p><img src="D:\marktest\image\2026-03-28-16-07-14-image.png"></p>
+<h6 id="2-2-账单信息："><a href="#2-2-账单信息：" class="headerlink" title="2.2 账单信息："></a>2.2 账单信息：</h6><p><img src="D:\marktest\image\2026-03-28-16-06-31-image.png"></p>
+<h4 id="3-绑定edu-cn邮箱与开启2FA"><a href="#3-绑定edu-cn邮箱与开启2FA" class="headerlink" title="3.绑定edu.cn邮箱与开启2FA"></a>3.绑定edu.cn邮箱与开启2FA</h4><p>笔者注册github就用的edu.cn所以此处不赘述，仅贴链接<a target="_blank" rel="noopener" href="https://github.com/settings/emails">https://github.com/settings/emails</a></p>
+<p><strong>2FA验证</strong></p>
+<p><img src="D:\marktest\image\2026-03-28-16-11-09-image.png"></p>
+<p>安卓在软件商城下载Authenticator扫码即可，记得保存recovery code。</p>
+<h4 id="4-开始申请学生认证"><a href="#4-开始申请学生认证" class="headerlink" title="4.开始申请学生认证"></a>4.开始申请学生认证</h4><p><img src="D:\marktest\image\2026-03-28-16-20-16-image.png"></p>
+<p>可以看见如果第二步绑定成功这一步可以直接选择select this school不需要填写详细信息。</p>
+<p>理论上这一步share location就可以通过但可以<strong>加一道保险</strong>。</p>
+<p><strong>打开开发者工具</strong>（依旧Brave举例子</p>
+<p><img src="D:\marktest\image\2026-03-28-16-43-35-image.png"></p>
+<p>位置改为其他，经纬度使用<a target="_blank" rel="noopener" href="http://jingweidu.757dy.com查询.越精确越好./">http://jingweidu.757dy.com查询。越精确越好。</a></p>
+<p><strong>Chorme</strong></p>
+<p><img src="D:\marktest\image\2026-03-28-16-47-34-image.png"></p>
+<h4 id="5-按要求上传个人信息"><a href="#5-按要求上传个人信息" class="headerlink" title="5.按要求上传个人信息"></a>5.按要求上传个人信息</h4><p><img src="D:\marktest\image\2026-03-28-16-53-35-image.png"></p>
+<p>选择<strong>8.other</strong>，先用<code>win+x</code>打开设备管理器禁用笔记本自带摄像头，数据线连接手机与电脑（同一wifi也行开热点），两台设备打开<strong>Irium Webcam</strong>准备拍屏幕。</p>
+<ul>
+<li>方法一：记事本大法</li>
+</ul>
+<p><img src="D:\marktest\image\2026-03-28-16-57-53-image.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Student Verification Report</span><br><span class="line">Name:                   </span><br><span class="line">School:                 </span><br><span class="line">Student ID:                </span><br><span class="line">Study Form: Distance learning</span><br><span class="line">Validate Until:</span><br><span class="line">Student xxx,<span class="keyword">is</span> allowed to study via distance learning <span class="keyword">in</span> xxx</span><br></pre></td></tr></table></figure>
+
+<p>注意<strong>Study Form</strong>一栏填写<strong>Distance learning</strong> ，下边那句<strong>Student xxx,is allowed to study via distance learning</strong>别省略。这样如果后续爆出询问为何不在当前地址就可以选择distance learning。</p>
+<ul>
+<li>方法二：学信网申请学籍报告下载，丢到google翻译成<strong>英文</strong>。再采用任意pdf修改器<strong>修改字体大小</strong>（学信网那个报告字太小了github识别容易失误）+<strong>改为Distance learning</strong></li>
+</ul>
+<p><img src="D:\marktest\image\2026-03-28-17-03-00-image.png"></p>
+<p>手机拍摄电脑屏幕，如果后续跳出第六步为何不在对应位置选择<strong>distance learning</strong>提交。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://linux.do/t/topic/1413847">https://linux.do/t/topic/1413847</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhaojianjun2004.github.io/2025/09/16/github_student">github学生认证常见问题解决方案（已Approved） - Caicaixiong</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>yshgsh1343</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://yshgsh1343.github.io/2026/03/28/2026%E5%B9%B4%E5%A6%82%E4%BD%95%E8%BF%87github%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81%EF%BC%88%E4%BB%85%E9%99%90%E6%8B%A5%E6%9C%89edu.cn%E7%89%88%E6%9C%AC/">https://yshgsh1343.github.io/2026/03/28/2026%E5%B9%B4%E5%A6%82%E4%BD%95%E8%BF%87github%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81%EF%BC%88%E4%BB%85%E9%99%90%E6%8B%A5%E6%9C%89edu.cn%E7%89%88%E6%9C%AC/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/10/15/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer class="site-footer">
+  
+  <div class="footer-item">
+    <span>&copy; 2026 yshgsh1343</span>
+  </div>
+
+  
+  <div class="footer-item">
+    <span>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+  </div>
+
+  
+  
+</footer>
+
+    </div>
+</body>
+
+</html>
