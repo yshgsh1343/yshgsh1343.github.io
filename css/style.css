@@ -1349,11 +1349,11 @@ h2 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 40vh;
   position: relative;
 }
 .main-content-index {
-  padding-top: 2rem;
+  padding-top: 0rem;
 }
 #scroll-down {
   position: absolute;
@@ -1429,6 +1429,71 @@ h2 {
 }
 .busuanzi-divider {
   margin: 0 10px;
+}
+/* ==========================================
+   云水归山博客 - 最终视觉美化方案
+   ========================================== */
+.post-content {
+  font-size: 18px !important;
+  line-height: 1.65 !important;
+  color: #333 !important;
+  text-align: justify;
+}
+.post-content p {
+  margin-bottom: 22px;
+}
+.post-tags {
+  margin-top: 40px;
+}
+.post-tags .tag a {
+  background: #eef2ff !important;
+  color: #3b82f6 !important;
+  padding: 4px 14px !important;
+  border-radius: 20px !important;
+  margin-right: 12px !important;
+  border: 1px solid #dbeafe !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+}
+.post-tags .tag a:hover {
+  background: #3b82f6 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(59,130,246,0.2);
+}
+.category-list-item a,
+.archive-item-link,
+.post-title {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: inline-block !important;
+  line-height: 1.4 !important;
+}
+.site-footer {
+  border-top: 1px solid #f0f0f0;
+  padding: 30px 0;
+  margin-top: 60px;
+  font-size: 14px;
+  color: #999;
+}
+.site-footer .footer-item {
+  margin-bottom: 6px;
+}
+.site-footer a {
+  color: #666;
+}
+.site-footer a:hover {
+  color: #3b82f6;
+}
+.post-item .post-link {
+  white-space: normal !important;
+  display: block !important;
+  line-height: 1.5 !important;
+}
+.recent-posts-title {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
 }
 @-moz-keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
