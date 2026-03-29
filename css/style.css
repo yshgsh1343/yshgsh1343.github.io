@@ -1223,45 +1223,72 @@ header .menu label {
   }
 }
 body:not(.dark-theme) .highlight {
-  color: #68615e;
-  background: #f1efee;
+  color: #333;
+  background: #f8f8f8;
 }
 body:not(.dark-theme) .highlight .code .comment,
 body:not(.dark-theme) .highlight .code .quote {
-  color: #766e6b;
-}
-body:not(.dark-theme) .highlight .code .variable,
-body:not(.dark-theme) .highlight .code .template-variable,
-body:not(.dark-theme) .highlight .code .attribute,
-body:not(.dark-theme) .highlight .code .tag,
-body:not(.dark-theme) .highlight .code .name,
-body:not(.dark-theme) .highlight .code .regexp,
-body:not(.dark-theme) .highlight .code .link,
-body:not(.dark-theme) .highlight .code .selector-id,
-body:not(.dark-theme) .highlight .code .selector-class {
-  color: #f22c40;
-}
-body:not(.dark-theme) .highlight .code .number,
-body:not(.dark-theme) .highlight .code .meta,
-body:not(.dark-theme) .highlight .code .built_in,
-body:not(.dark-theme) .highlight .code .builtin-name,
-body:not(.dark-theme) .highlight .code .literal,
-body:not(.dark-theme) .highlight .code .type,
-body:not(.dark-theme) .highlight .code .params {
-  color: #df5320;
-}
-body:not(.dark-theme) .highlight .code .string,
-body:not(.dark-theme) .highlight .code .symbol,
-body:not(.dark-theme) .highlight .code .bullet {
-  color: #7b9726;
-}
-body:not(.dark-theme) .highlight .code .title,
-body:not(.dark-theme) .highlight .code .section {
-  color: #407ee7;
+  color: #998;
+  font-style: italic;
 }
 body:not(.dark-theme) .highlight .code .keyword,
-body:not(.dark-theme) .highlight .code .selector-tag {
-  color: #6666ea;
+body:not(.dark-theme) .highlight .code .selector-tag,
+body:not(.dark-theme) .highlight .code .subst {
+  color: #333;
+  font-weight: bold;
+}
+body:not(.dark-theme) .highlight .code .number,
+body:not(.dark-theme) .highlight .code .literal,
+body:not(.dark-theme) .highlight .code .variable,
+body:not(.dark-theme) .highlight .code .template-variable,
+body:not(.dark-theme) .highlight .code .tag .attr {
+  color: #008080;
+}
+body:not(.dark-theme) .highlight .code .string,
+body:not(.dark-theme) .highlight .code .doctag {
+  color: #d14;
+}
+body:not(.dark-theme) .highlight .code .title,
+body:not(.dark-theme) .highlight .code .section,
+body:not(.dark-theme) .highlight .code .selector-id {
+  color: #900;
+  font-weight: bold;
+}
+body:not(.dark-theme) .highlight .code .subst {
+  font-weight: normal;
+}
+body:not(.dark-theme) .highlight .code .type,
+body:not(.dark-theme) .highlight .code .class .title {
+  color: #458;
+  font-weight: bold;
+}
+body:not(.dark-theme) .highlight .code .tag,
+body:not(.dark-theme) .highlight .code .name,
+body:not(.dark-theme) .highlight .code .attribute {
+  color: #000080;
+  font-weight: normal;
+}
+body:not(.dark-theme) .highlight .code .regexp,
+body:not(.dark-theme) .highlight .code .link {
+  color: #009926;
+}
+body:not(.dark-theme) .highlight .code .symbol,
+body:not(.dark-theme) .highlight .code .bullet {
+  color: #990073;
+}
+body:not(.dark-theme) .highlight .code .built_in,
+body:not(.dark-theme) .highlight .code .builtin-name {
+  color: #0086b3;
+}
+body:not(.dark-theme) .highlight .code .meta {
+  color: #999;
+  font-weight: bold;
+}
+body:not(.dark-theme) .highlight .code .deletion {
+  background: #fdd;
+}
+body:not(.dark-theme) .highlight .code .addition {
+  background: #dfd;
 }
 body:not(.dark-theme) .highlight .code .emphasis {
   font-style: italic;
@@ -1322,220 +1349,154 @@ body.dark-theme .highlight .code .deletion,
 body.dark-theme .highlight .code .meta {
   color: #7f7f7f;
 }
-.gutter {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-}
-.post-content figure.highlight figcaption {
-  text-align: left;
-}
-.footer {
-  height: 3rem;
-  line-height: 1.2rem;
-}
-footer {
-  text-align: right;
-}
-h1 {
-  font-size: 1.6em;
-}
-h2 {
-  font-size: 1.2em;
-}
+/* --- [首页布局] 缩减空白，删除箭头 --- */
 #page-header {
+  height: 30vh !important;
+  min-height: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 40vh;
-  position: relative;
-}
-.main-content-index {
-  padding-top: 0rem;
 }
 #scroll-down {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #333;
-  cursor: pointer;
-  animation: bounce 2s infinite;
-}
-#scroll-down .icon {
-  width: 32px;
-  height: 32px;
-  fill: currentColor;
-}
-.profile-container {
-  text-align: center;
-  color: #333;
+  display: none !important;
 }
 .profile-avatar {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  margin-bottom: 20px;
-  object-fit: cover;
   border: 3px solid #fff;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-.profile-title {
-  font-size: 2.5em;
-  margin: 0.5em 0;
-  font-weight: bold;
-}
-.profile-subtitle {
-  font-size: 1.2em;
-  color: #666;
-  margin-top: 0;
-}
-.content-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
+.main-content-index {
+  padding-top: 0 !important;
+  margin-top: -10px;
 }
 .recent-posts-title {
-  font-size: 1.8em;
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  margin-top: 15px !important;
+  margin-bottom: 25px !important;
+  font-weight: 700;
+  color: #3b82f6;
 }
-.site-footer {
-  padding: 40px 20px;
-  text-align: center;
-  color: #888;
-  font-size: 0.9em;
-  line-height: 1.8;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-}
-.site-footer a {
-  color: #555;
-  text-decoration: none;
-  border-bottom: 1px dotted #999;
-  transition: all 0.2s ease-in-out;
-}
-.site-footer a:hover {
-  color: #111;
-  border-bottom-color: #111;
-}
-.footer-item {
-  margin-bottom: 8px;
-}
-.footer-item:last-child {
-  margin-bottom: 0;
-}
-.busuanzi-divider {
-  margin: 0 10px;
-}
-/* ==========================================
-   云水归山博客 - 最终视觉美化方案
-   ========================================== */
+/* --- [文章排版] 强化层级，增大字号 --- */
 .post-content {
   font-size: 18px !important;
-  line-height: 1.65 !important;
-  color: #333 !important;
+  line-height: 1.8 !important;
+  color: #333;
   text-align: justify;
 }
 .post-content p {
-  margin-bottom: 22px;
+  margin-bottom: 25px !important;
 }
-.post-tags {
+.post-content h2 {
+  margin: 45px 0 20px 0 !important;
+  padding-left: 12px;
+  border-left: 5px solid #3b82f6;
+  font-weight: 700;
+  color: #1a1a1a;
+  font-size: 1.5rem !important;
+}
+.post-content h3 {
+  margin: 35px 0 15px 0 !important;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.3rem !important;
+}
+.post-content h3:after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #3b82f6;
+  margin-top: 5px;
+}
+.post-content img {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 25px auto !important;
+  display: block;
+}
+/* --- [代码块] 整合旧功能 --- */
+.gutter {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.post-content figure.highlight figcaption {
+  text-align: left;
+  font-size: 0.9em;
+  padding: 5px 15px;
+  background: rgba(0,0,0,0.03);
+}
+/* --- [引用与版权] 整合旧功能 --- */
+blockquote {
+  border-left: 4px solid #3b82f6 !important;
+  background: rgba(59,130,246,0.05) !important;
+  padding: 15px 20px !important;
+  margin: 25px 0 !important;
+}
+blockquote footer {
+  text-align: right;
+  font-size: 0.85em;
+  color: #999;
+}
+.post-copyright {
+  border-left: 4px solid #3b82f6 !important;
+  background: rgba(0,0,0,0.02) !important;
+  padding: 15px !important;
+  border-radius: 5px;
   margin-top: 40px;
 }
+/* --- [标签] 蓝色胶囊高亮 --- */
 .post-tags .tag a {
   background: #eef2ff !important;
   color: #3b82f6 !important;
   padding: 4px 14px !important;
   border-radius: 20px !important;
-  margin-right: 12px !important;
   border: 1px solid #dbeafe !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
+  margin-right: 10px !important;
   text-decoration: none !important;
-  transition: all 0.3s ease;
 }
 .post-tags .tag a:hover {
   background: #3b82f6 !important;
   color: #fff !important;
   box-shadow: 0 4px 12px rgba(59,130,246,0.2);
 }
-.category-list-item a,
+/* --- [暗黑模式适配] 调优色调 --- */
+body.dark-theme .post-content {
+  color: #cbd5e1 !important;
+}
+body.dark-theme .post-content h2,
+body.dark-theme .post-content h3 {
+  color: #eee !important;
+}
+body.dark-theme .post-tags .tag a {
+  background: #1e293b !important;
+  color: #60a5fa !important;
+  border-color: #334155 !important;
+}
+body.dark-theme blockquote {
+  background: rgba(59,130,246,0.1) !important;
+}
+body.dark-theme .post-copyright {
+  background: rgba(255,255,255,0.03) !important;
+}
+/* --- [全局修正] 标题不截断 --- */
+.post-title,
 .archive-item-link,
-.post-title {
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  display: inline-block !important;
-  line-height: 1.4 !important;
-}
-.site-footer {
-  border-top: 1px solid #f0f0f0;
-  padding: 30px 0;
-  margin-top: 60px;
-  font-size: 14px;
-  color: #999;
-}
-.site-footer .footer-item {
-  margin-bottom: 6px;
-}
-.site-footer a {
-  color: #666;
-}
-.site-footer a:hover {
-  color: #3b82f6;
-}
+.category-list-item a,
 .post-item .post-link {
   white-space: normal !important;
-  display: block !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
   line-height: 1.5 !important;
 }
-.recent-posts-title {
-  margin-top: 20px !important;
-  margin-bottom: 20px !important;
-}
-@-moz-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translate(-50%, 0);
-  }
-  40% {
-    transform: translate(-50%, -20px);
-  }
-  60% {
-    transform: translate(-50%, -10px);
-  }
-}
-@-webkit-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translate(-50%, 0);
-  }
-  40% {
-    transform: translate(-50%, -20px);
-  }
-  60% {
-    transform: translate(-50%, -10px);
-  }
-}
-@-o-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translate(-50%, 0);
-  }
-  40% {
-    transform: translate(-50%, -20px);
-  }
-  60% {
-    transform: translate(-50%, -10px);
-  }
-}
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translate(-50%, 0);
-  }
-  40% {
-    transform: translate(-50%, -20px);
-  }
-  60% {
-    transform: translate(-50%, -10px);
-  }
+.site-footer {
+  padding: 40px 0;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  font-size: 13px;
+  color: #999;
+  line-height: 1.8;
 }
