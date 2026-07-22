@@ -1,57 +1,6 @@
-<script>
-  (() => {
-    const storageKey = 'sidebar-collapsed';
-    const desktopQuery = window.matchMedia('(min-width: 850px)');
-
-    const readPreference = () => {
-      try {
-        return localStorage.getItem(storageKey) === 'true';
-      } catch (_) {
-        return false;
-      }
-    };
-
-    const applyPreference = () => {
-      document.documentElement.classList.toggle(
-        'sidebar-collapsed',
-        desktopQuery.matches && readPreference()
-      );
-    };
-
-    applyPreference();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const button = document.createElement('button');
-      button.id = 'sidebar-collapse-toggle';
-      button.type = 'button';
-      button.setAttribute('aria-controls', 'sidebar');
-      document.body.appendChild(button);
-
-      const renderButton = () => {
-        const collapsed = document.documentElement.classList.contains('sidebar-collapsed');
-        button.textContent = collapsed ? '›' : '‹';
-        button.setAttribute('aria-expanded', String(!collapsed));
-        button.setAttribute('aria-label', collapsed ? '展开侧边栏' : '收起侧边栏');
-        button.title = collapsed ? '展开侧边栏' : '收起侧边栏';
-      };
-
-      button.addEventListener('click', () => {
-        const collapsed = !document.documentElement.classList.contains('sidebar-collapsed');
-        document.documentElement.classList.toggle('sidebar-collapsed', collapsed);
-        try {
-          localStorage.setItem(storageKey, String(collapsed));
-        } catch (_) {
-          // The layout still works when storage is unavailable.
-        }
-        renderButton();
-      });
-
-      desktopQuery.addEventListener('change', () => {
-        applyPreference();
-        renderButton();
-      });
-
-      renderButton();
-    });
-  })();
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&amp;display=swap"
+  rel="stylesheet"
+>
