@@ -48,7 +48,7 @@ h6,
   --site-title-color: #3d392f;
   --site-subtitle-color: #746f66;
   --sidebar-bg: #ffffff;
-  --sidebar-border-color: #9b4141;
+  --sidebar-border-color: #d4d4d8;
   --sidebar-active-color: #9b4141;
   --sidebar-hover-bg: rgb(155 65 65 / 12%);
   --sidebar-btn-bg: #ffffff;
@@ -242,7 +242,7 @@ html:lang(zh-CN) #archives .date.day {
 .dropdown-item:active::after,
 .pagination .page-link:hover::after,
 .pagination .page-item.active .page-link::after {
-  width: calc(100% + 2ch);
+  width: calc(100% + 1ch);
 }
 
 .nav-tabs .nav-link,
@@ -282,12 +282,24 @@ html:lang(zh-CN) #archives .date.day {
   position: absolute;
   bottom: -0.22rem;
   left: 0;
-  width: calc(100% + 2ch);
+  width: calc(100% + 1ch);
   height: 2px;
   background: #9b4141;
   content: "";
 }
 
 #sidebar {
-  border-right: 1px solid #9b4141 !important;
+  border-right: 1px solid #d4d4d8 !important;
+}
+
+#sidebar::after {
+  position: absolute;
+  z-index: 2;
+  top: 33.333%;
+  right: -2px;
+  width: 3px;
+  height: 33.334%;
+  background: #9b4141;
+  content: "";
+  pointer-events: none;
 }
