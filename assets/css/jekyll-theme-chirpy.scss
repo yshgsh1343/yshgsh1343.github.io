@@ -107,6 +107,70 @@ html:lang(zh-CN) #archives .date.day {
   font-family: "Noto Serif SC", serif !important;
 }
 
+/* No rounded UI: structure and interaction are expressed with rules. */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+.card,
+.list-group-item,
+.dropdown-menu,
+.toast,
+.alert,
+[class^='prompt-'],
+[class*=' prompt-'] {
+  border: 0 !important;
+  border-bottom: 1px solid var(--main-border-color) !important;
+  box-shadow: none !important;
+}
+
+.btn,
+.form-control,
+.input-group-text,
+.dropdown-item,
+.pagination .page-link,
+.tag,
+.post-navigation .btn,
+.search-wrapper,
+#sidebar .sidebar-bottom a,
+#back-to-top {
+  border: 0 !important;
+  border-bottom: 1px solid var(--btn-border-color) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.btn:hover,
+.btn:focus,
+.form-control:hover,
+.form-control:focus,
+.dropdown-item:hover,
+.dropdown-item:focus,
+.pagination .page-link:hover,
+.pagination .page-link:focus,
+.pagination .page-item.active .page-link,
+.tag:hover,
+.tag:focus,
+.post-navigation .btn:hover,
+.search-wrapper:focus-within,
+#sidebar .sidebar-bottom a:hover,
+#sidebar .sidebar-bottom a:focus,
+#back-to-top:hover,
+#back-to-top:focus {
+  border-bottom-color: #9b4141 !important;
+  color: #9b4141 !important;
+}
+
+#avatar,
+#avatar img,
+.preview-img,
+.preview-img img,
+.post img {
+  border-radius: 0 !important;
+}
+
 /* The original timeline offsets assume Lato's baseline. */
 #archives .year::after {
   vertical-align: middle;
