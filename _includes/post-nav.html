@@ -1,0 +1,44 @@
+<!-- Navigation controls at the bottom of a post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="文章导航">
+  {% assign previous_label = site.data.locales[include.lang].post.button.previous %}
+  {% assign next_label = site.data.locales[include.lang].post.button.next %}
+
+  {% if page.previous.url %}
+    <a
+      href="{{ page.previous.url | relative_url }}"
+      class="post-nav-link post-nav-previous"
+      aria-label="{{ previous_label }}：{{ page.previous.title }}"
+    >
+      <span class="post-nav-arrow" aria-hidden="true">←</span>
+      <span class="post-nav-copy">
+        <span class="post-nav-label">{{ previous_label }}</span>
+        <span class="post-nav-title">{{ page.previous.title }}</span>
+      </span>
+    </a>
+  {% else %}
+    <span class="post-nav-link post-nav-previous is-disabled" aria-disabled="true">
+      <span class="post-nav-arrow" aria-hidden="true">←</span>
+      <span class="post-nav-label">{{ previous_label }}</span>
+    </span>
+  {% endif %}
+
+  {% if page.next.url %}
+    <a
+      href="{{ page.next.url | relative_url }}"
+      class="post-nav-link post-nav-next"
+      aria-label="{{ next_label }}：{{ page.next.title }}"
+    >
+      <span class="post-nav-copy">
+        <span class="post-nav-label">{{ next_label }}</span>
+        <span class="post-nav-title">{{ page.next.title }}</span>
+      </span>
+      <span class="post-nav-arrow" aria-hidden="true">→</span>
+    </a>
+  {% else %}
+    <span class="post-nav-link post-nav-next is-disabled" aria-disabled="true">
+      <span class="post-nav-label">{{ next_label }}</span>
+      <span class="post-nav-arrow" aria-hidden="true">→</span>
+    </span>
+  {% endif %}
+</nav>
