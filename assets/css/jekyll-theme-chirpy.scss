@@ -228,7 +228,7 @@ html:lang(zh-CN) #archives .date.day {
 #sidebar .nav-link span::after,
 .dropdown-item::after {
   right: auto;
-  left: 0;
+  left: -1ch;
   transform: none;
 }
 
@@ -242,5 +242,48 @@ html:lang(zh-CN) #archives .date.day {
 .dropdown-item:active::after,
 .pagination .page-link:hover::after,
 .pagination .page-item.active .page-link::after {
-  width: 1.2rem;
+  width: calc(100% + 2ch);
+}
+
+.nav-tabs .nav-link,
+.dropdown-item,
+.pagination .page-link {
+  width: fit-content;
+  margin-right: 1ch;
+  margin-left: 1ch;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Home and category lists: title rules replace the card outlines. */
+#post-list .card,
+#post-list .card:hover,
+.categories.card,
+.categories.card:hover,
+.categories .card-header,
+.categories .list-group-item {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#post-list .card-title,
+.categories .card-header > span > a,
+.categories .list-group-item > a {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  text-decoration: none !important;
+}
+
+#post-list .card-title::after,
+.categories .card-header > span > a::after,
+.categories .list-group-item > a::after {
+  position: absolute;
+  bottom: -0.22rem;
+  left: -1ch;
+  width: calc(100% + 2ch);
+  height: 2px;
+  background: #9b4141;
+  content: "";
 }
