@@ -27,3 +27,66 @@ h6,
 .site-title {
   font-family: "Noto Serif SC", serif;
 }
+
+/* Claude-inspired warm light palette. */
+:root[data-bs-theme='light'] {
+  --main-bg: #f7f5f2;
+  --main-border-color: #e4ded5;
+  --text-color: #3d392f;
+  --text-muted-color: #746f66;
+  --heading-color: #292724;
+  --label-color: #5f5a52;
+  --blockquote-border-color: #d97757;
+  --link-color: #b65338;
+  --link-underline-color: #d8b5a8;
+  --button-bg: #f7f5f2;
+  --btn-border-color: #ded7cd;
+  --checkbox-checked-color: #c15f3c;
+  --menu-bg: #fbfaf8;
+  --menu-border-color: #e4ded5;
+  --menu-highlight-bg: rgb(217 119 87 / 10%);
+  --site-title-color: #3d392f;
+  --site-subtitle-color: #746f66;
+  --sidebar-bg: #eeeae3;
+  --sidebar-border-color: #ddd6cc;
+  --sidebar-active-color: #a9472d;
+  --sidebar-hover-bg: rgb(217 119 87 / 12%);
+  --sidebar-btn-bg: #f7f5f2;
+  --sidebar-btn-color: #746f66;
+  --avatar-border-color: #f7f5f2;
+  --topbar-bg: rgb(247 245 242 / 82%);
+  --topbar-text-color: #5f5a52;
+  --search-border-color: #ded7cd;
+  --input-focus-border-color: #d97757;
+  --post-list-text-color: #625d55;
+  --toc-highlight: #b65338;
+  --card-bg: #fbfaf8;
+  --card-hover-bg: #f1ece5;
+  --card-shadow: rgb(61 57 47 / 6%) 0 2px 6px 0, rgb(61 57 47 / 10%) 0 0 0 1px;
+  --tag-border: #d8d0c5;
+  --tag-hover: #eadfd7;
+  --search-tag-bg: #eeeae3;
+  --categories-border: rgb(61 57 47 / 14%);
+  --timeline-color: rgb(182 83 56 / 20%);
+  --timeline-node-bg: #c15f3c;
+  --timeline-year-dot-color: #f7f5f2;
+  --highlight-bg-color: #eeeae3;
+  --inline-code-bg: rgb(61 57 47 / 7%);
+}
+
+:root[data-bs-theme='dark'] {
+  --link-color: #e08b70;
+  --toc-highlight: #e08b70;
+  --checkbox-checked-color: #d97757;
+  --sidebar-active-color: #e08b70;
+  --timeline-node-bg: #d97757;
+}
+
+/* The original timeline offsets assume Lato's baseline. */
+#archives .year::after {
+  vertical-align: middle;
+}
+
+#archives .date {
+  font-variant-numeric: tabular-nums;
+}
