@@ -47,8 +47,8 @@ h6,
   --menu-highlight-bg: rgb(155 65 65 / 10%);
   --site-title-color: #3d392f;
   --site-subtitle-color: #746f66;
-  --sidebar-bg: #f4f4f5;
-  --sidebar-border-color: #ddd6cc;
+  --sidebar-bg: #ffffff;
+  --sidebar-border-color: #9b4141;
   --sidebar-active-color: #9b4141;
   --sidebar-hover-bg: rgb(155 65 65 / 12%);
   --sidebar-btn-bg: #ffffff;
@@ -216,19 +216,19 @@ html:lang(zh-CN) #archives .date.day {
 .pagination .page-link::after {
   position: absolute;
   bottom: -0.2rem;
-  left: 50%;
+  left: 0;
   width: 0;
   height: 2px;
   background: var(--link-color);
   content: "";
-  transform: translateX(-50%);
+  transform: none;
   transition: width 0.18s ease;
 }
 
 #sidebar .nav-link span::after,
 .dropdown-item::after {
   right: auto;
-  left: -1ch;
+  left: 0;
   transform: none;
 }
 
@@ -281,9 +281,13 @@ html:lang(zh-CN) #archives .date.day {
 .categories .list-group-item > a::after {
   position: absolute;
   bottom: -0.22rem;
-  left: -1ch;
+  left: 0;
   width: calc(100% + 2ch);
   height: 2px;
   background: #9b4141;
   content: "";
+}
+
+#sidebar {
+  border-right: 1px solid #9b4141 !important;
 }
