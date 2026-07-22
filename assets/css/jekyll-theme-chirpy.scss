@@ -33,6 +33,11 @@
   --blockquote-text-color: rgb(25 24 22 / 68%);
   --checkbox-color: #70251d;
   --font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --bs-border-radius: 0;
+  --bs-border-radius-sm: 0;
+  --bs-border-radius-lg: 0;
+  --bs-border-radius-xl: 0;
+  --bs-border-radius-xxl: 0;
 }
 
 [data-mode='dark'],
@@ -60,6 +65,7 @@ body {
   border-right: 1px solid var(--main-border-color);
   box-shadow: none;
   padding-top: 3.6rem;
+  transition: transform 0.28s ease;
 }
 
 #sidebar .profile-wrapper {
@@ -119,6 +125,40 @@ body {
 
 #main-wrapper {
   background: var(--main-bg);
+  transition: margin-left 0.28s ease;
+}
+
+#sidebar-collapse-toggle {
+  position: fixed;
+  z-index: 1031;
+  top: 1.15rem;
+  left: calc(var(--sidebar-width) + 0.75rem);
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--main-border-color);
+  border-radius: 0;
+  background: var(--main-bg);
+  color: var(--text-muted-color);
+  font: 1.5rem/1 serif;
+  transition: left 0.28s ease, color 0.2s, border-color 0.2s;
+}
+
+#sidebar-collapse-toggle:hover {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+
+html.sidebar-collapsed #sidebar {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+}
+
+html.sidebar-collapsed #main-wrapper {
+  margin-left: 0;
+}
+
+html.sidebar-collapsed #sidebar-collapse-toggle {
+  left: 0.75rem;
 }
 
 .container,
@@ -205,6 +245,33 @@ h3,
   box-shadow: none !important;
 }
 
+/* Keep controls linear: borders and separators instead of pills and cards. */
+.btn,
+.form-control,
+.input-group-text,
+.dropdown-menu,
+.dropdown-item,
+.page-link,
+.pagination,
+.toast,
+.alert,
+.prompt-tip,
+.prompt-info,
+.prompt-warning,
+.prompt-danger,
+.search-wrapper,
+#search-results article,
+.tag {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.btn:hover,
+.dropdown-item:hover,
+.page-link:hover {
+  box-shadow: none !important;
+}
+
 .content a:not(.img-link) {
   text-decoration-color: var(--link-color);
   text-underline-offset: 0.2em;
@@ -235,5 +302,9 @@ footer {
 
   #sidebar {
     border-right: 0;
+  }
+
+  #sidebar-collapse-toggle {
+    display: none;
   }
 }
