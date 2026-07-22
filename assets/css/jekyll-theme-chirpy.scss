@@ -1,0 +1,239 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* Warm, editorial skin inspired by traditional personal weblogs. */
+:root {
+  --sidebar-width: 300px;
+  --main-content-max-width: 1040px;
+  --body-bg: #fbfaf7;
+  --main-bg: #fbfaf7;
+  --sidebar-bg: #fbfaf7;
+  --topbar-bg: rgb(251 250 247 / 92%);
+  --card-bg: transparent;
+  --card-hovor-bg: transparent;
+  --text-color: rgb(25 24 22 / 84%);
+  --heading-color: rgb(18 17 16 / 96%);
+  --text-muted-color: rgb(25 24 22 / 55%);
+  --link-color: #70251d;
+  --toc-highlight: #70251d;
+  --btn-border-color: rgb(25 24 22 / 16%);
+  --main-border-color: rgb(25 24 22 / 10%);
+  --blockquote-border-color: #70251d;
+  --blockquote-text-color: rgb(25 24 22 / 68%);
+  --checkbox-color: #70251d;
+  --font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+[data-mode='dark'],
+[data-bs-theme='dark'] {
+  --body-bg: #171614;
+  --main-bg: #171614;
+  --sidebar-bg: #171614;
+  --topbar-bg: rgb(23 22 20 / 92%);
+  --card-bg: transparent;
+  --card-hovor-bg: transparent;
+  --text-color: rgb(245 241 232 / 78%);
+  --heading-color: #f5f1e8;
+  --text-muted-color: rgb(245 241 232 / 48%);
+  --link-color: #c98278;
+  --toc-highlight: #c98278;
+  --main-border-color: rgb(245 241 232 / 12%);
+}
+
+body {
+  letter-spacing: 0.01em;
+  line-height: 1.75;
+}
+
+#sidebar {
+  border-right: 1px solid var(--main-border-color);
+  box-shadow: none;
+  padding-top: 3.6rem;
+}
+
+#sidebar .profile-wrapper {
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  text-align: left;
+}
+
+#sidebar #avatar {
+  width: 4.75rem;
+  height: 4.75rem;
+  margin-left: 0;
+  box-shadow: none;
+}
+
+#sidebar .site-title {
+  font-family: "Songti SC", "Noto Serif SC", STSong, Georgia, serif;
+  font-size: 1.65rem;
+  letter-spacing: 0;
+}
+
+#sidebar .site-subtitle {
+  margin-top: 0.45rem;
+  color: var(--text-muted-color);
+  font-style: normal;
+  line-height: 1.65;
+}
+
+#sidebar .nav {
+  padding: 1.2rem 2.4rem 0;
+}
+
+#sidebar .nav-item {
+  margin-bottom: 0.15rem;
+}
+
+#sidebar .nav-link {
+  border-radius: 0;
+  padding: 0.45rem 0;
+  font-size: 0.94rem;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+  background: transparent;
+  color: var(--link-color);
+}
+
+#sidebar .nav-link i {
+  display: none;
+}
+
+#sidebar .sidebar-bottom {
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+}
+
+#main-wrapper {
+  background: var(--main-bg);
+}
+
+.container,
+.container-fluid {
+  max-width: var(--main-content-max-width);
+}
+
+#core-wrapper {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+h1,
+h2,
+h3,
+.post-preview .post-title,
+.post-preview .card-title {
+  color: var(--heading-color);
+  font-family: "Songti SC", "Noto Serif SC", STSong, Georgia, serif;
+}
+
+/* Replace Chirpy's cards with a simple editorial list. */
+#post-list .card-wrapper {
+  margin-bottom: 0;
+}
+
+#post-list .card {
+  border: 0;
+  border-top: 1px solid var(--main-border-color);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none !important;
+}
+
+#post-list .card-wrapper:first-child .card {
+  border-top: 0;
+}
+
+#post-list .card-body {
+  padding: 1.65rem 0 1.9rem;
+}
+
+#post-list .post-preview::before {
+  display: none;
+}
+
+#post-list .post-preview .post-title,
+#post-list .post-preview .card-title {
+  font-size: 1.55rem;
+  line-height: 1.4;
+}
+
+#post-list .post-preview .post-content {
+  color: var(--text-muted-color);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+#post-list .post-meta {
+  color: var(--text-muted-color);
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+}
+
+#post-list .post-meta i {
+  display: none;
+}
+
+#post-list .post-meta .categories::before {
+  content: " · ";
+}
+
+#post-list .preview-img,
+#post-list .card-img-right {
+  display: none;
+}
+
+.post-tail-wrapper,
+.post-navigation .btn,
+.categories.card,
+.list-group-item,
+.archives li {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.content a:not(.img-link) {
+  text-decoration-color: var(--link-color);
+  text-underline-offset: 0.2em;
+}
+
+blockquote {
+  background: rgb(112 37 29 / 5%);
+  border-left-width: 4px;
+}
+
+footer {
+  border-top: 1px solid var(--main-border-color);
+  padding-top: 1.2rem;
+}
+
+@media (max-width: 1199px) {
+  #core-wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 849px) {
+  #core-wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #sidebar {
+    border-right: 0;
+  }
+}
