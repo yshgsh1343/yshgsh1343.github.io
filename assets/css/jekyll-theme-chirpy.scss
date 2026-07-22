@@ -36,30 +36,30 @@ h6,
   --text-muted-color: #746f66;
   --heading-color: #292724;
   --label-color: #5f5a52;
-  --blockquote-border-color: #d97757;
-  --link-color: #b65338;
-  --link-underline-color: #d8b5a8;
+  --blockquote-border-color: #9b4141;
+  --link-color: #9b4141;
+  --link-underline-color: #9b4141;
   --button-bg: #f7f5f2;
   --btn-border-color: #ded7cd;
-  --checkbox-checked-color: #c15f3c;
+  --checkbox-checked-color: #9b4141;
   --menu-bg: #fbfaf8;
   --menu-border-color: #e4ded5;
-  --menu-highlight-bg: rgb(217 119 87 / 10%);
+  --menu-highlight-bg: rgb(155 65 65 / 10%);
   --site-title-color: #3d392f;
   --site-subtitle-color: #746f66;
   --sidebar-bg: #eeeae3;
   --sidebar-border-color: #ddd6cc;
-  --sidebar-active-color: #a9472d;
-  --sidebar-hover-bg: rgb(217 119 87 / 12%);
+  --sidebar-active-color: #9b4141;
+  --sidebar-hover-bg: rgb(155 65 65 / 12%);
   --sidebar-btn-bg: #f7f5f2;
   --sidebar-btn-color: #746f66;
   --avatar-border-color: #f7f5f2;
   --topbar-bg: rgb(247 245 242 / 82%);
   --topbar-text-color: #5f5a52;
   --search-border-color: #ded7cd;
-  --input-focus-border-color: #d97757;
+  --input-focus-border-color: #9b4141;
   --post-list-text-color: #625d55;
-  --toc-highlight: #b65338;
+  --toc-highlight: #9b4141;
   --card-bg: #fbfaf8;
   --card-hover-bg: #f1ece5;
   --card-shadow: rgb(61 57 47 / 6%) 0 2px 6px 0, rgb(61 57 47 / 10%) 0 0 0 1px;
@@ -67,19 +67,28 @@ h6,
   --tag-hover: #eadfd7;
   --search-tag-bg: #eeeae3;
   --categories-border: rgb(61 57 47 / 14%);
-  --timeline-color: rgb(182 83 56 / 20%);
-  --timeline-node-bg: #c15f3c;
+  --timeline-color: rgb(155 65 65 / 20%);
+  --timeline-node-bg: #9b4141;
   --timeline-year-dot-color: #f7f5f2;
   --highlight-bg-color: #eeeae3;
   --inline-code-bg: rgb(61 57 47 / 7%);
 }
 
 :root[data-bs-theme='dark'] {
-  --link-color: #e08b70;
-  --toc-highlight: #e08b70;
-  --checkbox-checked-color: #d97757;
-  --sidebar-active-color: #e08b70;
-  --timeline-node-bg: #d97757;
+  --link-color: #9b4141;
+  --toc-highlight: #9b4141;
+  --checkbox-checked-color: #9b4141;
+  --sidebar-active-color: #9b4141;
+  --timeline-node-bg: #9b4141;
+}
+
+/* Decorative marker for tab page titles. */
+main > article > .dynamic-title::before {
+  margin-right: 0.32em;
+  color: #9b4141;
+  content: "#";
+  font-size: 1.16em;
+  font-weight: 600;
 }
 
 /* The original timeline offsets assume Lato's baseline. */
