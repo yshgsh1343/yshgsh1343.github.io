@@ -90,3 +90,68 @@ h6,
 #archives .date {
   font-variant-numeric: tabular-nums;
 }
+
+/* Active navigation uses a short rule instead of a rounded selection box. */
+#sidebar .nav-link,
+.nav-tabs .nav-link,
+.dropdown-item,
+.pagination .page-link {
+  border-radius: 0 !important;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-item.active .nav-link,
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link.active,
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item.active,
+.dropdown-item:active,
+.pagination .page-link:hover,
+.pagination .page-item.active .page-link {
+  background: transparent !important;
+  color: var(--link-color) !important;
+  box-shadow: none !important;
+}
+
+#sidebar .nav-link span,
+.nav-tabs .nav-link,
+.dropdown-item,
+.pagination .page-link {
+  position: relative;
+}
+
+#sidebar .nav-link span::after,
+.nav-tabs .nav-link::after,
+.dropdown-item::after,
+.pagination .page-link::after {
+  position: absolute;
+  bottom: -0.2rem;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--link-color);
+  content: "";
+  transform: translateX(-50%);
+  transition: width 0.18s ease;
+}
+
+#sidebar .nav-link span::after,
+.dropdown-item::after {
+  right: auto;
+  left: 0;
+  transform: none;
+}
+
+#sidebar .nav-link:hover span::after,
+#sidebar .nav-item.active .nav-link span::after,
+.nav-tabs .nav-link:hover::after,
+.nav-tabs .nav-link.active::after,
+.dropdown-item:hover::after,
+.dropdown-item:focus::after,
+.dropdown-item.active::after,
+.dropdown-item:active::after,
+.pagination .page-link:hover::after,
+.pagination .page-item.active .page-link::after {
+  width: 1.2rem;
+}
