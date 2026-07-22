@@ -188,6 +188,15 @@ html:lang(zh-CN) #archives .date.day {
   border-radius: 0 !important;
 }
 
+#sidebar .nav-link,
+#sidebar .nav-link:hover,
+#sidebar .nav-link:focus,
+#sidebar .nav-link span {
+  border-bottom: 0 !important;
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
+}
+
 #sidebar .nav-link:hover,
 #sidebar .nav-item.active .nav-link,
 .nav-tabs .nav-link:hover,
@@ -296,8 +305,8 @@ html:lang(zh-CN) #archives .date.day {
   position: absolute;
   z-index: 2;
   top: 33.333%;
-  right: -2px;
-  width: 3px;
+  right: -3px;
+  width: 5px;
   height: 33.334%;
   background: #9b4141;
   content: "";
