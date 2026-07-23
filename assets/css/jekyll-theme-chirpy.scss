@@ -415,6 +415,13 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   }
 }
 
+/* Kill the slide animation while restoring a persisted collapsed state. */
+.sidebar-no-anim #sidebar,
+.sidebar-no-anim #main-wrapper,
+.sidebar-no-anim .sidebar-edge-toggle {
+  transition: none !important;
+}
+
 /* Explicit previous/next arrow states on post pages. */
 .post-navigation {
   gap: 2rem;

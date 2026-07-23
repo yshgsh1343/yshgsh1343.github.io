@@ -157,7 +157,24 @@
 
 <script>
   (function () {
+    var KEY = 'sidebar-collapsed';
     var rails = document.querySelectorAll('.sidebar-edge-toggle');
+
+    function readState() {
+      try {
+        return localStorage.getItem(KEY) === 'true';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function writeState(collapsed) {
+      try {
+        localStorage.setItem(KEY, collapsed ? 'true' : 'false');
+      } catch (e) {
+        /* private mode: state stays session-only */
+      }
+    }
 
     function syncLabels() {
       var collapsed = document.body.classList.contains('sidebar-collapsed');
@@ -168,9 +185,23 @@
       });
     }
 
+    /* Restore the persisted state without playing the slide animation. */
+    if (readState()) {
+      document.documentElement.classList.add('sidebar-no-anim');
+      document.body.classList.add('sidebar-collapsed');
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          document.documentElement.classList.remove('sidebar-no-anim');
+        });
+      });
+    }
+
+    syncLabels();
+
     rails.forEach(function (rail) {
       rail.addEventListener('click', function () {
-        document.body.classList.toggle('sidebar-collapsed');
+        var collapsed = document.body.classList.toggle('sidebar-collapsed');
+        writeState(collapsed);
         syncLabels();
       });
     });
