@@ -435,6 +435,22 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   padding-left: 0;
 }
 
+/* The residual card ring lives on .post-preview (1px spread shadow);
+   kill it together with the hover background block. */
+#post-list .post-preview {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+#post-list .post-preview::before {
+  content: none;
+}
+
+/* Footer runtime counter: steady numerals while ticking. */
+#site-runtime {
+  font-variant-numeric: tabular-nums;
+}
+
 /* Explicit previous/next arrow states on post pages. */
 .post-navigation {
   gap: 2rem;
