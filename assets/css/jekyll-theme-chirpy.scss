@@ -447,20 +447,40 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
 }
 
 /* Footer: left-align all text; keep the divider line in place and
-   move only the text down by 1em (grow the band, add top padding). */
+   move only the text down (grow the band, add top padding). */
 footer {
-  height: calc(5rem + 1em);
-  padding-top: 1em;
+  height: calc(5rem + 3em);
+  padding-top: 3em;
 }
 
 @media (max-width: 991.98px) {
   footer {
-    height: calc(6rem + 1em);
+    height: calc(6rem + 3em);
   }
 }
 
 footer p {
   text-align: left;
+}
+
+/* Tag chips: rounded pill boxes instead of lone underlines. */
+.tag,
+.post-tags .post-tag,
+#access-tags .post-tag {
+  border: 1px solid var(--tag-border) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+.tag:hover,
+.tag:focus,
+.post-tags .post-tag:hover,
+.post-tags .post-tag:focus,
+#access-tags .post-tag:hover,
+#access-tags .post-tag:focus {
+  border-color: #9b4141 !important;
+  background: var(--tag-hover) !important;
+  color: #9b4141 !important;
 }
 
 footer .footer-runtime {
