@@ -337,7 +337,7 @@ html:lang(zh-CN) #sidebar .site-title {
 .sidebar-edge-toggle {
   position: fixed;
   top: 25%;
-  left: 385px; /* sidebar 130px offset + 260px width, rail straddles the edge */
+  left: 380px; /* right edge flush with the sidebar divider (130 + 260 - 10) */
   z-index: 1100;
   display: block;
   width: 10px;
@@ -350,10 +350,6 @@ html:lang(zh-CN) #sidebar .site-title {
   transition:
     left 0.3s ease,
     background-color 0.18s ease;
-}
-
-.sidebar-edge-toggle.edge-bottom {
-  top: 75%;
 }
 
 .sidebar-edge-toggle:hover,
@@ -387,7 +383,7 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   }
 
   .sidebar-edge-toggle {
-    left: 425px;
+    left: 420px;
   }
 
   body.sidebar-collapsed #main-wrapper {

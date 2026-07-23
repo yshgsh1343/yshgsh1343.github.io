@@ -1,11 +1,11 @@
 ---
-title: 月报
-icon: fas fa-calendar-days
-order: 2
+title: 笔记
+icon: fas fa-pen-nib
+order: 1
 group: 内容
 ---
 
-{% assign posts = site.categories["月报"] %}
+{% assign posts = site.categories["笔记"] %}
 {% if posts.size > 0 %}
 
 <ul class="tab-post-list">
@@ -19,6 +19,6 @@ group: 内容
 
 {% else %}
 
-每月一篇，记录这个月的所见、所学与所想。第一篇正在路上。
+这里放课程与读书的笔记，正在整理，敬请期待。
 
 {% endif %}

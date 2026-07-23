@@ -2,7 +2,7 @@
 # the default layout is 'page'
 title: 关于
 icon: fas fa-info-circle
-order: 6
+order: 7
 group: 站点
 ---
 

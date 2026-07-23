@@ -1,7 +1,7 @@
 ---
 title: 留言板
 icon: fas fa-comments
-order: 7
+order: 8
 group: 站点
 comments: true
 ---

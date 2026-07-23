@@ -2,6 +2,6 @@
 layout: archives
 title: 归档
 icon: fas fa-archive
-order: 2
+order: 3
 group: 内容
 ---

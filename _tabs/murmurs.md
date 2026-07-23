@@ -1,16 +1,12 @@
 ---
 title: 碎碎念
 icon: fas fa-comment-dots
-order: 5
+order: 6
 group: 内容
 ---
 
 {% assign posts = site.categories["碎碎念"] %}
-{% if posts == empty %}
-
-一些零碎的只言片语，不成文章，但也值得留下。还没有内容，先占个位置。
-
-{% else %}
+{% if posts.size > 0 %}
 
 <ul class="tab-post-list">
 {% for post in posts %}
@@ -20,5 +16,9 @@ group: 内容
   </li>
 {% endfor %}
 </ul>
+
+{% else %}
+
+一些零碎的只言片语，不成文章，但也值得留下。还没有内容，先占个位置。
 
 {% endif %}
