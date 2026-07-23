@@ -389,3 +389,96 @@ a.post-nav-next:hover .post-nav-arrow {
   cursor: not-allowed;
   opacity: 0.28;
 }
+
+/* Whono-style generous page margins: narrow the content column,
+   let whitespace frame both sides. */
+@media (min-width: 850px) {
+  #main-wrapper > .container {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  #main-wrapper > .container {
+    max-width: 1150px;
+  }
+}
+
+@media (min-width: 1650px) {
+  #main-wrapper > .container {
+    padding-right: 4rem;
+    padding-left: 4rem;
+  }
+}
+
+/* Zishu-style grouped sidebar navigation labels. */
+#sidebar .nav-group-label {
+  width: 100%;
+  margin-top: 1.25rem;
+  margin-bottom: 0.2rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  color: var(--text-muted-color);
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  line-height: 1.2;
+  opacity: 0.75;
+  user-select: none;
+}
+
+#sidebar .nav-group-label:first-child {
+  margin-top: 0.25rem;
+}
+
+/* Post lists on tab pages (月报 / 碎碎念): date + ruled title links. */
+.tab-post-list {
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.tab-post-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--main-border-color);
+}
+
+.tab-post-list .date {
+  flex-shrink: 0;
+  color: var(--text-muted-color);
+  font-size: 0.88em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tab-post-list a {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+}
+
+.tab-post-list a::after {
+  position: absolute;
+  bottom: -0.22rem;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #9b4141;
+  content: "";
+  transition: width 0.18s ease;
+}
+
+.tab-post-list a:hover {
+  color: var(--link-color) !important;
+}
+
+.tab-post-list a:hover::after {
+  width: calc(100% + 1ch);
+}

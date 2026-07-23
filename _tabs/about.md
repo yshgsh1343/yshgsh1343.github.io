@@ -2,7 +2,8 @@
 # the default layout is 'page'
 title: 关于
 icon: fas fa-info-circle
-order: 4
+order: 6
+group: 站点
 ---
 
 你好，我是 Lumin。
