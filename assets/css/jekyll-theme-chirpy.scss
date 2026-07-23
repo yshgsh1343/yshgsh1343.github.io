@@ -337,14 +337,15 @@ html:lang(zh-CN) #sidebar .site-title {
 .sidebar-edge-toggle {
   position: fixed;
   top: 25%;
-  left: 380px; /* right edge flush with the sidebar divider (130 + 260 - 10) */
+  left: 382px; /* right edge flush with the sidebar divider (130 + 260 - 8) */
   z-index: 1100;
   display: block;
-  width: 10px;
+  width: 8px;
   height: 25%;
   margin: 0;
   padding: 0;
   border: 0;
+  border-radius: 999px !important; /* pill ends, exempt from the global square rule */
   background-color: #9b4141;
   cursor: pointer;
   transition:
@@ -383,7 +384,7 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   }
 
   .sidebar-edge-toggle {
-    left: 420px;
+    left: 422px;
   }
 
   body.sidebar-collapsed #main-wrapper {
@@ -416,6 +417,22 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
 .sidebar-no-anim #main-wrapper,
 .sidebar-no-anim .sidebar-edge-toggle {
   transition: none !important;
+}
+
+/* Home post list: plain rows separated by hairlines, no card blocks. */
+#post-list .card-wrapper {
+  margin-bottom: 0;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--main-border-color) !important;
+}
+
+#post-list .card-wrapper:last-child {
+  border-bottom: 0 !important;
+}
+
+#post-list .card .card-body {
+  padding-right: 0;
+  padding-left: 0;
 }
 
 /* Explicit previous/next arrow states on post pages. */
