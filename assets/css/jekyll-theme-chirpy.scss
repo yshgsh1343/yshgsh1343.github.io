@@ -183,12 +183,16 @@ html:lang(zh-CN) #sidebar .site-title {
   color: #9b4141 !important;
 }
 
-#avatar,
-#avatar img,
 .preview-img,
 .preview-img img,
 .post img {
   border-radius: 0 !important;
+}
+
+/* The avatar stays a circle, exempt from the global square rule. */
+#avatar,
+#avatar img {
+  border-radius: 50% !important;
 }
 
 /* The original timeline offsets assume Lato's baseline. */
