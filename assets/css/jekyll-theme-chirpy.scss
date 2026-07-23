@@ -446,17 +446,22 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   content: none;
 }
 
-/* Footer: left-align all text; left block stacks copyright + runtime. */
+/* Footer: left-align all text, nudge the whole footer down by one
+   character width, and keep the runtime on the copyright line. */
+footer {
+  margin-top: 1em;
+}
+
 footer p {
   text-align: left;
 }
 
-footer .site-footer-left p {
-  margin-bottom: 0.15rem;
+footer .footer-runtime {
+  margin-left: 0.6em;
 }
 
-footer .site-footer-left p:last-child {
-  margin-bottom: 0;
+footer .footer-runtime [aria-hidden] {
+  margin-right: 0.35em;
 }
 
 /* Explicit previous/next arrow states on post pages. */

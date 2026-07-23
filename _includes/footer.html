@@ -7,32 +7,31 @@
     flex-lg-row justify-content-lg-between align-items-lg-end pb-lg-3
   "
 >
-  <div class="site-footer-left">
-    <p>
-      {{- '©' }}
-      <time>{{ 'now' | date: '%Y' }}</time>
+  <p>
+    {{- '©' }}
+    <time>{{ 'now' | date: '%Y' }}</time>
 
-      {% if site.social.links %}
-        <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
-      {% else %}
-        <em class="fst-normal">{{ site.social.name }}</em>.
-      {% endif %}
+    {% if site.social.links %}
+      <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+    {% else %}
+      <em class="fst-normal">{{ site.social.name }}</em>.
+    {% endif %}
 
-      {% if site.data.locales[include.lang].copyright.brief %}
-        <span
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          title="{{ site.data.locales[include.lang].copyright.verbose }}"
-        >
-          {{- site.data.locales[include.lang].copyright.brief -}}
-        </span>
-      {% endif %}
-    </p>
+    {% if site.data.locales[include.lang].copyright.brief %}
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="{{ site.data.locales[include.lang].copyright.verbose }}"
+      >
+        {{- site.data.locales[include.lang].copyright.brief -}}
+      </span>
+    {% endif %}
 
-    <p>
+    <span class="footer-runtime">
+      <span aria-hidden="true">·</span>
       <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
-    </p>
-  </div>
+    </span>
+  </p>
 
   <p>
     {%- capture _platform -%}
