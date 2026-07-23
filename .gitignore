@@ -30,3 +30,6 @@ assets/js/dist
 *~
 .DS_Store
 Thumbs.db
+
+# WorkBuddy agent workspace
+.workbuddy/
