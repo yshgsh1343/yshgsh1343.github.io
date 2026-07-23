@@ -446,10 +446,17 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   content: none;
 }
 
-/* Footer: left-align all text, nudge the whole footer down by one
-   character width, and keep the runtime on the copyright line. */
+/* Footer: left-align all text; keep the divider line in place and
+   move only the text down by 1em (grow the band, add top padding). */
 footer {
-  margin-top: 1em;
+  height: calc(5rem + 1em);
+  padding-top: 1em;
+}
+
+@media (max-width: 991.98px) {
+  footer {
+    height: calc(6rem + 1em);
+  }
 }
 
 footer p {
