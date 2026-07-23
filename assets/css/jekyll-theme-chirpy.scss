@@ -483,6 +483,17 @@ footer p {
   color: #9b4141 !important;
 }
 
+/* jemoji: keep emojis inline at text size. */
+.emoji {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  margin: 0 0.05em;
+  padding: 0;
+  border: 0;
+  vertical-align: -0.2em;
+}
+
 footer .footer-runtime {
   margin-left: 0.6em;
 }
