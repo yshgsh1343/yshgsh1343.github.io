@@ -446,9 +446,13 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   content: none;
 }
 
-/* Footer runtime counter: steady numerals while ticking. */
-#site-runtime {
-  font-variant-numeric: tabular-nums;
+/* Footer left block: copyright with the runtime line tucked under it. */
+footer .site-footer-left p {
+  margin-bottom: 0.15rem;
+}
+
+footer .site-footer-left p:last-child {
+  margin-bottom: 0;
 }
 
 /* Explicit previous/next arrow states on post pages. */

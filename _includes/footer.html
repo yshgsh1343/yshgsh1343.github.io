@@ -7,30 +7,32 @@
     flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
   "
 >
-  <p>
-    {{- '©' }}
-    <time>{{ 'now' | date: '%Y' }}</time>
+  <div class="site-footer-left">
+    <p>
+      {{- '©' }}
+      <time>{{ 'now' | date: '%Y' }}</time>
 
-    {% if site.social.links %}
-      <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
-    {% else %}
-      <em class="fst-normal">{{ site.social.name }}</em>.
-    {% endif %}
+      {% if site.social.links %}
+        <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+      {% else %}
+        <em class="fst-normal">{{ site.social.name }}</em>.
+      {% endif %}
 
-    {% if site.data.locales[include.lang].copyright.brief %}
-      <span
-        data-bs-toggle="tooltip"
-        data-bs-placement="top"
-        title="{{ site.data.locales[include.lang].copyright.verbose }}"
-      >
-        {{- site.data.locales[include.lang].copyright.brief -}}
-      </span>
-    {% endif %}
-  </p>
+      {% if site.data.locales[include.lang].copyright.brief %}
+        <span
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="{{ site.data.locales[include.lang].copyright.verbose }}"
+        >
+          {{- site.data.locales[include.lang].copyright.brief -}}
+        </span>
+      {% endif %}
+    </p>
 
-  <p>
-    <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
-  </p>
+    <p>
+      <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
+    </p>
+  </div>
 
   <p>
     {%- capture _platform -%}
@@ -60,21 +62,7 @@
     }
 
     var start = new Date(el.getAttribute('data-start')).getTime();
-
-    function pad(n) {
-      return n < 10 ? '0' + n : '' + n;
-    }
-
-    function tick() {
-      var diff = Math.max(0, Date.now() - start);
-      var days = Math.floor(diff / 86400000);
-      var hours = Math.floor((diff % 86400000) / 3600000);
-      var minutes = Math.floor((diff % 3600000) / 60000);
-      var seconds = Math.floor((diff % 60000) / 1000);
-      el.textContent = '已运行 ' + days + ' 天 ' + pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
-    }
-
-    tick();
-    setInterval(tick, 1000);
+    var days = Math.floor(Math.max(0, Date.now() - start) / 86400000);
+    el.textContent = '已运行 ' + days + ' 天';
   })();
 </script>
