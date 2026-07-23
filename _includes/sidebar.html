@@ -150,3 +150,29 @@
   <!-- .sidebar-bottom -->
 </aside>
 <!-- #sidebar -->
+
+<!-- Red edge rails: click to recolor and collapse / restore the sidebar -->
+<button type="button" class="sidebar-edge-toggle" aria-label="收起侧边栏" title="收起侧边栏"></button>
+<button type="button" class="sidebar-edge-toggle edge-bottom" aria-label="收起侧边栏" title="收起侧边栏"></button>
+
+<script>
+  (function () {
+    var rails = document.querySelectorAll('.sidebar-edge-toggle');
+
+    function syncLabels() {
+      var collapsed = document.body.classList.contains('sidebar-collapsed');
+      rails.forEach(function (rail) {
+        var label = collapsed ? '展开侧边栏' : '收起侧边栏';
+        rail.setAttribute('aria-label', label);
+        rail.setAttribute('title', label);
+      });
+    }
+
+    rails.forEach(function (rail) {
+      rail.addEventListener('click', function () {
+        document.body.classList.toggle('sidebar-collapsed');
+        syncLabels();
+      });
+    });
+  })();
+</script>

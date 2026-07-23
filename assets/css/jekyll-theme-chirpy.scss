@@ -12,20 +12,26 @@
 {%- endif -%}
 ';
 
-/* The sole visual override: Noto Serif SC. */
+/* Body & UI in Microsoft YaHei; headings in Noto Serif SC Heavy. */
 body,
 button,
 input,
 textarea,
-select,
+select {
+  font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-.site-title {
-  font-family: "Noto Serif SC", serif;
+.site-title,
+.card-title,
+.post-nav-title {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "思源宋体", serif;
+  font-weight: 900;
 }
 
 /* Claude-inspired warm light palette. */
@@ -91,7 +97,7 @@ main > article > .dynamic-title::before {
   font-weight: 800;
 }
 
-/* Keep every Chinese UI text run on Noto Serif SC. */
+/* Keep every Chinese UI text run on Microsoft YaHei. */
 html:lang(zh-CN) body,
 html:lang(zh-CN) button,
 html:lang(zh-CN) input,
@@ -101,10 +107,24 @@ html:lang(zh-CN) #sidebar,
 html:lang(zh-CN) #topbar-wrapper,
 html:lang(zh-CN) .content,
 html:lang(zh-CN) .post-meta,
-html:lang(zh-CN) .dynamic-title,
 html:lang(zh-CN) #archives .date,
 html:lang(zh-CN) #archives .date.day {
-  font-family: "Noto Serif SC", serif !important;
+  font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif !important;
+}
+
+/* Chinese headings stay on Noto Serif SC Heavy. */
+html:lang(zh-CN) h1,
+html:lang(zh-CN) h2,
+html:lang(zh-CN) h3,
+html:lang(zh-CN) h4,
+html:lang(zh-CN) h5,
+html:lang(zh-CN) h6,
+html:lang(zh-CN) .dynamic-title,
+html:lang(zh-CN) .card-title,
+html:lang(zh-CN) .post-nav-title,
+html:lang(zh-CN) #sidebar .site-title {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "思源宋体", serif !important;
+  font-weight: 900;
 }
 
 /* No rounded UI: structure and interaction are expressed with rules. */
@@ -301,16 +321,98 @@ html:lang(zh-CN) #archives .date.day {
   border-right: 1px solid #d4d4d8 !important;
 }
 
-#sidebar::after {
-  position: absolute;
-  z-index: 2;
-  top: 33.333%;
-  right: -3px;
-  width: 5px;
-  height: 33.334%;
-  background: #9b4141;
-  content: "";
-  pointer-events: none;
+/* Sidebar shifted right by half its width (260 / 2 = 130px). */
+@media (min-width: 1200px) {
+  #sidebar {
+    left: 130px;
+  }
+
+  #main-wrapper {
+    margin-left: 390px;
+  }
+}
+
+/* Clickable red edge rails: top rail spans 1/4-1/2 of the viewport height,
+   second rail sits at the bottom quarter. Click = recolor + collapse. */
+.sidebar-edge-toggle {
+  position: fixed;
+  top: 25%;
+  left: 385px; /* sidebar 130px offset + 260px width, rail straddles the edge */
+  z-index: 1100;
+  display: block;
+  width: 10px;
+  height: 25%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: #9b4141;
+  cursor: pointer;
+  transition:
+    left 0.3s ease,
+    background-color 0.18s ease;
+}
+
+.sidebar-edge-toggle.edge-bottom {
+  top: 75%;
+}
+
+.sidebar-edge-toggle:hover,
+.sidebar-edge-toggle:focus-visible {
+  background-color: #7d3434;
+}
+
+/* Collapsed state: sidebar slides out to the left, main content goes
+   full-width, rails pin to the screen edge and turn dark. */
+body.sidebar-collapsed #sidebar {
+  transform: translateX(-390px);
+}
+
+body.sidebar-collapsed #main-wrapper {
+  margin-left: 0;
+}
+
+body.sidebar-collapsed .sidebar-edge-toggle {
+  left: 0;
+  background-color: #3d392f;
+}
+
+body.sidebar-collapsed .sidebar-edge-toggle:hover,
+body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
+  background-color: #9b4141;
+}
+
+@media (min-width: 1650px) {
+  #main-wrapper {
+    margin-left: 430px; /* sidebar grows to 300px wide on very large screens */
+  }
+
+  .sidebar-edge-toggle {
+    left: 425px;
+  }
+
+  body.sidebar-collapsed #main-wrapper {
+    margin-left: 0;
+  }
+
+  body.sidebar-collapsed .sidebar-edge-toggle {
+    left: 0;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .sidebar-edge-toggle {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  #sidebar {
+    transition: transform 0.3s ease;
+  }
+
+  #main-wrapper {
+    transition: margin-left 0.3s ease;
+  }
 }
 
 /* Explicit previous/next arrow states on post pages. */
