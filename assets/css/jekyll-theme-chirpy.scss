@@ -494,12 +494,13 @@ footer p {
   vertical-align: -0.2em;
 }
 
-footer .footer-runtime {
-  margin-left: 0.6em;
+/* Footer left block: copyright with the runtime line tucked under it. */
+footer .site-footer-left p {
+  margin-bottom: 0.15rem;
 }
 
-footer .footer-runtime [aria-hidden] {
-  margin-right: 0.35em;
+footer .site-footer-left p:last-child {
+  margin-bottom: 0;
 }
 
 /* Explicit previous/next arrow states on post pages. */

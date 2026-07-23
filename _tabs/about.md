@@ -6,8 +6,7 @@ order: 7
 group: 站点
 ---
 
-你好，我是 Lumin。
-
-这里用来记录技术、思考和日常生活。内容正在慢慢整理中。
-
-你可以在 [GitHub](https://github.com/yshgsh1343) 找到我。
+云水归山。BME大四本→？
+一种技术笔记本/日记本性质的东西。
+contact： [GitHub](https://github.com/yshgsh1343) or yshgsh1343@linux.do。
+CC BY-NC-SA 4.0。
