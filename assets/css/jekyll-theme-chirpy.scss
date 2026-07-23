@@ -446,7 +446,11 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   content: none;
 }
 
-/* Footer left block: copyright with the runtime line tucked under it. */
+/* Footer: left-align all text; left block stacks copyright + runtime. */
+footer p {
+  text-align: left;
+}
+
 footer .site-footer-left p {
   margin-bottom: 0.15rem;
 }
