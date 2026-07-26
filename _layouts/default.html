@@ -54,8 +54,10 @@ layout: compress
           <!-- tail -->
           <div id="tail-wrapper" class="{{ main_cols }} px-md-4">
             {% for _include in layout.tail_includes %}
-              {% assign _include_path = _include | append: '.html' %}
-              {% include {{ _include_path }} lang=lang %}
+              {% unless page.layout == 'post' and _include == 'related-posts' %}
+                {% assign _include_path = _include | append: '.html' %}
+                {% include {{ _include_path }} lang=lang %}
+              {% endunless %}
             {% endfor %}
 
             <!-- 自建评论：所有正式文章（非碎碎念）都带评论区；留言板在 guestbook 里单独 include -->

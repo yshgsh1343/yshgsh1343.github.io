@@ -576,6 +576,10 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   border-bottom: 1px solid var(--main-border-color) !important;
 }
 
+#post-list .card-wrapper:first-child {
+  padding-top: 0.35rem;
+}
+
 #post-list .card-wrapper:last-child {
   border-bottom: 0 !important;
 }

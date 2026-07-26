@@ -1,19 +1,56 @@
 <!-- Navigation controls at the bottom of a post. -->
 
+{% assign current_bucket = 'blog' %}
+{% if page.categories contains '笔记' %}
+  {% assign current_bucket = 'notes' %}
+{% elsif page.categories contains '月报' %}
+  {% assign current_bucket = 'monthly' %}
+{% elsif page.categories contains '碎碎念' %}
+  {% assign current_bucket = 'memos' %}
+{% endif %}
+
+{% assign previous_post = nil %}
+{% assign next_post = nil %}
+{% assign found_current = false %}
+{% assign posts_by_date = site.posts | sort: 'date' %}
+
+{% for post in posts_by_date %}
+  {% assign post_bucket = 'blog' %}
+  {% if post.categories contains '笔记' %}
+    {% assign post_bucket = 'notes' %}
+  {% elsif post.categories contains '月报' %}
+    {% assign post_bucket = 'monthly' %}
+  {% elsif post.categories contains '碎碎念' %}
+    {% assign post_bucket = 'memos' %}
+  {% endif %}
+
+  {% if post_bucket == current_bucket %}
+    {% if post.url == page.url %}
+      {% assign found_current = true %}
+    {% elsif found_current %}
+      {% unless next_post %}
+        {% assign next_post = post %}
+      {% endunless %}
+    {% else %}
+      {% assign previous_post = post %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
 <nav class="post-navigation d-flex justify-content-between" aria-label="文章导航">
   {% assign previous_label = site.data.locales[include.lang].post.button.previous %}
   {% assign next_label = site.data.locales[include.lang].post.button.next %}
 
-  {% if page.previous.url %}
+  {% if previous_post.url %}
     <a
-      href="{{ page.previous.url | relative_url }}"
+      href="{{ previous_post.url | relative_url }}"
       class="post-nav-link post-nav-previous"
-      aria-label="{{ previous_label }}：{{ page.previous.title }}"
+      aria-label="{{ previous_label }}：{{ previous_post.title }}"
     >
       <span class="post-nav-arrow" aria-hidden="true">←</span>
       <span class="post-nav-copy">
         <span class="post-nav-label">{{ previous_label }}</span>
-        <span class="post-nav-title">{{ page.previous.title }}</span>
+        <span class="post-nav-title">{{ previous_post.title }}</span>
       </span>
     </a>
   {% else %}
@@ -23,15 +60,15 @@
     </span>
   {% endif %}
 
-  {% if page.next.url %}
+  {% if next_post.url %}
     <a
-      href="{{ page.next.url | relative_url }}"
+      href="{{ next_post.url | relative_url }}"
       class="post-nav-link post-nav-next"
-      aria-label="{{ next_label }}：{{ page.next.title }}"
+      aria-label="{{ next_label }}：{{ next_post.title }}"
     >
       <span class="post-nav-copy">
         <span class="post-nav-label">{{ next_label }}</span>
-        <span class="post-nav-title">{{ page.next.title }}</span>
+        <span class="post-nav-title">{{ next_post.title }}</span>
       </span>
       <span class="post-nav-arrow" aria-hidden="true">→</span>
     </a>
