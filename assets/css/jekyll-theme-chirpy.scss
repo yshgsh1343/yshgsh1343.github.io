@@ -666,6 +666,24 @@ a.post-nav-next:hover .post-nav-arrow {
   margin-top: 0.25rem;
 }
 
+/* Tag cloud section folded into the 分类 page. */
+.taxonomy-tags {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--main-border-color);
+  padding-top: 1.75rem;
+}
+
+.taxonomy-tags-title {
+  margin-bottom: 1.25rem;
+  font-size: 1.15rem;
+}
+
+.taxonomy-tags .tag {
+  display: inline-block;
+  margin: 0 0.6rem 0.8rem 0;
+  padding: 0.25rem 0.75rem;
+}
+
 /* Post lists on tab pages (月报 / 碎碎念): date + ruled title links. */
 .tab-post-list {
   margin-top: 1.25rem;
