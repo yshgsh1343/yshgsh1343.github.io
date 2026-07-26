@@ -21,14 +21,7 @@
 
   <nav class="flex-column flex-grow-1 w-100 ps-0">
     <ul class="nav">
-      <!-- home -->
-      <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
-        <a href="{{ '/' | relative_url }}" class="nav-link">
-          <i class="fa-fw fas fa-home"></i>
-          <span>首页</span>
-        </a>
-      </li>
-      <!-- the real tabs, grouped by their `group` front matter -->
+      <!-- the tabs, grouped by their `group` front matter; home stays on the avatar / site title -->
       {% assign current_group = '' %}
       {% for tab in site.tabs %}
         {% if tab.group and tab.group != current_group %}
@@ -47,6 +40,16 @@
   </nav>
 
   <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
+    <!-- Collapse arrow: same toggle behavior as the edge rail -->
+    <button
+      type="button"
+      class="btn btn-link nav-link sidebar-collapse-btn d-none d-xl-inline-block"
+      aria-label="收起侧边栏"
+      title="收起侧边栏"
+    >
+      <i class="fa-solid fa-angles-left"></i>
+    </button>
+
     {% unless site.theme_mode == 'light' or site.theme_mode == 'dark' %}
       {%- capture icon_system -%}
         <i class="fa-solid fa-display" data-theme-mode="system"></i>
@@ -189,7 +192,7 @@
 
   (function () {
     var KEY = 'sidebar-collapsed';
-    var rails = document.querySelectorAll('.sidebar-edge-toggle');
+    var rails = document.querySelectorAll('.sidebar-edge-toggle, .sidebar-collapse-btn');
 
     function readState() {
       try {

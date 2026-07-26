@@ -2,6 +2,6 @@
 layout: tags
 title: 标签
 icon: fas fa-tags
-order: 5
-group: 内容
+order: 6
+group: 站点
 ---

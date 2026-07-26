@@ -12,7 +12,7 @@
 {%- endif -%}
 ';
 
-/* Body & UI in Microsoft YaHei; headings in Noto Serif SC Heavy. */
+/* Body & UI in Microsoft YaHei; headings in Noto Serif SC Bold. */
 body,
 button,
 input,
@@ -31,7 +31,7 @@ h6,
 .card-title,
 .post-nav-title {
   font-family: "Noto Serif SC", "Source Han Serif SC", "思源宋体", serif;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 /* Cool blue light palette. */
@@ -114,7 +114,7 @@ html:lang(zh-CN) #archives .date.day {
   font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif !important;
 }
 
-/* Chinese headings stay on Noto Serif SC Heavy. */
+/* Chinese headings stay on Noto Serif SC Bold. */
 html:lang(zh-CN) h1,
 html:lang(zh-CN) h2,
 html:lang(zh-CN) h3,
@@ -126,7 +126,7 @@ html:lang(zh-CN) .card-title,
 html:lang(zh-CN) .post-nav-title,
 html:lang(zh-CN) #sidebar .site-title {
   font-family: "Noto Serif SC", "Source Han Serif SC", "思源宋体", serif !important;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 /* No rounded UI: structure and interaction are expressed with rules. */
@@ -344,16 +344,16 @@ html:lang(zh-CN) #sidebar .site-title {
   }
 }
 
-/* Clickable accent edge rail: spans 1/4-1/2 of the viewport height.
+/* Clickable accent edge rail: a slim marker high on the sidebar divider.
    Click = collapse / restore the sidebar. */
 .sidebar-edge-toggle {
   position: fixed;
-  top: 25%;
-  left: 382px; /* right edge flush with the sidebar divider (130 + 260 - 8) */
+  top: 14%;
+  left: 386px; /* right edge flush with the sidebar divider (130 + 260 - 4) */
   z-index: 1100;
   display: block;
-  width: 8px;
-  height: 25%;
+  width: 4px;
+  height: 14%;
   margin: 0;
   padding: 0;
   border: 0;
@@ -396,7 +396,7 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   }
 
   .sidebar-edge-toggle {
-    left: 422px;
+    left: 426px; /* sidebar divider at 430 on very large screens */
   }
 
   body.sidebar-collapsed #main-wrapper {
@@ -422,6 +422,20 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   #main-wrapper {
     transition: margin-left 0.3s ease;
   }
+}
+
+/* Bottom-left collapse arrow in the sidebar footer row. */
+#sidebar .sidebar-collapse-btn {
+  padding: 0.25rem 0.5rem;
+  border: 0 !important;
+  color: var(--sidebar-btn-color);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+#sidebar .sidebar-collapse-btn:hover,
+#sidebar .sidebar-collapse-btn:focus-visible {
+  color: var(--accent) !important;
 }
 
 /* Kill the slide animation while restoring a persisted collapsed state. */
@@ -672,6 +686,90 @@ a.post-nav-next:hover .post-nav-arrow {
 
 #sidebar .nav-group-label:first-child {
   margin-top: 0.25rem;
+}
+
+/* 碎碎念: timeline of cards — a vertical rail with node dots, each entry
+   a stamped card carrying the full short text. */
+.murmur-timeline {
+  position: relative;
+  margin-top: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.murmur-timeline::before {
+  position: absolute;
+  top: 0.45rem;
+  bottom: 0.45rem;
+  left: 4px;
+  width: 2px;
+  background: var(--timeline-color);
+  content: "";
+}
+
+.murmur-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.murmur-item:last-child {
+  padding-bottom: 0.5rem;
+}
+
+/* Node dot on the rail, aligned with the date line. */
+.murmur-item::before {
+  position: absolute;
+  top: 0.3rem;
+  left: calc(-1.5rem + 5px - 4px);
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--main-bg);
+  border-radius: 50% !important; /* exempt from the global square rule */
+  background: var(--timeline-node-bg);
+  content: "";
+}
+
+.murmur-date {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted-color);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.murmur-card {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--main-border-color);
+  border-left: 3px solid var(--accent);
+  background: var(--card-bg);
+  transition: border-color 0.18s ease;
+}
+
+.murmur-card:hover {
+  border-color: var(--accent);
+}
+
+.murmur-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.02rem;
+}
+
+.murmur-title a {
+  color: var(--heading-color);
+  text-decoration: none !important;
+}
+
+.murmur-title a:hover {
+  color: var(--accent);
+}
+
+.murmur-content {
+  color: var(--text-color);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.murmur-content > p:last-child {
+  margin-bottom: 0;
 }
 
 /* Post lists on tab pages (月报 / 碎碎念): date + ruled title links. */
