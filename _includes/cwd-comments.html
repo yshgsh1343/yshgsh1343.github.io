@@ -1,0 +1,383 @@
+<section id="cwd-comments" class="cwd-comments mt-5" data-api="https://cwd-api.luminaire6699.workers.dev" data-post-slug="{{ page.url | default: '/guestbook/' }}" data-site-id="yshgsh1343.github.io">
+  <div class="cwd-comments__header">
+    <h2 class="cwd-comments__title">留言</h2>
+    <p class="cwd-comments__desc">欢迎留下想说的话，昵称、邮箱和内容为必填。</p>
+  </div>
+
+  <form id="cwd-comment-form" class="cwd-comments__form">
+    <input type="hidden" id="cwd-parent-id" name="parent_id" value="">
+    <div id="cwd-replying" class="cwd-comments__replying" hidden>
+      正在回复 <strong id="cwd-replying-name"></strong>
+      <button type="button" id="cwd-cancel-reply" class="cwd-comments__link-button">取消回复</button>
+    </div>
+
+    <div class="cwd-comments__grid">
+      <label>
+        <span>昵称</span>
+        <input id="cwd-name" name="name" type="text" autocomplete="name" required>
+      </label>
+      <label>
+        <span>邮箱</span>
+        <input id="cwd-email" name="email" type="email" autocomplete="email" required>
+      </label>
+    </div>
+
+    <label>
+      <span>网站（可选）</span>
+      <input id="cwd-url" name="url" type="url" autocomplete="url" placeholder="https://">
+    </label>
+
+    <label>
+      <span>内容</span>
+      <textarea id="cwd-content" name="content" rows="5" required placeholder="支持 Markdown，友好交流～"></textarea>
+    </label>
+
+    <div class="cwd-comments__actions">
+      <button id="cwd-submit" type="submit" class="cwd-comments__submit">提交留言</button>
+      <span id="cwd-status" class="cwd-comments__status" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <div id="cwd-comment-list" class="cwd-comments__list" aria-live="polite">
+    <p class="cwd-comments__loading">正在加载留言……</p>
+  </div>
+</section>
+
+<style>
+  .cwd-comments {
+    border-top: 1px solid var(--main-border-color, #e5e7eb);
+    padding-top: 2rem;
+  }
+
+  .cwd-comments__header {
+    margin-bottom: 1rem;
+  }
+
+  .cwd-comments__title {
+    font-size: 1.35rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .cwd-comments__desc,
+  .cwd-comments__status,
+  .cwd-comments__loading,
+  .cwd-comments__empty,
+  .cwd-comments__meta {
+    color: var(--text-muted-color, #6b7280);
+  }
+
+  .cwd-comments__form {
+    display: grid;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .cwd-comments__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .cwd-comments label {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .cwd-comments input,
+  .cwd-comments textarea {
+    width: 100%;
+    border: 1px solid var(--main-border-color, #d1d5db);
+    border-radius: 0.65rem;
+    padding: 0.65rem 0.75rem;
+    color: var(--text-color, #111827);
+    background: var(--main-bg, #fff);
+    font: inherit;
+  }
+
+  .cwd-comments textarea {
+    resize: vertical;
+  }
+
+  .cwd-comments__replying {
+    border-radius: 0.65rem;
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.6rem 0.75rem;
+  }
+
+  .cwd-comments__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .cwd-comments__submit {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.55rem 1.15rem;
+    color: #fff;
+    background: var(--link-color, #2563eb);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .cwd-comments__submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .cwd-comments__link-button {
+    border: 0;
+    padding: 0;
+    color: var(--link-color, #2563eb);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .cwd-comments__list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .cwd-comment {
+    border: 1px solid var(--main-border-color, #e5e7eb);
+    border-radius: 0.9rem;
+    padding: 1rem;
+    background: var(--card-bg, rgba(255, 255, 255, 0.02));
+  }
+
+  .cwd-comment__head {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .cwd-comment__avatar {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--main-border-color, #e5e7eb);
+  }
+
+  .cwd-comment__name {
+    font-weight: 700;
+  }
+
+  .cwd-comment__admin {
+    display: inline-block;
+    margin-left: 0.35rem;
+    border-radius: 999px;
+    padding: 0.05rem 0.4rem;
+    color: #fff;
+    background: #16a34a;
+    font-size: 0.72rem;
+    vertical-align: middle;
+  }
+
+  .cwd-comment__content {
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+
+  .cwd-comment__content > :last-child {
+    margin-bottom: 0;
+  }
+
+  .cwd-comment__foot {
+    margin-top: 0.75rem;
+  }
+
+  .cwd-comment__replies {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 0.9rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--main-border-color, #e5e7eb);
+  }
+
+  @media (max-width: 576px) {
+    .cwd-comments__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById('cwd-comments');
+    if (!root) return;
+
+    const apiBase = root.dataset.api.replace(/\/$/, '');
+    const postSlug = root.dataset.postSlug || window.location.pathname;
+    const siteId = root.dataset.siteId || '';
+    const list = document.getElementById('cwd-comment-list');
+    const form = document.getElementById('cwd-comment-form');
+    const submit = document.getElementById('cwd-submit');
+    const status = document.getElementById('cwd-status');
+    const parentInput = document.getElementById('cwd-parent-id');
+    const replying = document.getElementById('cwd-replying');
+    const replyingName = document.getElementById('cwd-replying-name');
+    const cancelReply = document.getElementById('cwd-cancel-reply');
+
+    const fields = {
+      name: document.getElementById('cwd-name'),
+      email: document.getElementById('cwd-email'),
+      url: document.getElementById('cwd-url'),
+      content: document.getElementById('cwd-content')
+    };
+
+    const storageKey = 'cwd-comment-profile';
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      fields.name.value = saved.name || '';
+      fields.email.value = saved.email || '';
+      fields.url.value = saved.url || '';
+    } catch (_) {}
+
+    const setStatus = (message, isError = false) => {
+      status.textContent = message || '';
+      status.style.color = isError ? '#dc2626' : '';
+    };
+
+    const escapeHtml = (value) => String(value || '').replace(/[&<>'"]/g, (char) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    })[char]);
+
+    const formatTime = (created) => {
+      const date = new Date(Number(created));
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleString('zh-CN', { hour12: false });
+    };
+
+    const renderComment = (comment, isReply = false) => {
+      const article = document.createElement('article');
+      article.className = 'cwd-comment';
+      article.id = `comment-${comment.id}`;
+
+      const name = escapeHtml(comment.name || '匿名');
+      const url = comment.url ? escapeHtml(comment.url) : '';
+      const nameHtml = url
+        ? `<a href="${url}" target="_blank" rel="nofollow noopener">${name}</a>`
+        : name;
+      const avatar = escapeHtml(comment.avatar || `https://cravatar.cn/avatar/?d=mp`);
+      const replyTo = comment.replyToAuthor ? `<span class="cwd-comments__meta">回复 ${escapeHtml(comment.replyToAuthor)}</span>` : '';
+
+      article.innerHTML = `
+        <div class="cwd-comment__head">
+          <img class="cwd-comment__avatar" src="${avatar}" alt="" loading="lazy">
+          <div>
+            <div class="cwd-comment__name">${nameHtml}${comment.isAdmin ? '<span class="cwd-comment__admin">博主</span>' : ''}</div>
+            <div class="cwd-comments__meta">${formatTime(comment.created)} ${replyTo}</div>
+          </div>
+        </div>
+        <div class="cwd-comment__content">${comment.contentHtml || escapeHtml(comment.contentText || '')}</div>
+        <div class="cwd-comment__foot">
+          <button type="button" class="cwd-comments__link-button" data-reply-id="${comment.id}" data-reply-name="${name}">回复</button>
+        </div>
+      `;
+
+      if (!isReply && Array.isArray(comment.replies) && comment.replies.length) {
+        const replies = document.createElement('div');
+        replies.className = 'cwd-comment__replies';
+        comment.replies.forEach((reply) => replies.appendChild(renderComment(reply, true)));
+        article.appendChild(replies);
+      }
+
+      return article;
+    };
+
+    const loadComments = async () => {
+      list.innerHTML = '<p class="cwd-comments__loading">正在加载留言……</p>';
+      const params = new URLSearchParams({ post_slug: postSlug, limit: '50' });
+      if (siteId) params.set('site_id', siteId);
+
+      try {
+        const response = await fetch(`${apiBase}/api/comments?${params}`);
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.message || '加载失败');
+
+        const comments = Array.isArray(payload.data) ? payload.data : [];
+        list.innerHTML = '';
+        if (!comments.length) {
+          list.innerHTML = '<p class="cwd-comments__empty">还没有留言，来坐第一排。</p>';
+          return;
+        }
+        comments.forEach((comment) => list.appendChild(renderComment(comment)));
+      } catch (error) {
+        list.innerHTML = `<p class="cwd-comments__empty">留言加载失败：${escapeHtml(error.message || error)}</p>`;
+      }
+    };
+
+    const clearReply = () => {
+      parentInput.value = '';
+      replying.hidden = true;
+      replyingName.textContent = '';
+    };
+
+    list.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-reply-id]');
+      if (!button) return;
+      parentInput.value = button.dataset.replyId;
+      replyingName.textContent = button.dataset.replyName || '这条留言';
+      replying.hidden = false;
+      fields.content.focus();
+    });
+
+    cancelReply.addEventListener('click', clearReply);
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setStatus('正在提交……');
+      submit.disabled = true;
+
+      const payload = {
+        post_slug: postSlug,
+        site_id: siteId,
+        post_title: document.title,
+        post_url: window.location.href,
+        name: fields.name.value.trim(),
+        email: fields.email.value.trim(),
+        url: fields.url.value.trim(),
+        content: fields.content.value.trim()
+      };
+
+      if (parentInput.value) payload.parent_id = Number(parentInput.value);
+
+      try {
+        const response = await fetch(`${apiBase}/api/comments`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.message || '提交失败');
+
+        localStorage.setItem(storageKey, JSON.stringify({
+          name: payload.name,
+          email: payload.email,
+          url: payload.url
+        }));
+
+        fields.content.value = '';
+        clearReply();
+        setStatus(result.message || '留言已提交');
+        await loadComments();
+      } catch (error) {
+        setStatus(error.message || '提交失败，请稍后再试', true);
+      } finally {
+        submit.disabled = false;
+      }
+    });
+
+    loadComments();
+  })();
+</script>

@@ -11,3 +11,5 @@ comments: true
 目前可以通过邮件找到我：[{{ site.social.email }}](mailto:{{ site.social.email }})
 
 也可以在 [GitHub](https://github.com/{{ site.github.username }}) 上给我提 Issue 或 PR。
+
+{% include cwd-comments.html %}
