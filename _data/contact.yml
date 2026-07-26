@@ -3,6 +3,12 @@
 - type: github
   icon: "fab fa-github"
 
+- type: tools
+  icon: "fas fa-toolbox"
+  url: /tools/
+  label: 工具与工作流
+  noblank: true
+
 - type: rss
   icon: "fas fa-rss"
   noblank: true
