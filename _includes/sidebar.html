@@ -32,6 +32,7 @@
       <!-- the tabs, grouped by their `group` front matter; home stays on the avatar / site title -->
       {% assign current_group = '' %}
       {% for tab in site.tabs %}
+        {% if tab.nav_hidden %}{% continue %}{% endif %}
         {% if tab.group and tab.group != current_group %}
           <li class="nav-group-label" aria-hidden="true"><span>{{ tab.group }}</span></li>
           {% assign current_group = tab.group %}

@@ -721,6 +721,23 @@ footer p {
   width: calc(100% + 1ch);
 }
 
+/* 标签胶囊不吃右栏链接的下划线滑动态，保持 pill 语言。 */
+#panel-wrapper .access a.tag::after {
+  content: none;
+}
+
+/* 右栏标签云：胶囊缩一号，适配窄列。 */
+#panel-wrapper .panel-tag-cloud {
+  gap: 0.5rem 0.35rem;
+}
+
+#panel-wrapper .panel-tag-cloud .tag {
+  margin-right: 0;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
 #panel-wrapper .panel-count {
   margin-left: 0.35rem;
   font-size: 0.8em;

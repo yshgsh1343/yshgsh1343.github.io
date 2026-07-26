@@ -1,0 +1,39 @@
+<!-- 分类页右栏：标签云。口径与 /tags/ 聚合页一致——只统计正式文章，
+     碎碎念 / 笔记 / 月报 不计入，只属于它们的标签不显示。 -->
+{% assign excluded = '碎碎念|笔记|月报' | split: '|' %}
+
+{% assign tags = '' | split: '' %}
+{% for t in site.tags %}
+  {% assign tags = tags | push: t[0] %}
+{% endfor %}
+{% assign sorted_tags = tags | sort_natural %}
+
+<div class="access">
+  <section id="panel-tags">
+    <h2 class="panel-heading">标签</h2>
+    <div class="d-flex flex-wrap mt-3 panel-tag-cloud">
+      {% for t in sorted_tags %}
+        {% assign visible_count = 0 %}
+        {% for post in site.tags[t] %}
+          {% assign skip = false %}
+          {% for cat in excluded %}
+            {% if post.categories contains cat %}
+              {% assign skip = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% unless skip %}
+            {% assign visible_count = visible_count | plus: 1 %}
+          {% endunless %}
+        {% endfor %}
+
+        {% if visible_count == 0 %}{% continue %}{% endif %}
+
+        <a class="tag" href="{{ t | slugify | url_encode | prepend: '/tags/' | append: '/' | relative_url }}">
+          {{ t -}}
+          <span class="text-muted">{{ visible_count }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
