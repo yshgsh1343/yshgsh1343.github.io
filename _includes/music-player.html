@@ -3,7 +3,9 @@
 <div id="music-player" class="music-player" data-src="{{ mp_src | relative_url }}" data-autoplay="{{ mp_autoplay }}">
   <div class="music-player__cover">
     <i class="fas fa-music"></i>
-    <img id="mp-cover-img" src="" alt="" hidden>
+    <!-- 不带 src 属性：主题的 refactor-content 会把正文 img 包成灯箱链接，
+         空 src 会被拼成死链 /src；封面地址由 JS 播放时赋值。 -->
+    <img id="mp-cover-img" alt="" hidden>
   </div>
   <div class="music-player__body">
     <div class="music-player__title" id="mp-title">歌单加载中……</div>

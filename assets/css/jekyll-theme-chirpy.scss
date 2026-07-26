@@ -90,13 +90,25 @@ h6,
   --timeline-node-bg: var(--accent);
 }
 
-/* Decorative marker for tab page titles. */
+/* Decorative marker for tab page titles, in a rounded face so the
+   hash reads as an ornament rather than Markdown syntax. */
 main > article > .dynamic-title::before {
   margin-right: 0.32em;
   color: var(--accent);
   content: "#";
+  font-family: "Arial Rounded MT Bold", "Varela Round", "Yuanti SC", "幼圆", "YouYuan", sans-serif;
   font-size: 1.16em;
-  font-weight: 800;
+  font-weight: 700;
+}
+
+/* Hide the theme's per-heading anchor hashtag inside post content. */
+h1 .anchor,
+h2 .anchor,
+h3 .anchor,
+h4 .anchor,
+h5 .anchor,
+h6 .anchor {
+  display: none !important;
 }
 
 /* Keep every Chinese UI text run on Microsoft YaHei. */
@@ -445,10 +457,11 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   transition: none !important;
 }
 
-/* Home post list: plain rows separated by hairlines, no card blocks. */
+/* Home post list: plain rows separated by hairlines, no card blocks.
+   Vertical rhythm matches the sidebar: body-size text, even paddings. */
 #post-list .card-wrapper {
   margin-bottom: 0;
-  padding: 0.75rem 0;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--main-border-color) !important;
 }
 
@@ -457,8 +470,20 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
 }
 
 #post-list .card .card-body {
-  padding-right: 0;
-  padding-left: 0;
+  padding: 0;
+}
+
+/* Title rule sits at -0.22rem; give it clearance before the summary. */
+#post-list .card-title {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Align with the 1rem body/sidebar text instead of the theme's 1.03em. */
+#post-list .card-text,
+#post-list .card-text p {
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
 /* The residual card ring lives on .post-preview (1px spread shadow);
