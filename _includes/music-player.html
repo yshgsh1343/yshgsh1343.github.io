@@ -296,20 +296,19 @@
       if (autoplayNext) play();
     };
 
-    const start = () => {
+    /* 加载完歌单就先随机抽一首停在暂停态，点播放直接播这首 */
+    const prepare = () => {
       started = true;
       buildOrder(-1);
       load(current());
-      play();
     };
 
     els.toggle.addEventListener('click', () => {
-      if (!tracks.length) return;
-      if (!started) { start(); return; }
+      if (!started) return;
       if (audio.paused) play(); else audio.pause();
     });
-    els.next.addEventListener('click', () => { started ? step(1, true) : start(); });
-    els.prev.addEventListener('click', () => { started ? step(-1, true) : start(); });
+    els.next.addEventListener('click', () => { if (started) step(1, !audio.paused); });
+    els.prev.addEventListener('click', () => { if (started) step(-1, !audio.paused); });
 
     audio.addEventListener('playing', () => {
       errorStreak = 0;
@@ -395,9 +394,9 @@
         tracks = data.filter((item) => item && item.url);
         if (!tracks.length) throw new Error('歌单是空的');
         disableButtons(false);
-        els.title.textContent = '点击播放，随机来一首';
         els.mode.textContent = `随机循环 · ${tracks.length} 首`;
-        if (root.dataset.autoplay === 'true') start();
+        prepare();
+        if (root.dataset.autoplay === 'true') play();
       })
       .catch((error) => {
         els.title.textContent = '歌单加载失败';
