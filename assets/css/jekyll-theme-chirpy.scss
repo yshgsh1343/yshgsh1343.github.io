@@ -612,23 +612,6 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   content: none;
 }
 
-/* Footer: left-align all text; keep the divider line in place and
-   move only the text down (grow the band, add top padding). */
-footer {
-  height: calc(5rem + 3em);
-  padding-top: 3em;
-}
-
-@media (max-width: 991.98px) {
-  footer {
-    height: calc(6rem + 3em);
-  }
-}
-
-footer p {
-  text-align: left;
-}
-
 /* Tags use underline rules instead of pill boxes. */
 .tag,
 .post-tags .post-tag,
@@ -757,6 +740,20 @@ footer p {
   font-variant-numeric: tabular-nums;
 }
 
+#panel-site-info .panel-subheading {
+  margin: 1rem 0 0.55rem;
+  color: var(--heading-color);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#panel-site-info .panel-ack-heading {
+  margin: 0.75rem 0 0;
+  color: var(--heading-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 /* 随机漫游按钮：走全局按钮语言（细底线 + hover 变 accent）。 */
 .random-walk-btn {
   padding: 0.3rem 0.2rem;
@@ -814,15 +811,6 @@ footer p {
   padding: 0;
   border: 0;
   vertical-align: -0.2em;
-}
-
-/* Footer left block: copyright with the runtime line tucked under it. */
-footer .site-footer-left p {
-  margin-bottom: 0.15rem;
-}
-
-footer .site-footer-left p:last-child {
-  margin-bottom: 0;
 }
 
 /* Explicit previous/next arrow states on post pages. */
