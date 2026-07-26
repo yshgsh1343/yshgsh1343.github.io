@@ -1,0 +1,403 @@
+{% assign mp_src = include.src | default: '/assets/data/music.json' %}
+{% assign mp_autoplay = include.autoplay | default: '' %}
+<div id="music-player" class="music-player" data-src="{{ mp_src | relative_url }}" data-autoplay="{{ mp_autoplay }}">
+  <div class="music-player__cover">
+    <i class="fas fa-music"></i>
+    <img id="mp-cover-img" src="" alt="" hidden>
+  </div>
+  <div class="music-player__body">
+    <div class="music-player__title" id="mp-title">歌单加载中……</div>
+    <div class="music-player__artist" id="mp-artist"></div>
+    <div class="music-player__progress" id="mp-progress" title="点击跳转">
+      <div class="music-player__bar" id="mp-bar"></div>
+    </div>
+    <div class="music-player__meta">
+      <span id="mp-time">0:00 / 0:00</span>
+      <span id="mp-mode">随机循环</span>
+    </div>
+    <div class="music-player__status" id="mp-status" hidden></div>
+  </div>
+  <div class="music-player__controls">
+    <button type="button" id="mp-prev" class="music-player__btn" aria-label="上一首" title="上一首"><i class="fas fa-step-backward"></i></button>
+    <button type="button" id="mp-toggle" class="music-player__btn music-player__btn--main" aria-label="播放" title="播放"><i class="fas fa-play" id="mp-toggle-icon"></i></button>
+    <button type="button" id="mp-next" class="music-player__btn" aria-label="下一首" title="下一首"><i class="fas fa-step-forward"></i></button>
+  </div>
+</div>
+
+<style>
+  .music-player {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--main-border-color, #e5e7eb);
+    border-radius: 0.9rem;
+    background: var(--card-bg, rgba(255, 255, 255, 0.02));
+  }
+
+  .music-player__cover {
+    position: relative;
+    flex: none;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-border-color, #e5e7eb);
+    color: var(--text-muted-color, #6b7280);
+    animation: mp-spin 24s linear infinite;
+    animation-play-state: paused;
+  }
+
+  .music-player--playing .music-player__cover {
+    animation-play-state: running;
+  }
+
+  .music-player__cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .music-player__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .music-player__title {
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .music-player__artist {
+    color: var(--text-muted-color, #6b7280);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 1.2em;
+  }
+
+  .music-player__progress {
+    height: 0.35rem;
+    margin: 0.55rem 0 0.35rem;
+    border-radius: 999px;
+    background: var(--main-border-color, #e5e7eb);
+    cursor: pointer;
+    touch-action: none;
+  }
+
+  .music-player__bar {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: var(--link-color, #2563eb);
+  }
+
+  .music-player__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted-color, #6b7280);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .music-player__status {
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--text-muted-color, #6b7280);
+  }
+
+  .music-player__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    flex: none;
+  }
+
+  .music-player__btn {
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-color, #374151);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .music-player__btn:hover {
+    background: rgba(128, 128, 128, 0.15);
+  }
+
+  .music-player__btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .music-player__btn--main {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #fff;
+    background: var(--link-color, #2563eb);
+  }
+
+  .music-player__btn--main:hover {
+    background: var(--link-color, #2563eb);
+    opacity: 0.9;
+  }
+
+  .music-player__btn--main .fa-play {
+    margin-left: 0.12em;
+  }
+
+  @keyframes mp-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .music-player__cover {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .music-player {
+      gap: 0.75rem;
+      padding: 0.85rem 0.9rem;
+    }
+
+    .music-player__btn {
+      width: 1.9rem;
+      height: 1.9rem;
+    }
+
+    .music-player__btn--main {
+      width: 2.3rem;
+      height: 2.3rem;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.getElementById('music-player');
+    if (!root) return;
+
+    const els = {
+      cover: document.getElementById('mp-cover-img'),
+      title: document.getElementById('mp-title'),
+      artist: document.getElementById('mp-artist'),
+      progress: document.getElementById('mp-progress'),
+      bar: document.getElementById('mp-bar'),
+      time: document.getElementById('mp-time'),
+      mode: document.getElementById('mp-mode'),
+      status: document.getElementById('mp-status'),
+      prev: document.getElementById('mp-prev'),
+      toggle: document.getElementById('mp-toggle'),
+      toggleIcon: document.getElementById('mp-toggle-icon'),
+      next: document.getElementById('mp-next')
+    };
+
+    const audio = new Audio();
+    audio.preload = 'none';
+    audio.volume = 0.8;
+
+    let tracks = [];
+    let order = [];
+    let pos = 0;
+    let errorStreak = 0;
+    let seeking = false;
+    let started = false;
+
+    const setStatus = (message) => {
+      els.status.textContent = message || '';
+      els.status.hidden = !message;
+    };
+
+    const formatTime = (seconds) => {
+      if (!Number.isFinite(seconds)) return '0:00';
+      const s = Math.max(0, Math.round(seconds));
+      return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+    };
+
+    const shuffle = (list) => {
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+      return list;
+    };
+
+    // 洗一轮新顺序；avoidFirst 防止新一轮开头正好重复上一首
+    const buildOrder = (avoidFirst) => {
+      order = shuffle(tracks.map((_, i) => i));
+      if (order.length > 1 && order[0] === avoidFirst) {
+        const j = 1 + Math.floor(Math.random() * (order.length - 1));
+        [order[0], order[j]] = [order[j], order[0]];
+      }
+      pos = 0;
+    };
+
+    const current = () => tracks[order[pos]];
+
+    const updateMediaSession = (track) => {
+      if (!('mediaSession' in navigator)) return;
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: track.name || '',
+        artist: track.artist || '',
+        artwork: track.pic ? [{ src: track.pic }] : []
+      });
+    };
+
+    const load = (track) => {
+      els.title.textContent = track.name || '未知曲目';
+      els.artist.textContent = track.artist || '';
+      els.bar.style.width = '0%';
+      els.time.textContent = '0:00 / 0:00';
+      els.cover.hidden = true;
+      if (track.pic) els.cover.src = track.pic;
+      audio.src = track.url;
+      updateMediaSession(track);
+    };
+
+    els.cover.addEventListener('load', () => { els.cover.hidden = false; });
+    els.cover.addEventListener('error', () => { els.cover.hidden = true; });
+
+    const play = () => {
+      audio.play().catch(() => { /* 自动播放被拦截时保持暂停态；加载失败走 error 事件 */ });
+    };
+
+    const step = (delta, autoplayNext) => {
+      if (!tracks.length) return;
+      if (delta > 0) {
+        pos += 1;
+        if (pos >= order.length) buildOrder(order[order.length - 1]);
+      } else {
+        pos = (pos - 1 + order.length) % order.length;
+      }
+      load(current());
+      if (autoplayNext) play();
+    };
+
+    const start = () => {
+      started = true;
+      buildOrder(-1);
+      load(current());
+      play();
+    };
+
+    els.toggle.addEventListener('click', () => {
+      if (!tracks.length) return;
+      if (!started) { start(); return; }
+      if (audio.paused) play(); else audio.pause();
+    });
+    els.next.addEventListener('click', () => { started ? step(1, true) : start(); });
+    els.prev.addEventListener('click', () => { started ? step(-1, true) : start(); });
+
+    audio.addEventListener('playing', () => {
+      errorStreak = 0;
+      root.classList.add('music-player--playing');
+      els.toggleIcon.className = 'fas fa-pause';
+      els.toggle.setAttribute('aria-label', '暂停');
+      setStatus('');
+    });
+
+    audio.addEventListener('pause', () => {
+      root.classList.remove('music-player--playing');
+      els.toggleIcon.className = 'fas fa-play';
+      els.toggle.setAttribute('aria-label', '播放');
+    });
+
+    audio.addEventListener('ended', () => step(1, true));
+
+    audio.addEventListener('error', () => {
+      if (!started) return;
+      errorStreak += 1;
+      if (errorStreak >= tracks.length) {
+        setStatus('歌单里的歌曲暂时都无法播放，稍后再试试。');
+        root.classList.remove('music-player--playing');
+        els.toggleIcon.className = 'fas fa-play';
+        return;
+      }
+      setStatus(`「${current().name}」无法播放，已跳过`);
+      setTimeout(() => step(1, true), 500);
+    });
+
+    const renderProgress = () => {
+      const ratio = Number.isFinite(audio.duration) && audio.duration > 0
+        ? audio.currentTime / audio.duration
+        : 0;
+      els.bar.style.width = `${(ratio * 100).toFixed(2)}%`;
+      els.time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    };
+
+    audio.addEventListener('timeupdate', () => { if (!seeking) renderProgress(); });
+    audio.addEventListener('durationchange', renderProgress);
+
+    const seekRatio = (event) => {
+      const rect = els.progress.getBoundingClientRect();
+      return Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    };
+
+    els.progress.addEventListener('pointerdown', (event) => {
+      if (!started || !Number.isFinite(audio.duration) || audio.duration <= 0) return;
+      seeking = true;
+      try { els.progress.setPointerCapture(event.pointerId); } catch (_) {}
+      els.bar.style.width = `${seekRatio(event) * 100}%`;
+    });
+    els.progress.addEventListener('pointermove', (event) => {
+      if (seeking) els.bar.style.width = `${seekRatio(event) * 100}%`;
+    });
+    els.progress.addEventListener('pointerup', (event) => {
+      if (!seeking) return;
+      seeking = false;
+      audio.currentTime = seekRatio(event) * audio.duration;
+    });
+    els.progress.addEventListener('pointercancel', () => { seeking = false; });
+
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => { if (started) play(); });
+      navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+      navigator.mediaSession.setActionHandler('previoustrack', () => { if (started) step(-1, true); });
+      navigator.mediaSession.setActionHandler('nexttrack', () => { if (started) step(1, true); });
+    }
+
+    const disableButtons = (disabled) => {
+      [els.prev, els.toggle, els.next].forEach((button) => { button.disabled = disabled; });
+    };
+
+    disableButtons(true);
+
+    fetch(root.dataset.src)
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        if (!Array.isArray(data)) throw new Error('歌单数据格式不对');
+        tracks = data.filter((item) => item && item.url);
+        if (!tracks.length) throw new Error('歌单是空的');
+        disableButtons(false);
+        els.title.textContent = '点击播放，随机来一首';
+        els.mode.textContent = `随机循环 · ${tracks.length} 首`;
+        if (root.dataset.autoplay === 'true') start();
+      })
+      .catch((error) => {
+        els.title.textContent = '歌单加载失败';
+        setStatus(`${error.message || error}（刷新再试）`);
+      });
+  })();
+</script>

@@ -33,3 +33,6 @@ Thumbs.db
 
 # WorkBuddy agent workspace
 .workbuddy/
+
+# Locally built playlist export shell (build with tools/build-export-shell.cmd)
+tools/export-playlist.exe
