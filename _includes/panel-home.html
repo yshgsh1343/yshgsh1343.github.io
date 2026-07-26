@@ -28,11 +28,13 @@
     </p>
   </section>
 
-  <!-- 运行时间：从 footer 挪来，同一个 #site-runtime 契约。 -->
-  <section id="panel-runtime">
-    <h2 class="panel-heading">运行时间</h2>
+  <!-- 站点信息：运行时间逐秒走字 + 不蒜子全站浏览量（脚本在 default.html 全站加载）。 -->
+  <section id="panel-site-info">
+    <h2 class="panel-heading">站点信息</h2>
     <p class="content mt-2 mb-0">
       <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
+      <br>
+      <span>浏览量 <span id="busuanzi_value_site_pv">…</span> 次</span>
     </p>
   </section>
 
@@ -54,14 +56,25 @@
 </div>
 
 <script>
-  /* 运行天数 + 随机漫游。compress_html 会把内联脚本压成一行，
-     只能用块注释。 */
+  /* 运行时间（精确到秒，每秒走字）+ 随机漫游。
+     compress_html 会把内联脚本压成一行，只能用块注释。 */
   (function () {
     var el = document.getElementById('site-runtime');
     if (el) {
       var start = new Date(el.getAttribute('data-start')).getTime();
-      var days = Math.floor(Math.max(0, Date.now() - start) / 86400000);
-      el.textContent = '已运行 ' + days + ' 天';
+
+      var tick = function () {
+        var diff = Math.max(0, Date.now() - start);
+        var s = Math.floor(diff / 1000);
+        var days = Math.floor(s / 86400);
+        var hours = Math.floor((s % 86400) / 3600);
+        var mins = Math.floor((s % 3600) / 60);
+        var secs = s % 60;
+        el.textContent = '已运行 ' + days + ' 天 ' + hours + ' 时 ' + mins + ' 分 ' + secs + ' 秒';
+      };
+
+      tick();
+      setInterval(tick, 1000);
     }
 
     var urls = [
