@@ -1,0 +1,62 @@
+# 大陆访问加速：覆盖主题默认外链源。
+# - cdn.jsdelivr.net 在大陆不稳定 → cdn.jsdmirror.com（jsDelivr 国内镜像）
+# - fonts.googleapis.com 直连超时 → fonts.loli.net（Google Fonts 镜像）
+# 结构须与主题 _data/origin/cors.yml 保持一致，键全量覆盖。
+
+# Resource Hints
+resource_hints:
+  - url: https://fonts.loli.net
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
+  - url: https://gstatic.loli.net
+    links:
+      - rel: preconnect
+        opts: [crossorigin]
+      - rel: dns-prefetch
+  - url: https://cdn.jsdmirror.com
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
+
+# Web Fonts（英文正文字体走 loli 镜像；中文标题字体在 metadata-hook 里）
+webfonts: https://fonts.loli.net/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap
+
+# Libraries
+
+bootstrap:
+  css: https://cdn.jsdmirror.com/npm/bootstrap@5/dist/css/bootstrap.min.css
+
+toc:
+  css: https://cdn.jsdmirror.com/npm/tocbot@4/dist/tocbot.min.css
+  js: https://cdn.jsdmirror.com/npm/tocbot@4/dist/tocbot.min.js
+
+fontawesome:
+  css: https://cdn.jsdmirror.com/npm/@fortawesome/fontawesome-free@7/css/all.min.css
+
+search:
+  js: https://cdn.jsdmirror.com/npm/simple-jekyll-search@1/dest/simple-jekyll-search.min.js
+
+mermaid:
+  js: https://cdn.jsdmirror.com/npm/mermaid@11/dist/mermaid.min.js
+
+dayjs:
+  js:
+    common: https://cdn.jsdmirror.com/npm/dayjs@1/dayjs.min.js
+    locale: https://cdn.jsdmirror.com/npm/dayjs@1/locale/:LOCALE.js
+    relativeTime: https://cdn.jsdmirror.com/npm/dayjs@1/plugin/relativeTime.js
+    localizedFormat: https://cdn.jsdmirror.com/npm/dayjs@1/plugin/localizedFormat.js
+
+glightbox:
+  css: https://cdn.jsdmirror.com/npm/glightbox@3/dist/css/glightbox.min.css
+  js: https://cdn.jsdmirror.com/npm/glightbox@3/dist/js/glightbox.min.js
+
+lazy-polyfill:
+  css: https://cdn.jsdmirror.com/npm/loading-attribute-polyfill@2/dist/loading-attribute-polyfill.min.css
+  js: https://cdn.jsdmirror.com/npm/loading-attribute-polyfill@2/dist/loading-attribute-polyfill.umd.min.js
+
+clipboard:
+  js: https://cdn.jsdmirror.com/npm/clipboard@2/dist/clipboard.min.js
+
+mathjax:
+  js: https://cdn.jsdmirror.com/npm/mathjax@4/tex-mml-chtml.js

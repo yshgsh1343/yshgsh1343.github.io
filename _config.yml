@@ -95,7 +95,8 @@ theme_mode: # [light | dark]
 # will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-cdn: https://cdn.jsdelivr.net/gh/yshgsh1343/yshgsh1343.github.io
+# 媒体走站点同源（自定义域名），不再经 jsDelivr——大陆访问它反而更慢。
+cdn:
 
 # the avatar on sidebar, support local or CORS resources
 avatar: /assets/img/avatar.jpg
