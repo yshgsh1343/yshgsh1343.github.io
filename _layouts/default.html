@@ -58,6 +58,13 @@ layout: compress
               {% include {{ _include_path }} lang=lang %}
             {% endfor %}
 
+            <!-- 自建评论：所有正式文章（非碎碎念）都带评论区；留言板在 guestbook 里单独 include -->
+            {% if page.layout == 'post' and page.comments %}
+              {% unless page.categories contains '碎碎念' %}
+                {% include cwd-comments.html title='评论' desc='欢迎讨论，昵称、邮箱和内容为必填。' %}
+              {% endunless %}
+            {% endif %}
+
             {% include_cached footer.html lang=lang %}
           </div>
         </div>
