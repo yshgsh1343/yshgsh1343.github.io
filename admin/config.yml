@@ -1,6 +1,10 @@
 # Sveltia CMS 配置
 # 后台入口: https://blog.uzumakinoharu.top/admin/
-# 登录依赖下面 base_url 指向的 OAuth 中转 (Cloudflare Worker, 见 sveltia-cms-auth)
+# 登录依赖下面 base_url 指向的 OAuth 中转 (Cloudflare Worker, sveltia-cms-auth)
+#
+# 所有内容都存在 _posts/, 靠 categories 区分板块;
+# 下面按站点栏目拆成多个集合, 每个集合用 filter 只显示对应分类,
+# 新建时自动带上正确的 categories。
 
 backend:
   name: github
@@ -18,69 +22,150 @@ slug:
   encoding: ascii
   clean_accents: true
 
+# 共用字段 (YAML 锚点)
+_field_defs:
+  title: &f_title
+    name: title
+    label: 标题
+    widget: string
+  slug: &f_slug
+    name: slug
+    label: 文件名 slug
+    widget: string
+    hint: 英文短横线格式, 决定文章 URL, 如 hello-world
+    pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "只能用小写字母、数字和短横线"]
+  date: &f_date
+    name: date
+    label: 发布时间
+    widget: datetime
+    format: "YYYY-MM-DD HH:mm:ss ZZ"
+    picker_utc: false
+  description: &f_description
+    name: description
+    label: 摘要
+    widget: string
+    required: false
+    hint: 可选, 显示在首页列表和 SEO 描述
+  tags: &f_tags
+    name: tags
+    label: 标签
+    widget: list
+    required: false
+  pin: &f_pin
+    name: pin
+    label: 置顶
+    widget: boolean
+    required: false
+  image: &f_image
+    name: image
+    label: 封面图
+    widget: object
+    required: false
+    fields:
+      - name: path
+        label: 图片
+        widget: image
+      - name: alt
+        label: 替代文本
+        widget: string
+        required: false
+  body: &f_body
+    name: body
+    label: 正文
+    widget: markdown
+
 collections:
-  - name: posts
-    label: 文章
+  - name: murmurs
+    label: 碎碎念
     folder: _posts
     create: true
     extension: md
     format: yaml-frontmatter
-    # 文件名需要英文 slug (决定文章 URL), 由下面的 slug 字段提供
+    filter: { field: categories, value: 碎碎念 }
     slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
     summary: "{{title}} ({{date}})"
     sortable_fields: [date, title]
     fields:
-      - name: title
-        label: 标题
-        widget: string
-
-      - name: slug
-        label: 文件名 slug
-        widget: string
-        hint: 英文短横线格式, 决定文章 URL, 如 hello-world
-        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "只能用小写字母、数字和短横线"]
-
-      - name: date
-        label: 发布时间
-        widget: datetime
-        format: "YYYY-MM-DD HH:mm:ss ZZ"
-        picker_utc: false
-
-      - name: description
-        label: 摘要
-        widget: string
-        required: false
-        hint: 可选, 显示在首页列表和 SEO 描述
-
+      - *f_title
+      - *f_slug
+      - *f_date
       - name: categories
         label: 分类
         widget: list
-        hint: 碎碎念会进碎碎念时间线, 笔记/月报会进对应页面
-        default: [随笔]
+        default: [碎碎念]
+      - *f_tags
+      - *f_body
 
-      - name: tags
-        label: 标签
+  - name: notes
+    label: 笔记
+    folder: _posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    filter: { field: categories, value: 笔记 }
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
+    summary: "{{title}} ({{date}})"
+    sortable_fields: [date, title]
+    fields:
+      - *f_title
+      - *f_slug
+      - *f_date
+      - name: categories
+        label: 分类
         widget: list
-        required: false
+        default: [笔记]
+        hint: 第一项保持"笔记", 可加第二级如 [笔记, 读书]
+      - *f_tags
+      - *f_description
+      - *f_image
+      - *f_body
 
-      - name: pin
-        label: 置顶
-        widget: boolean
-        required: false
+  - name: monthly
+    label: 月报
+    folder: _posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    filter: { field: categories, value: 月报 }
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
+    summary: "{{title}} ({{date}})"
+    sortable_fields: [date, title]
+    fields:
+      - *f_title
+      - *f_slug
+      - *f_date
+      - name: categories
+        label: 分类
+        widget: list
+        default: [月报]
+      - *f_tags
+      - *f_description
+      - *f_image
+      - *f_body
 
-      - name: image
-        label: 封面图
-        widget: object
-        required: false
-        fields:
-          - name: path
-            label: 图片
-            widget: image
-          - name: alt
-            label: 替代文本
-            widget: string
-            required: false
-
-      - name: body
-        label: 正文
-        widget: markdown
+  - name: posts
+    label: 全部文章
+    folder: _posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
+    summary: "{{title}} ({{date}})"
+    sortable_fields: [date, title]
+    view_groups:
+      - label: 按分类
+        field: categories
+    fields:
+      - *f_title
+      - *f_slug
+      - *f_date
+      - name: categories
+        label: 分类
+        widget: list
+        default: [随笔]
+        hint: 碎碎念/笔记/月报会进对应栏目, 其他分类 (如随笔) 只出现在首页
+      - *f_tags
+      - *f_description
+      - *f_pin
+      - *f_image
+      - *f_body
