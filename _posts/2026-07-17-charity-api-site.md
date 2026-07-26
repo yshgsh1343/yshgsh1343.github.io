@@ -1,6 +1,6 @@
 ---
 title: 如何开一个公益站
-date: 2026-07-27 02:04:00 +0800
+date: 2026-07-17 02:04:00 +0800
 categories: [碎碎念]
 memo_category: AI
 tags: [AI, 公益站, 折腾]
