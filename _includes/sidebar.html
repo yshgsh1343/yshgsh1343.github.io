@@ -7,7 +7,7 @@
         {%- capture avatar_url -%}
           {% include media-url.html src=site.avatar %}
         {%- endcapture -%}
-        <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+        <img src="{{- avatar_url -}}" width="72" height="72" alt="avatar" onerror="this.style.display='none'">
       {%- endif -%}
     </a>
 
@@ -152,7 +152,7 @@
 </aside>
 <!-- #sidebar -->
 
-<!-- Red edge rail: click to recolor and collapse / restore the sidebar -->
+<!-- Accent edge rail: click to collapse / restore the sidebar -->
 <button type="button" class="sidebar-edge-toggle" aria-label="收起侧边栏" title="收起侧边栏"></button>
 
 <script>

@@ -34,64 +34,66 @@ h6,
   font-weight: 900;
 }
 
-/* Claude-inspired warm light palette. */
+/* Cool blue light palette. */
 :root[data-bs-theme='light'] {
+  --accent: #2f5d8a;
   --main-bg: #ffffff;
-  --main-border-color: #e4ded5;
-  --text-color: #3d392f;
-  --text-muted-color: #746f66;
-  --heading-color: #292724;
-  --label-color: #5f5a52;
-  --blockquote-border-color: #9b4141;
-  --link-color: #9b4141;
-  --link-underline-color: #9b4141;
+  --main-border-color: #dfe5ec;
+  --text-color: #2e3440;
+  --text-muted-color: #64707d;
+  --heading-color: #232a33;
+  --label-color: #55606c;
+  --blockquote-border-color: var(--accent);
+  --link-color: var(--accent);
+  --link-underline-color: var(--accent);
   --button-bg: #ffffff;
-  --btn-border-color: #ded7cd;
-  --checkbox-checked-color: #9b4141;
+  --btn-border-color: #d5dce4;
+  --checkbox-checked-color: var(--accent);
   --menu-bg: #ffffff;
-  --menu-border-color: #e4ded5;
-  --menu-highlight-bg: rgb(155 65 65 / 10%);
-  --site-title-color: #3d392f;
-  --site-subtitle-color: #746f66;
+  --menu-border-color: #dfe5ec;
+  --menu-highlight-bg: rgb(47 93 138 / 10%);
+  --site-title-color: #2e3440;
+  --site-subtitle-color: #64707d;
   --sidebar-bg: #ffffff;
-  --sidebar-border-color: #d4d4d8;
-  --sidebar-active-color: #9b4141;
-  --sidebar-hover-bg: rgb(155 65 65 / 12%);
+  --sidebar-border-color: #dfe5ec;
+  --sidebar-active-color: var(--accent);
+  --sidebar-hover-bg: rgb(47 93 138 / 12%);
   --sidebar-btn-bg: #ffffff;
-  --sidebar-btn-color: #746f66;
+  --sidebar-btn-color: #64707d;
   --avatar-border-color: #ffffff;
   --topbar-bg: rgb(255 255 255 / 82%);
-  --topbar-text-color: #5f5a52;
-  --search-border-color: #ded7cd;
-  --input-focus-border-color: #9b4141;
-  --post-list-text-color: #625d55;
-  --toc-highlight: #9b4141;
+  --topbar-text-color: #55606c;
+  --search-border-color: #d5dce4;
+  --input-focus-border-color: var(--accent);
+  --post-list-text-color: #59636e;
+  --toc-highlight: var(--accent);
   --card-bg: #ffffff;
-  --card-hover-bg: #f1ece5;
-  --card-shadow: rgb(61 57 47 / 6%) 0 2px 6px 0, rgb(61 57 47 / 10%) 0 0 0 1px;
-  --tag-border: #d8d0c5;
-  --tag-hover: #eadfd7;
-  --search-tag-bg: #eeeae3;
-  --categories-border: rgb(61 57 47 / 14%);
-  --timeline-color: rgb(155 65 65 / 20%);
-  --timeline-node-bg: #9b4141;
+  --card-hover-bg: #eef2f6;
+  --card-shadow: rgb(46 52 64 / 6%) 0 2px 6px 0, rgb(46 52 64 / 10%) 0 0 0 1px;
+  --tag-border: #ccd6e1;
+  --tag-hover: #e2eaf2;
+  --search-tag-bg: #eaeef4;
+  --categories-border: rgb(46 52 64 / 14%);
+  --timeline-color: rgb(47 93 138 / 20%);
+  --timeline-node-bg: var(--accent);
   --timeline-year-dot-color: #ffffff;
-  --highlight-bg-color: #eeeae3;
-  --inline-code-bg: rgb(61 57 47 / 7%);
+  --highlight-bg-color: #eaeef4;
+  --inline-code-bg: rgb(46 52 64 / 7%);
 }
 
 :root[data-bs-theme='dark'] {
-  --link-color: #9b4141;
-  --toc-highlight: #9b4141;
-  --checkbox-checked-color: #9b4141;
-  --sidebar-active-color: #9b4141;
-  --timeline-node-bg: #9b4141;
+  --accent: #6d9dc9;
+  --link-color: var(--accent);
+  --toc-highlight: var(--accent);
+  --checkbox-checked-color: var(--accent);
+  --sidebar-active-color: var(--accent);
+  --timeline-node-bg: var(--accent);
 }
 
 /* Decorative marker for tab page titles. */
 main > article > .dynamic-title::before {
   margin-right: 0.32em;
-  color: #9b4141;
+  color: var(--accent);
   content: "#";
   font-size: 1.16em;
   font-weight: 800;
@@ -179,8 +181,8 @@ html:lang(zh-CN) #sidebar .site-title {
 #sidebar .sidebar-bottom a:focus,
 #back-to-top:hover,
 #back-to-top:focus {
-  border-bottom-color: #9b4141 !important;
-  color: #9b4141 !important;
+  border-bottom-color: var(--accent) !important;
+  color: var(--accent) !important;
 }
 
 .preview-img,
@@ -193,6 +195,12 @@ html:lang(zh-CN) #sidebar .site-title {
 #avatar,
 #avatar img {
   border-radius: 50% !important;
+}
+
+/* Smaller avatar: an identity mark, not a portrait (theme default is 7rem). */
+#sidebar #avatar {
+  width: 4.5rem;
+  height: 4.5rem;
 }
 
 /* The original timeline offsets assume Lato's baseline. */
@@ -317,12 +325,12 @@ html:lang(zh-CN) #sidebar .site-title {
   left: 0;
   width: calc(100% + 1ch);
   height: 2px;
-  background: #9b4141;
+  background: var(--accent);
   content: "";
 }
 
 #sidebar {
-  border-right: 1px solid #d4d4d8 !important;
+  border-right: 1px solid var(--main-border-color) !important;
 }
 
 /* Sidebar shifted right by half its width (260 / 2 = 130px). */
@@ -336,8 +344,8 @@ html:lang(zh-CN) #sidebar .site-title {
   }
 }
 
-/* Clickable red edge rails: top rail spans 1/4-1/2 of the viewport height,
-   second rail sits at the bottom quarter. Click = recolor + collapse. */
+/* Clickable accent edge rail: spans 1/4-1/2 of the viewport height.
+   Click = collapse / restore the sidebar. */
 .sidebar-edge-toggle {
   position: fixed;
   top: 25%;
@@ -350,7 +358,7 @@ html:lang(zh-CN) #sidebar .site-title {
   padding: 0;
   border: 0;
   border-radius: 999px !important; /* pill ends, exempt from the global square rule */
-  background-color: #9b4141;
+  background-color: var(--accent);
   cursor: pointer;
   transition:
     left 0.3s ease,
@@ -359,7 +367,7 @@ html:lang(zh-CN) #sidebar .site-title {
 
 .sidebar-edge-toggle:hover,
 .sidebar-edge-toggle:focus-visible {
-  background-color: #7d3434;
+  background-color: #24476a;
 }
 
 /* Collapsed state: sidebar slides out to the left, main content goes
@@ -374,12 +382,12 @@ body.sidebar-collapsed #main-wrapper {
 
 body.sidebar-collapsed .sidebar-edge-toggle {
   left: 0;
-  background-color: #3d392f;
+  background-color: #2e3440;
 }
 
 body.sidebar-collapsed .sidebar-edge-toggle:hover,
 body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
-  background-color: #9b4141;
+  background-color: var(--accent);
 }
 
 @media (min-width: 1650px) {
@@ -482,9 +490,9 @@ footer p {
 .post-tags .post-tag:focus,
 #access-tags .post-tag:hover,
 #access-tags .post-tag:focus {
-  border-color: #9b4141 !important;
+  border-color: var(--accent) !important;
   background: var(--tag-hover) !important;
-  color: #9b4141 !important;
+  color: var(--accent) !important;
 }
 
 /* jemoji: keep emojis inline at text size. */
@@ -559,12 +567,12 @@ footer .site-footer-left p:last-child {
   left: 0;
   width: calc(100% + 1ch);
   height: 2px;
-  background: #9b4141;
+  background: var(--accent);
   content: "";
 }
 
 .post-nav-arrow {
-  color: #9b4141;
+  color: var(--accent);
   font-family: serif;
   font-size: 1.65rem;
   line-height: 1;
@@ -640,7 +648,7 @@ a.post-nav-next:hover .post-nav-arrow {
 }
 
 #sidebar-search-slot search:focus-within {
-  border-bottom-color: #9b4141 !important;
+  border-bottom-color: var(--accent) !important;
 }
 
 #sidebar-search-slot search i {
@@ -664,24 +672,6 @@ a.post-nav-next:hover .post-nav-arrow {
 
 #sidebar .nav-group-label:first-child {
   margin-top: 0.25rem;
-}
-
-/* Tag cloud section folded into the 分类 page. */
-.taxonomy-tags {
-  margin-top: 2.5rem;
-  border-top: 1px solid var(--main-border-color);
-  padding-top: 1.75rem;
-}
-
-.taxonomy-tags-title {
-  margin-bottom: 1.25rem;
-  font-size: 1.15rem;
-}
-
-.taxonomy-tags .tag {
-  display: inline-block;
-  margin: 0 0.6rem 0.8rem 0;
-  padding: 0.25rem 0.75rem;
 }
 
 /* Post lists on tab pages (月报 / 碎碎念): date + ruled title links. */
@@ -723,7 +713,7 @@ a.post-nav-next:hover .post-nav-arrow {
   left: 0;
   width: 0;
   height: 2px;
-  background: #9b4141;
+  background: var(--accent);
   content: "";
   transition: width 0.18s ease;
 }
