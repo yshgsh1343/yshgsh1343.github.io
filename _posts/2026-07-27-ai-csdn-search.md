@@ -28,4 +28,4 @@ AI 恰好破坏了这个逻辑。
 
 科技发展的欣慰在于后来的人不必再重复前人的所有艰难。科技发展的遗憾则在于我们总要等到一种生活开始消失才意识到它曾经怎样塑造了自己。搜索不会在某一天举行葬礼，CSDN 也不会在明天关闭服务器。它可能还会存在很久，继续作为 AI 的资料来源和互联网档案，与现在主动把自己改造成另一个 AI 平台。只是作为解决问题的第一入口，它已经悄无声息地从我的生活里消失了，不仅是我还有越来越多的人。**但无论是否遗憾，让我回到过去是不可能的。CSDN 还是好似喵。**
 
-[![image](https://cdn3.ldstatic.com/original/4X/b/9/0/b901a63f40db549e0cdc453897f365ecdac44341.png)](https://cdn3.ldstatic.com/original/4X/b/9/0/b901a63f40db549e0cdc453897f365ecdac44341.png)
+![CSDN 好似喵](/assets/img/posts/csdn-haosimiao.png){: width="447" height="442" }
