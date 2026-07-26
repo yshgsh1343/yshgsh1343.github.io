@@ -241,7 +241,8 @@
       return list;
     };
 
-    // 洗一轮新顺序；avoidFirst 防止新一轮开头正好重复上一首
+    /* 洗一轮新顺序；avoidFirst 防止新一轮开头正好重复上一首。
+       注意：这个内联脚本会被 compress_html 压成一行，只能用块注释。 */
     const buildOrder = (avoidFirst) => {
       order = shuffle(tracks.map((_, i) => i));
       if (order.length > 1 && order[0] === avoidFirst) {
