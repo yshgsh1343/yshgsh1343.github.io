@@ -13,15 +13,6 @@
 
     <a class="site-title d-block" href="{{ '/' | relative_url }}">{{ site.title }}</a>
 
-    <!-- Home link where the tagline used to sit; search right below it. -->
-    <a
-      href="{{ '/' | relative_url }}"
-      class="sidebar-home-link{% if page.layout == 'home' %} active{% endif %}"
-    >
-      <i class="fa-fw fas fa-home"></i>
-      <span>首页</span>
-    </a>
-
     <!-- Desktop home of the theme's #search element (moved here from the topbar). -->
     <div id="sidebar-search-slot" class="d-none d-lg-block"></div>
   </header>
@@ -29,7 +20,14 @@
 
   <nav class="flex-column flex-grow-1 w-100 ps-0">
     <ul class="nav">
-      <!-- the tabs, grouped by their `group` front matter; home stays on the avatar / site title -->
+      <!-- home: hardcoded first entry, upstream style; not a tab file -->
+      <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
+        <a href="{{ '/' | relative_url }}" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>首页</span>
+        </a>
+      </li>
+      <!-- the tabs, grouped by their `group` front matter -->
       {% assign current_group = '' %}
       {% for tab in site.tabs %}
         {% if tab.nav_hidden %}{% continue %}{% endif %}
