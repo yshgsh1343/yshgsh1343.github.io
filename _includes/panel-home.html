@@ -1,0 +1,81 @@
+<!-- 首页右栏：近期动态 / 近期留言 / 运行时间 / 致谢与随机漫游。 -->
+
+{% assign recent = '' | split: '' %}
+{% for post in site.posts limit: 5 %}
+  {% assign recent = recent | push: post %}
+{% endfor %}
+
+<div class="access">
+  <!-- 近期动态：全类型混排（正式文章 + 碎碎念 + 笔记 + 月报），
+       与首页信息流的过滤口径刻意相反，是互补不是重复。 -->
+  <section id="panel-recent">
+    <h2 class="panel-heading">近期动态</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      {% for post in recent %}
+        <li class="text-truncate lh-lg">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <!-- 近期留言：等 Worker 端"全站最新 N 条评论"接口就绪后接上，
+       接口格式以 Worker 为准，这里先占位。 -->
+  <section id="panel-recent-comments">
+    <h2 class="panel-heading">近期留言</h2>
+    <p class="content mt-2 mb-0 text-muted">
+      这里以后会滚动最新留言，先去<a href="{{ '/guestbook/' | relative_url }}">留言板</a>逛逛。
+    </p>
+  </section>
+
+  <!-- 运行时间：从 footer 挪来，同一个 #site-runtime 契约。 -->
+  <section id="panel-runtime">
+    <h2 class="panel-heading">运行时间</h2>
+    <p class="content mt-2 mb-0">
+      <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
+    </p>
+  </section>
+
+  <!-- 致谢一行小字 + 随机漫游按钮。 -->
+  <section id="panel-colophon">
+    <h2 class="panel-heading">致谢</h2>
+    <p class="content mt-2 mb-2 text-muted">
+      本站由
+      <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+      驱动，主题
+      <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a>，
+      托管在
+      <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>。
+    </p>
+    <button type="button" id="random-walk" class="btn random-walk-btn">
+      <i class="fas fa-shoe-prints fa-fw me-1"></i>随机漫游
+    </button>
+  </section>
+</div>
+
+<script>
+  /* 运行天数 + 随机漫游。compress_html 会把内联脚本压成一行，
+     只能用块注释。 */
+  (function () {
+    var el = document.getElementById('site-runtime');
+    if (el) {
+      var start = new Date(el.getAttribute('data-start')).getTime();
+      var days = Math.floor(Math.max(0, Date.now() - start) / 86400000);
+      el.textContent = '已运行 ' + days + ' 天';
+    }
+
+    var urls = [
+      {% for post in site.posts %}
+        '{{ post.url | relative_url }}'{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+
+    var btn = document.getElementById('random-walk');
+    if (btn && urls.length) {
+      btn.addEventListener('click', function () {
+        var target = urls[Math.floor(Math.random() * urls.length)];
+        window.location.href = target;
+      });
+    }
+  })();
+</script>

@@ -28,10 +28,6 @@
         </span>
       {% endif %}
     </p>
-
-    <p>
-      <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
-    </p>
   </div>
 
   <p>
@@ -53,16 +49,3 @@
     {{ site.data.locales[include.lang].meta | replace: ':PLATFORM', _platform | replace: ':THEME', _theme }}
   </p>
 </footer>
-
-<script>
-  (function () {
-    var el = document.getElementById('site-runtime');
-    if (!el) {
-      return;
-    }
-
-    var start = new Date(el.getAttribute('data-start')).getTime();
-    var days = Math.floor(Math.max(0, Date.now() - start) / 86400000);
-    el.textContent = '已运行 ' + days + ' 天';
-  })();
-</script>

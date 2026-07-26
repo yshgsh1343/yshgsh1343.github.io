@@ -591,22 +591,6 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   line-height: 1.8;
 }
 
-/* 首页信息流整体右移：左右等量偏移保持列宽不变，
-   平衡侧栏右移后右侧显得过空的留白。 */
-@media (min-width: 1200px) {
-  #post-list {
-    margin-right: -3.5rem;
-    margin-left: 3.5rem;
-  }
-}
-
-@media (min-width: 1650px) {
-  #post-list {
-    margin-right: -4.5rem;
-    margin-left: 4.5rem;
-  }
-}
-
 /* The residual card ring lives on .post-preview (1px spread shadow);
    kill it together with the hover background block. */
 #post-list .post-preview {
@@ -742,6 +726,27 @@ footer p {
   margin-left: 0.35rem;
   font-size: 0.8em;
   font-variant-numeric: tabular-nums;
+}
+
+/* 首页右栏：正文小字沿用面板节奏；运行时间数字用等宽数字。 */
+#panel-wrapper .access p.content {
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+#panel-runtime .content {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 随机漫游按钮：走全局按钮语言（细底线 + hover 变 accent）。 */
+.random-walk-btn {
+  padding: 0.3rem 0.2rem;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+
+.random-walk-btn i {
+  color: var(--accent);
 }
 
 /* 月报页：年份组标题；年终总结在列表里带小徽标、在右栏里高亮直达。
