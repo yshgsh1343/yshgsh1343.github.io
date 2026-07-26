@@ -642,7 +642,6 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
 
 .categories-plain .category-row {
   padding: 0.55rem 0;
-  border-bottom: 1px solid var(--main-border-color);
 }
 
 .categories-plain .category-row i {
@@ -660,7 +659,6 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
 
 .categories-plain .category-sublist li {
   padding: 0.45rem 0;
-  border-bottom: 1px solid var(--main-border-color);
 }
 
 .categories-plain .category-trigger {
@@ -736,6 +734,11 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   line-height: 1.8;
 }
 
+/* 致谢与站点信息之间留一行空隙。 */
+#panel-site-info {
+  margin-top: 1.75rem;
+}
+
 #panel-site-info .content {
   font-variant-numeric: tabular-nums;
 }
@@ -778,7 +781,6 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
 
 /* 笔记页 / 碎碎念页右栏：当前生效的筛选项加粗提亮。 */
 #panel-notes-groups .note-filter.active,
-#panel-memos-categories .memo-filter.active,
 #panel-memos-tags .memo-filter.active {
   color: var(--accent);
   font-weight: 600;
@@ -1156,6 +1158,21 @@ a.post-nav-next:hover .post-nav-arrow {
 
 .murmur-expand:hover {
   text-decoration: underline;
+}
+
+/* Tags pinned to the card's bottom-right, outside the collapsible area. */
+.murmur-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.murmur-tag {
+  color: var(--text-muted-color);
+  font-size: 0.78rem;
+  line-height: 1.4;
 }
 
 /* Post lists on tab pages (笔记 / 月报 / 归档): date + title, no rules between rows. */

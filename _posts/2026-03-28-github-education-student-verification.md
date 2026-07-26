@@ -9,7 +9,7 @@ tags: [GitHub Education, 学生认证]
 ## [前言](https://linux.do/t/topic/1841676#p-15783973-h-1)
 
 由于近两年 github 学生认证逐渐收紧到真学生都过不去认证，且国内直连 GitHub 本就困难，而审核要求关闭 VPN 并共享地理位置。用校园网网页刷不出来 github，用 VPN 则 IP 地址对不上。于是即使是真学生也需要采取特殊手段，下面是个人通过学生认证的截图。
-[![2026-03-28-15-54-38-image](https://cdn3.ldstatic.com/optimized/4X/7/0/5/705500f15b457ad9c1a9f7f87125828adb362051_2_690x290.png)](https://cdn3.ldstatic.com/original/4X/7/0/5/705500f15b457ad9c1a9f7f87125828adb362051.png)
+![2026-03-28-15-54-38-image](/assets/img/posts/github-edu/github-edu-approved.png)
 
 ## [准备工作](https://linux.do/t/topic/1841676#p-15783973-h-2)
 
@@ -27,11 +27,11 @@ tags: [GitHub Education, 学生认证]
 #### [1. 修改 DoH](https://linux.do/t/topic/1841676#p-15783973-h-1doh-5)
 
 修改 DoH 使得可以在国内环境免 VPN 工具直连 Github。笔者此处使用为 Brave 浏览器，设置 - 隐私与安全 - 高级，打开使用安全 DNS 把 DNS 提供商改为 Cloudfare（1.1.1.1）。
-[![2026-03-28-16-23-51-image](https://cdn3.ldstatic.com/optimized/4X/e/b/6/eb64dbe033a0f237068ca27370017cdb9d0a4112_2_690x355.png)](https://cdn3.ldstatic.com/original/4X/e/b/6/eb64dbe033a0f237068ca27370017cdb9d0a4112.png)
+![2026-03-28-16-23-51-image](/assets/img/posts/github-edu/brave-doh.png)
 
 Chorme 浏览器位置
 
-[![2026-03-28-16-39-26-image](https://cdn3.ldstatic.com/optimized/4X/7/0/3/703cd572468287da03752244262f0b36386ba9b4_2_690x358.png)](https://cdn3.ldstatic.com/original/4X/7/0/3/703cd572468287da03752244262f0b36386ba9b4.png)
+![2026-03-28-16-39-26-image](/assets/img/posts/github-edu/chrome-doh.png)
 
 **Tips**：如果 Chrome 提示 “浏览器由贵单位管理” 导致无法修改，请：
 
@@ -45,10 +45,10 @@ Chorme 浏览器位置
 #### [2. 修改个人信息 （Profile 易忽略）](https://linux.do/t/topic/1841676#p-15783973-h-2-profile-6)
 
 修改姓名
-[![2026-03-28-16-07-14-image](https://cdn3.ldstatic.com/optimized/4X/a/1/f/a1f843fc204a1fb4aedd7a826ad339a576b8dc3e_2_690x361.png)](https://cdn3.ldstatic.com/original/4X/a/1/f/a1f843fc204a1fb4aedd7a826ad339a576b8dc3e.png)
+![2026-03-28-16-07-14-image](/assets/img/posts/github-edu/profile-name.png)
 
 账单信息
-[![2026-03-28-16-06-31-image](https://cdn3.ldstatic.com/optimized/4X/7/0/c/70c72f9a1711a9a679b19e74a7e4503b0ee4287e_2_690x419.png)](https://cdn3.ldstatic.com/original/4X/7/0/c/70c72f9a1711a9a679b19e74a7e4503b0ee4287e.png)
+![2026-03-28-16-06-31-image](/assets/img/posts/github-edu/billing-info.png)
 
 #### [3. 绑定 edu.cn 邮箱与开启 2FA](https://linux.do/t/topic/1841676#p-15783973-h-3educn2fa-7)
 
@@ -56,36 +56,36 @@ Chorme 浏览器位置
 
 **2FA 验证**
 
-[![2026-03-28-16-11-09-image](https://cdn3.ldstatic.com/optimized/4X/a/f/6/af690f068056c3c6f8ed3914ecb6b510176b8340_2_690x355.png)](https://cdn3.ldstatic.com/original/4X/a/f/6/af690f068056c3c6f8ed3914ecb6b510176b8340.png)
+![2026-03-28-16-11-09-image](/assets/img/posts/github-edu/two-fa.png)
 
 安卓在软件商城下载 Authenticator 扫码即可，记得保存 recovery code。苹果据说可以直接扫码。
 
 #### [4. 开始申请学生认证](https://linux.do/t/topic/1841676#p-15783973-h-4-8)
 
-[![2026-03-28-16-20-16-image](https://cdn3.ldstatic.com/optimized/4X/7/5/a/75a614de56384f7b3097a5d77b5d6c4cc2a61404_2_405x500.png)](https://cdn3.ldstatic.com/original/4X/7/5/a/75a614de56384f7b3097a5d77b5d6c4cc2a61404.png)
+![2026-03-28-16-20-16-image](/assets/img/posts/github-edu/apply-select-school.png)
 
 可以看见如果第二步绑定成功这一步可以直接选择 select this school 不需要填写详细信息。
 
 理论上这一步 share location 就可以通过但可以**加一道保险**。
 
 **打开开发者工具**（依旧 Brave 举例子
-[![2026-03-28-16-43-35-image](https://cdn3.ldstatic.com/optimized/4X/a/4/d/a4d070899a09295f1b343b70dc337413c7f2dffe_2_494x499.png)](https://cdn3.ldstatic.com/original/4X/a/4/d/a4d070899a09295f1b343b70dc337413c7f2dffe.png)
+![2026-03-28-16-43-35-image](/assets/img/posts/github-edu/devtools-location.png)
 
 位置改为其他，经纬度使用 [http://jingweidu.757dy.com](http://jingweidu.757dy.com/) 查询。越精确越好。
 
 Chorme
 
-[![2026-03-28-16-47-34-image](https://cdn3.ldstatic.com/optimized/4X/4/5/9/45922d518a740bcede0e881937473cca8a239c39_2_416x499.png)](https://cdn3.ldstatic.com/original/4X/4/5/9/45922d518a740bcede0e881937473cca8a239c39.png)
+![2026-03-28-16-47-34-image](/assets/img/posts/github-edu/chrome-sensors.png)
 
 #### [5. 按要求上传个人信息](https://linux.do/t/topic/1841676#p-15783973-h-5-9)
 
-[![2026-03-28-16-53-35-image](https://cdn3.ldstatic.com/optimized/4X/a/c/e/ace0581e57899eb749029d7f658348b3e38fda60_2_403x500.png)](https://cdn3.ldstatic.com/original/4X/a/c/e/ace0581e57899eb749029d7f658348b3e38fda60.png)
+![2026-03-28-16-53-35-image](/assets/img/posts/github-edu/upload-other.png)
 
 选择 **8.other**，先用 `win+x` 打开设备管理器禁用笔记本自带摄像头，数据线连接手机与电脑（同一 wifi 也行开热点），两台设备打开 **Irium Webcam** 准备拍屏幕。
 
 - **方法一：记事本大法（疑似已失效）**
 
-[![2026-03-28-16-57-53-image](https://cdn3.ldstatic.com/original/4X/6/b/8/6b83be2da5da97f5bf7ba2b8e0e23a3e2165e161.png)](https://cdn3.ldstatic.com/original/4X/6/b/8/6b83be2da5da97f5bf7ba2b8e0e23a3e2165e161.png)
+![2026-03-28-16-57-53-image](/assets/img/posts/github-edu/notepad-method.png)
 
 ```
 Student Verification Report
@@ -101,7 +101,7 @@ Student xxx,is allowed to study via distance learning in xxx
 
 - 方法二：学信网申请学籍报告下载，丢到 google 翻译成英文。再采用任意 pdf 修改器修改字体大小（学信网那个报告字太小了 github 识别容易失误）+ 就读方式改为 Distance learning  
 
-[![2026-03-28-17-03-00-image](https://cdn3.ldstatic.com/optimized/4X/a/8/4/a84f4b1e99d5a740b3d521b95b34a8022929a014_2_396x500.png)](https://cdn3.ldstatic.com/original/4X/a/8/4/a84f4b1e99d5a740b3d521b95b34a8022929a014.png)
+![2026-03-28-17-03-00-image](/assets/img/posts/github-edu/chsi-report.png)
 
 手机拍摄电脑屏幕，如果后续跳出第六步为何不在对应位置选择 distance learning 提交。
 

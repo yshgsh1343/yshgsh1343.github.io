@@ -3,7 +3,7 @@ title: 记Claude百亿补贴
 date: 2026-07-27 00:22:00 +0800
 categories: [碎碎念]
 memo_category: AI
-tags: [Claude]
+tags: [Claude, AI, 随想]
 ---
 
 今天有个 vibe coding 程序员发信息给我说，这是她入行以来最好的夏天，这一年她白嫖到了 token，把所有的项目都用 ai 优化了一遍，跑了 500B 的 token；羊毛到处乱薅，随便薅个 grok/gpt/claude 只要等一周的时间就够，前天看到 claude 德区百亿补贴，大群里突然所有人停下手头的事拥抱在一起欢呼，她说很开心，有种人类黄金时代的错觉。

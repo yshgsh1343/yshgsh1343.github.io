@@ -11,16 +11,21 @@ layout: memos
 
 <div class="murmur-timeline">
 {% for post in posts %}
-  {% assign memo_category = post.memo_category | default: post.murmur_category | default: '未分类' %}
-  {% if memo_category == '' %}{% assign memo_category = '未分类' %}{% endif %}
   {% capture memo_tags %}|{% for tag in post.tags %}{{ tag }}|{% endfor %}{% endcapture %}
-  <article class="murmur-item" data-memo-category="{{ memo_category | escape }}" data-memo-tags="{{ memo_tags | escape }}">
+  <article class="murmur-item" data-memo-tags="{{ memo_tags | escape }}">
     <time class="murmur-date" datetime="{{ post.date | date_to_xmlschema }}">
       {{ post.date | date: "%Y-%m-%d %H:%M" }}
     </time>
     <div class="murmur-card">
       <div class="murmur-content" data-collapsible>{{ post.content }}</div>
       <button type="button" class="murmur-expand" hidden>展开全文</button>
+      {% if post.tags.size > 0 %}
+        <div class="murmur-tags">
+          {% for tag in post.tags %}
+            <span class="murmur-tag"># {{ tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </article>
 {% endfor %}
