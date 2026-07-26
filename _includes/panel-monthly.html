@@ -1,0 +1,24 @@
+<!-- 月报页右栏：年份导航。年终总结（yearly: true 的 12 月月报）在该年下高亮直达。 -->
+{% assign posts = site.categories['月报'] %}
+{% if posts.size > 0 %}
+  {% assign years = posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}
+
+  <div class="access">
+    <section id="panel-monthly-years">
+      <h2 class="panel-heading">年份</h2>
+      <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+        {% for year in years %}
+          <li class="lh-lg">
+            <a href="#year-{{ year.name }}">{{ year.name }} 年</a>
+            <span class="text-muted panel-count">{{ year.items | size }}</span>
+
+            {% assign yearly = year.items | where_exp: 'item', 'item.yearly == true' %}
+            {% for y in yearly %}
+              <a class="yearly-link" href="{{ y.url | relative_url }}">年终总结</a>
+            {% endfor %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+{% endif %}

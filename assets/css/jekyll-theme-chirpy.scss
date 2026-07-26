@@ -690,6 +690,68 @@ footer p {
   font-size: 0.85em;
 }
 
+/* 右栏（panel_includes）公共语言：链接走下划线滑动态，
+   与 tab-post-list 的规则一致；计数弱化为小号灰字。 */
+#panel-wrapper .access a {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  color: var(--text-color);
+  text-decoration: none !important;
+}
+
+#panel-wrapper .access a::after {
+  position: absolute;
+  bottom: -0.12rem;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  content: "";
+  transition: width 0.18s ease;
+}
+
+#panel-wrapper .access a:hover {
+  color: var(--link-color);
+}
+
+#panel-wrapper .access a:hover::after {
+  width: calc(100% + 1ch);
+}
+
+#panel-wrapper .panel-count {
+  margin-left: 0.35rem;
+  font-size: 0.8em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 月报页：年份组标题；年终总结在列表里带小徽标、在右栏里高亮直达。 */
+.monthly-year {
+  margin-top: 2.25rem;
+  font-size: 1.15rem;
+}
+
+.monthly-year:first-of-type {
+  margin-top: 1.25rem;
+}
+
+.yearly-badge {
+  flex-shrink: 0;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--tag-border);
+  border-radius: 999px !important; /* pill, exempt from the global square rule */
+  color: var(--accent);
+  font-size: 0.75em;
+}
+
+#panel-wrapper .yearly-link {
+  margin-left: 0.6rem;
+  color: var(--accent);
+  font-size: 0.9em;
+}
+
 /* jemoji: keep emojis inline at text size. */
 .emoji {
   display: inline-block;
