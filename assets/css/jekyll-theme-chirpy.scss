@@ -37,7 +37,7 @@ h6,
 /* Cool blue light palette. */
 :root[data-bs-theme='light'] {
   --accent: #2f5d8a;
-  --main-bg: #ffffff;
+  --main-bg: #fffefc;
   --main-border-color: #dfe5ec;
   --text-color: #2e3440;
   --text-muted-color: #64707d;
@@ -46,28 +46,28 @@ h6,
   --blockquote-border-color: var(--accent);
   --link-color: var(--accent);
   --link-underline-color: var(--accent);
-  --button-bg: #ffffff;
+  --button-bg: #fffefc;
   --btn-border-color: #d5dce4;
   --checkbox-checked-color: var(--accent);
-  --menu-bg: #ffffff;
+  --menu-bg: #fffefc;
   --menu-border-color: #dfe5ec;
   --menu-highlight-bg: rgb(47 93 138 / 10%);
   --site-title-color: #2e3440;
   --site-subtitle-color: #64707d;
-  --sidebar-bg: #ffffff;
+  --sidebar-bg: #fffefc;
   --sidebar-border-color: #dfe5ec;
   --sidebar-active-color: var(--accent);
   --sidebar-hover-bg: rgb(47 93 138 / 12%);
-  --sidebar-btn-bg: #ffffff;
+  --sidebar-btn-bg: #fffefc;
   --sidebar-btn-color: #64707d;
-  --avatar-border-color: #ffffff;
-  --topbar-bg: rgb(255 255 255 / 82%);
+  --avatar-border-color: #fffefc;
+  --topbar-bg: rgb(255 254 252 / 82%);
   --topbar-text-color: #55606c;
   --search-border-color: #d5dce4;
   --input-focus-border-color: var(--accent);
   --post-list-text-color: #59636e;
   --toc-highlight: var(--accent);
-  --card-bg: #ffffff;
+  --card-bg: #fffefc;
   --card-hover-bg: #eef2f6;
   --card-shadow: rgb(46 52 64 / 6%) 0 2px 6px 0, rgb(46 52 64 / 10%) 0 0 0 1px;
   --tag-border: #ccd6e1;
@@ -686,6 +686,18 @@ a.post-nav-next:hover .post-nav-arrow {
 
 #sidebar .nav-group-label:first-child {
   margin-top: 0.25rem;
+}
+
+/* 关于页 GitHub 贡献热力图：通栏、可横向滚动，防小屏挤压。 */
+.gh-heatmap {
+  margin: 1.75rem 0;
+  overflow-x: auto;
+}
+
+.gh-heatmap img {
+  display: block;
+  min-width: 660px;
+  width: 100%;
 }
 
 /* 碎碎念: timeline of cards — a vertical rail with node dots, each entry
