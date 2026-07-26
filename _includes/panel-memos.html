@@ -1,0 +1,119 @@
+<!-- 碎碎念页右栏：只统计碎碎念自己的分类与标签，不复用 /categories/ /tags/ 的正式文章口径。 -->
+{% assign posts = site.categories['碎碎念'] %}
+{% if posts.size > 0 %}
+  {% assign memo_categories = '' | split: '' %}
+  {% assign memo_tags = '' | split: '' %}
+
+  {% for post in posts %}
+    {% assign memo_category = post.memo_category | default: post.murmur_category | default: '未分类' %}
+    {% if memo_category == '' %}{% assign memo_category = '未分类' %}{% endif %}
+    {% unless memo_categories contains memo_category %}
+      {% assign memo_categories = memo_categories | push: memo_category %}
+    {% endunless %}
+
+    {% for tag in post.tags %}
+      {% unless memo_tags contains tag %}
+        {% assign memo_tags = memo_tags | push: tag %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+
+  {% assign memo_categories = memo_categories | sort_natural %}
+  {% assign memo_tags = memo_tags | sort_natural %}
+
+  <div class="access">
+    <section id="panel-memos-categories">
+      <h2 class="panel-heading">碎碎念分类</h2>
+      <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+        <li class="lh-lg">
+          <a href="#" class="memo-filter active" data-memo-filter-type="category" data-memo-filter-value="">全部</a>
+          <span class="text-muted panel-count">{{ posts | size }}</span>
+        </li>
+
+        {% for category in memo_categories %}
+          {% assign category_count = 0 %}
+          {% for post in posts %}
+            {% assign memo_category = post.memo_category | default: post.murmur_category | default: '未分类' %}
+            {% if memo_category == '' %}{% assign memo_category = '未分类' %}{% endif %}
+            {% if memo_category == category %}
+              {% assign category_count = category_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+
+          <li class="lh-lg">
+            <a href="#" class="memo-filter" data-memo-filter-type="category" data-memo-filter-value="{{ category | escape }}">{{ category }}</a>
+            <span class="text-muted panel-count">{{ category_count }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    {% if memo_tags.size > 0 %}
+      <section id="panel-memos-tags" class="mt-4">
+        <h2 class="panel-heading">碎碎念标签</h2>
+        <div class="d-flex flex-wrap mt-3 panel-tag-cloud">
+          <a href="#" class="tag memo-filter active" data-memo-filter-type="tag" data-memo-filter-value="">
+            全部
+            <span class="text-muted">{{ posts | size }}</span>
+          </a>
+
+          {% for tag in memo_tags %}
+            {% assign tag_count = 0 %}
+            {% for post in posts %}
+              {% if post.tags contains tag %}
+                {% assign tag_count = tag_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+
+            <a href="#" class="tag memo-filter" data-memo-filter-type="tag" data-memo-filter-value="{{ tag | escape }}">
+              {{ tag -}}
+              <span class="text-muted">{{ tag_count }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  </div>
+
+  <script>
+    /* 碎碎念右栏筛选：分类与标签只作用于当前时间线，避免进入主分类/主标签页面。
+       compress_html 会把内联脚本压成一行，只能用块注释。 */
+    (function () {
+      var filters = document.querySelectorAll('.memo-filter');
+      var items = document.querySelectorAll('.murmur-item');
+      var state = { category: '', tag: '' };
+      if (!filters.length || !items.length) return;
+
+      function applyFilters() {
+        items.forEach(function (item) {
+          var category = item.getAttribute('data-memo-category') || '';
+          var tags = item.getAttribute('data-memo-tags') || '';
+          var show = true;
+
+          if (state.category && category !== state.category) show = false;
+          if (state.tag && tags.indexOf('|' + state.tag + '|') === -1) show = false;
+
+          item.style.display = show ? '' : 'none';
+        });
+      }
+
+      filters.forEach(function (filter) {
+        filter.addEventListener('click', function (event) {
+          event.preventDefault();
+          var type = filter.getAttribute('data-memo-filter-type');
+          var value = filter.getAttribute('data-memo-filter-value') || '';
+          if (!type) return;
+
+          state[type] = value;
+          filters.forEach(function (other) {
+            if (other.getAttribute('data-memo-filter-type') === type) {
+              other.classList.toggle('active', other === filter);
+            }
+          });
+
+          applyFilters();
+        });
+      });
+    })();
+  </script>
+{% endif %}

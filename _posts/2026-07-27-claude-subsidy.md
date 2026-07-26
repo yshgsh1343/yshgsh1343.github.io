@@ -2,6 +2,7 @@
 title: 记Claude百亿补贴
 date: 2026-07-27 00:22:00 +0800
 categories: [碎碎念]
+memo_category: AI
 tags: [Claude]
 ---
 

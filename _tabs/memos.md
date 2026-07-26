@@ -3,6 +3,7 @@ title: 碎碎念
 icon: fas fa-comment-dots
 order: 4
 group: 内容
+layout: memos
 ---
 
 {% assign posts = site.categories["碎碎念"] %}
@@ -10,7 +11,10 @@ group: 内容
 
 <div class="murmur-timeline">
 {% for post in posts %}
-  <article class="murmur-item">
+  {% assign memo_category = post.memo_category | default: post.murmur_category | default: '未分类' %}
+  {% if memo_category == '' %}{% assign memo_category = '未分类' %}{% endif %}
+  {% capture memo_tags %}|{% for tag in post.tags %}{{ tag }}|{% endfor %}{% endcapture %}
+  <article class="murmur-item" data-memo-category="{{ memo_category | escape }}" data-memo-tags="{{ memo_tags | escape }}">
     <time class="murmur-date" datetime="{{ post.date | date_to_xmlschema }}">
       {{ post.date | date: "%Y-%m-%d %H:%M" }}
     </time>

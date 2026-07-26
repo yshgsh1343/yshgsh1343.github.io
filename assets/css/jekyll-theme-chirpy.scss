@@ -797,10 +797,16 @@ footer p {
   font-size: 0.9em;
 }
 
-/* 笔记页右栏：当前生效的知识分类筛选项加粗提亮。 */
-#panel-notes-groups .note-filter.active {
+/* 笔记页 / 碎碎念页右栏：当前生效的筛选项加粗提亮。 */
+#panel-notes-groups .note-filter.active,
+#panel-memos-categories .memo-filter.active,
+#panel-memos-tags .memo-filter.active {
   color: var(--accent);
   font-weight: 600;
+}
+
+#panel-memos-tags .memo-filter.active {
+  border-color: var(--accent) !important;
 }
 
 /* jemoji: keep emojis inline at text size. */

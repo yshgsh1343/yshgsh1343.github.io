@@ -2,6 +2,7 @@
 title: AI的心智锁死效应
 date: 2026-07-27 00:42:00 +0800
 categories: [碎碎念]
+memo_category: AI
 tags: [AI]
 ---
 
