@@ -1,0 +1,29 @@
+<!-- 笔记页右栏：知识大类导航。分组来自笔记自己的 note_category 字段，
+     与全站 categories 无关；只列有内容的分组。 -->
+{% assign posts = site.categories['笔记'] %}
+{% if posts.size > 0 %}
+  {% assign groups = posts | group_by: 'note_category' %}
+
+  <div class="access">
+    <section id="panel-notes-groups">
+      <h2 class="panel-heading">知识分类</h2>
+      <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+        {% for group in groups %}
+          {% if group.name == '' %}{% continue %}{% endif %}
+          <li class="lh-lg">
+            <a href="#note-group-{{ group.name | slugify }}">{{ group.name }}</a>
+            <span class="text-muted panel-count">{{ group.items | size }}</span>
+          </li>
+        {% endfor %}
+
+        {% assign ungrouped = posts | where_exp: 'item', 'item.note_category == nil' %}
+        {% if ungrouped.size > 0 %}
+          <li class="lh-lg">
+            <a href="#note-group-misc">未分类</a>
+            <span class="text-muted panel-count">{{ ungrouped | size }}</span>
+          </li>
+        {% endif %}
+      </ul>
+    </section>
+  </div>
+{% endif %}

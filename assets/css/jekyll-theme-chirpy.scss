@@ -744,13 +744,16 @@ footer p {
   font-variant-numeric: tabular-nums;
 }
 
-/* 月报页：年份组标题；年终总结在列表里带小徽标、在右栏里高亮直达。 */
-.monthly-year {
+/* 月报页：年份组标题；年终总结在列表里带小徽标、在右栏里高亮直达。
+   笔记页的知识大类标题共用同一套节奏。 */
+.monthly-year,
+.note-group {
   margin-top: 2.25rem;
   font-size: 1.15rem;
 }
 
-.monthly-year:first-of-type {
+.monthly-year:first-of-type,
+.note-group:first-of-type {
   margin-top: 1.25rem;
 }
 
