@@ -1,0 +1,86 @@
+# Sveltia CMS 配置
+# 后台入口: https://blog.uzumakinoharu.top/admin/
+# 登录依赖下面 base_url 指向的 OAuth 中转 (Cloudflare Worker, 见 sveltia-cms-auth)
+
+backend:
+  name: github
+  repo: yshgsh1343/yshgsh1343.github.io
+  branch: main
+  base_url: https://sveltia-cms-auth.luminaire6699.workers.dev
+
+site_url: https://blog.uzumakinoharu.top
+display_url: https://blog.uzumakinoharu.top
+
+media_folder: assets/img/posts
+public_folder: /assets/img/posts
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: posts
+    label: 文章
+    folder: _posts
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    # 文件名需要英文 slug (决定文章 URL), 由下面的 slug 字段提供
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
+    summary: "{{title}} ({{date}})"
+    sortable_fields: [date, title]
+    fields:
+      - name: title
+        label: 标题
+        widget: string
+
+      - name: slug
+        label: 文件名 slug
+        widget: string
+        hint: 英文短横线格式, 决定文章 URL, 如 hello-world
+        pattern: ["^[a-z0-9]+(-[a-z0-9]+)*$", "只能用小写字母、数字和短横线"]
+
+      - name: date
+        label: 发布时间
+        widget: datetime
+        format: "YYYY-MM-DD HH:mm:ss ZZ"
+        picker_utc: false
+
+      - name: description
+        label: 摘要
+        widget: string
+        required: false
+        hint: 可选, 显示在首页列表和 SEO 描述
+
+      - name: categories
+        label: 分类
+        widget: list
+        hint: 碎碎念会进碎碎念时间线, 笔记/月报会进对应页面
+        default: [随笔]
+
+      - name: tags
+        label: 标签
+        widget: list
+        required: false
+
+      - name: pin
+        label: 置顶
+        widget: boolean
+        required: false
+
+      - name: image
+        label: 封面图
+        widget: object
+        required: false
+        fields:
+          - name: path
+            label: 图片
+            widget: image
+          - name: alt
+            label: 替代文本
+            widget: string
+            required: false
+
+      - name: body
+        label: 正文
+        widget: markdown
