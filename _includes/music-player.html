@@ -3,9 +3,10 @@
 <div id="music-player" class="music-player" data-src="{{ mp_src | relative_url }}" data-autoplay="{{ mp_autoplay }}">
   <div class="music-player__cover">
     <i class="fas fa-music"></i>
-    <!-- 不带 src 属性：主题的 refactor-content 会把正文 img 包成灯箱链接，
-         空 src 会被拼成死链 /src；封面地址由 JS 播放时赋值。 -->
-    <img id="mp-cover-img" alt="" hidden>
+    <!-- src 必须存在且非空：空串会被主题拼成死链 /src（htmlproofer 报错），
+         缺失则 refactor-content 处理 img 时把后续正文全部吞掉。
+         用 1x1 透明 gif 占位，真实封面由 JS 播放时赋值。 -->
+    <img id="mp-cover-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" hidden>
   </div>
   <div class="music-player__body">
     <div class="music-player__title" id="mp-title">歌单加载中……</div>
