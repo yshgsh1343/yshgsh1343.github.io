@@ -98,7 +98,7 @@ theme_mode: # [light | dark]
 cdn: https://cdn.jsdelivr.net/gh/yshgsh1343/yshgsh1343.github.io
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://github.com/yshgsh1343.png
+avatar: /assets/img/avatar.jpg
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -230,6 +230,8 @@ exclude:
   - "*.config.js"
   - "package*.json"
 
+# Category archive pages stay enabled (post metadata links to them);
+# only the standalone "分类" nav tab was removed.
 jekyll-archives:
   enabled: [categories, tags]
   layouts:
