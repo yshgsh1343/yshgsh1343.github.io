@@ -71,7 +71,7 @@ Chorme 浏览器位置
 **打开开发者工具**（依旧 Brave 举例子
 ![2026-03-28-16-43-35-image](/assets/img/posts/github-edu/devtools-location.png)
 
-位置改为其他，经纬度使用 [http://jingweidu.757dy.com](http://jingweidu.757dy.com/) 查询。越精确越好。
+位置改为其他，经纬度使用 [jingweidu.757dy.com](https://jingweidu.757dy.com/) 查询。越精确越好。
 
 Chorme
 
