@@ -1,0 +1,41 @@
+---
+layout: page
+---
+
+<!-- 标签页只统计正式文章：碎碎念 / 笔记 / 月报 的文章不计入，
+     只属于它们的标签也不显示。 -->
+{% assign excluded = '碎碎念|笔记|月报' | split: '|' %}
+
+<div id="tags" class="d-flex flex-wrap mx-xl-2">
+  {% assign tags = '' | split: '' %}
+  {% for t in site.tags %}
+    {% assign tags = tags | push: t[0] %}
+  {% endfor %}
+
+  {% assign sorted_tags = tags | sort_natural %}
+
+  {% for t in sorted_tags %}
+    {% assign visible_count = 0 %}
+    {% for post in site.tags[t] %}
+      {% assign skip = false %}
+      {% for cat in excluded %}
+        {% if post.categories contains cat %}
+          {% assign skip = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% unless skip %}
+        {% assign visible_count = visible_count | plus: 1 %}
+      {% endunless %}
+    {% endfor %}
+
+    {% if visible_count == 0 %}{% continue %}{% endif %}
+
+    <div>
+      <a class="tag" href="{{ t | slugify | url_encode | prepend: '/tags/' | append: '/' | relative_url }}">
+        {{ t -}}
+        <span class="text-muted">{{ visible_count }}</span>
+      </a>
+    </div>
+  {% endfor %}
+</div>

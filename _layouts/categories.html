@@ -1,0 +1,25 @@
+---
+layout: page
+---
+
+{% include lang.html %}
+
+<!-- 分类页：横向排列的分类胶囊；碎碎念 / 笔记 / 月报 不参与展示。 -->
+{% assign excluded = '碎碎念|笔记|月报' | split: '|' %}
+{% assign sort_categories = site.categories | sort %}
+
+<div id="page-categories" class="categories-inline">
+  {% for category in sort_categories %}
+    {% assign category_name = category | first %}
+    {% assign posts_of_category = category | last %}
+
+    {% if excluded contains category_name %}{% continue %}{% endif %}
+
+    {% capture _category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
+    <a class="category-chip" href="{{ _category_url | relative_url }}">
+      <i class="far fa-folder-open fa-fw"></i>
+      <span class="name">{{ category_name }}</span>
+      <span class="count text-muted">{{ posts_of_category | size }}</span>
+    </a>
+  {% endfor %}
+</div>

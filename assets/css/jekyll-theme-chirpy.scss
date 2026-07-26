@@ -77,7 +77,8 @@ h6,
   --timeline-color: rgb(47 93 138 / 20%);
   --timeline-node-bg: var(--accent);
   --timeline-year-dot-color: #ffffff;
-  --highlight-bg-color: #eaeef4;
+  --highlight-bg-color: #f6f8fa;
+  --highlight-lineno-color: #8c959f;
   --inline-code-bg: rgb(46 52 64 / 7%);
 }
 
@@ -88,6 +89,90 @@ h6,
   --checkbox-checked-color: var(--accent);
   --sidebar-active-color: var(--accent);
   --timeline-node-bg: var(--accent);
+}
+
+/* GitHub Light 代码高亮：浅色模式下覆写 Rouge 令牌配色。 */
+:root[data-bs-theme='light'] .highlight,
+html:not([data-bs-theme='dark']) .highlight {
+  .c,
+  .c1,
+  .cm,
+  .cs { color: #57606a; font-style: normal; }
+
+  .cp,
+  .cpf,
+  .se,
+  .si { color: #0550ae; }
+
+  .err { background: transparent; color: #82071e; }
+
+  .k,
+  .kc,
+  .kd,
+  .kn,
+  .kp,
+  .kr,
+  .kv,
+  .o,
+  .ow { color: #cf222e; }
+
+  .kt,
+  .nc,
+  .nn { color: #953800; }
+
+  .m,
+  .mb,
+  .mf,
+  .mh,
+  .mi,
+  .il,
+  .mo,
+  .mx,
+  .no,
+  .bp,
+  .ne,
+  .ni,
+  .nl,
+  .nv,
+  .vc,
+  .vg,
+  .vi,
+  .vm { color: #0550ae; }
+
+  .s,
+  .s1,
+  .s2,
+  .sa,
+  .sb,
+  .sc,
+  .dl,
+  .sd,
+  .sh,
+  .sx,
+  .sr,
+  .ss { color: #0a3069; }
+
+  .na,
+  .nd,
+  .nf,
+  .fm { color: #8250df; }
+
+  .nb,
+  .nt { color: #116329; }
+
+  .n,
+  .nx,
+  .p,
+  .w { color: #1f2328; }
+
+  .gd { background-color: #ffebe9; color: #82071e; }
+  .gi { background-color: #dafbe1; color: #116329; }
+
+  .gh,
+  .gu { color: #0550ae; font-weight: 600; }
+
+  .ge { font-style: italic; }
+  .gs { font-weight: 600; }
 }
 
 /* Decorative marker for tab page titles, in a rounded face so the
@@ -123,6 +208,17 @@ html:lang(zh-CN) .content,
 html:lang(zh-CN) .post-meta,
 html:lang(zh-CN) #archives .date,
 html:lang(zh-CN) #archives .date.day {
+  font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif !important;
+}
+
+/* Markdown 正文（含正文内标题）统一微软雅黑；
+   页面级标题、卡片标题仍走宋体规则。 */
+html:lang(zh-CN) .content h1,
+html:lang(zh-CN) .content h2,
+html:lang(zh-CN) .content h3,
+html:lang(zh-CN) .content h4,
+html:lang(zh-CN) .content h5,
+html:lang(zh-CN) .content h6 {
   font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif !important;
 }
 
@@ -486,6 +582,22 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   line-height: 1.8;
 }
 
+/* 首页信息流整体右移：左右等量偏移保持列宽不变，
+   平衡侧栏右移后右侧显得过空的留白。 */
+@media (min-width: 1200px) {
+  #post-list {
+    margin-right: -3.5rem;
+    margin-left: 3.5rem;
+  }
+}
+
+@media (min-width: 1650px) {
+  #post-list {
+    margin-right: -4.5rem;
+    margin-left: 4.5rem;
+  }
+}
+
 /* The residual card ring lives on .post-preview (1px spread shadow);
    kill it together with the hover background block. */
 #post-list .post-preview {
@@ -532,6 +644,42 @@ footer p {
   border-color: var(--accent) !important;
   background: var(--tag-hover) !important;
   color: var(--accent) !important;
+}
+
+/* 分类页：横向排列的分类胶囊，样式与卡片语言一致（细边 + 左侧强调条）。 */
+.categories-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.categories-inline .category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  border: 1px solid var(--main-border-color) !important;
+  border-left: 3px solid var(--accent) !important;
+  background: var(--card-bg);
+  box-shadow: none !important;
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.categories-inline .category-chip:hover,
+.categories-inline .category-chip:focus {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+.categories-inline .category-chip i {
+  color: var(--accent);
+}
+
+.categories-inline .category-chip .count {
+  font-size: 0.85em;
 }
 
 /* jemoji: keep emojis inline at text size. */
