@@ -111,6 +111,9 @@
     cursor: pointer;
     width: 3.2rem;
     height: 3.2rem;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .music-player--playing .music-player__cover {
@@ -284,6 +287,73 @@
       return;
     } else {
       root.classList.add('music-player--float');
+    }
+
+    /* 悬浮形态可拖动：按住封面拖到任意位置，位置存 sessionStorage 跨页保持。
+       拖动位移超过阈值就不再触发封面的展开/收起点击。 */
+    const PKEY = 'mp-pos-v1';
+    let dragMoved = false;
+    if (!dock) {
+      const clampPos = (x, y) => {
+        const rect = root.getBoundingClientRect();
+        const maxX = window.innerWidth - Math.min(rect.width, 56);
+        const maxY = window.innerHeight - rect.height;
+        return {
+          x: Math.min(Math.max(x, -(rect.width - 56)), Math.max(maxX, 0)),
+          y: Math.min(Math.max(y, 0), Math.max(maxY, 0))
+        };
+      };
+      const applyPos = (x, y) => {
+        const p = clampPos(x, y);
+        root.classList.add('music-player--custom-pos');
+        root.style.left = `${p.x}px`;
+        root.style.top = `${p.y}px`;
+      };
+      const savePos = () => {
+        if (!root.classList.contains('music-player--custom-pos')) return;
+        try {
+          sessionStorage.setItem(PKEY, JSON.stringify({
+            x: parseFloat(root.style.left) || 0,
+            y: parseFloat(root.style.top) || 0
+          }));
+        } catch (_) {}
+      };
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(PKEY));
+        if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) {
+          applyPos(saved.x, saved.y);
+        }
+      } catch (_) {}
+      const coverEl = document.getElementById('mp-cover-btn');
+      let drag = null;
+      coverEl.addEventListener('pointerdown', (event) => {
+        if (event.button !== undefined && event.button !== 0) return;
+        const rect = root.getBoundingClientRect();
+        drag = { sx: event.clientX, sy: event.clientY, ox: rect.left, oy: rect.top };
+        dragMoved = false;
+        try { coverEl.setPointerCapture(event.pointerId); } catch (_) {}
+      });
+      coverEl.addEventListener('pointermove', (event) => {
+        if (!drag) return;
+        const dx = event.clientX - drag.sx;
+        const dy = event.clientY - drag.sy;
+        if (!dragMoved && Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        dragMoved = true;
+        applyPos(drag.ox + dx, drag.oy + dy);
+      });
+      const endDrag = () => {
+        if (!drag) return;
+        drag = null;
+        if (dragMoved) savePos();
+      };
+      coverEl.addEventListener('pointerup', endDrag);
+      coverEl.addEventListener('pointercancel', () => { drag = null; });
+      window.addEventListener('resize', () => {
+        if (root.classList.contains('music-player--custom-pos')) {
+          applyPos(parseFloat(root.style.left) || 0, parseFloat(root.style.top) || 0);
+          savePos();
+        }
+      });
     }
 
     const els = {
@@ -509,6 +579,11 @@
 
     if (!dock) {
       els.coverBtn.addEventListener('click', () => {
+        /* 刚拖动完的那次 click 不当作展开/收起 */
+        if (dragMoved) {
+          dragMoved = false;
+          return;
+        }
         root.classList.toggle('music-player--collapsed');
         saveState();
       });
@@ -582,6 +657,9 @@
     });
 
     window.addEventListener('pagehide', saveState);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') saveState();
+    });
 
     const seekRatio = (event) => {
       const rect = els.progress.getBoundingClientRect();
