@@ -54,6 +54,20 @@
     box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.18);
   }
 
+  /* 被用户拖动过之后改用 left/top 定位，不再贴边 */
+  .music-player--float.music-player--custom-pos {
+    right: auto;
+    bottom: auto;
+  }
+
+  /* 拖动过的收起态是一个完整圆形悬浮球，而不是贴右缘的半胶囊 */
+  .music-player--float.music-player--custom-pos.music-player--collapsed {
+    right: auto;
+    padding: 0.25rem;
+    border-radius: 999px;
+    border-right: 1px solid var(--main-border-color, #e5e7eb);
+  }
+
   /* 收起时贴住屏幕右缘，只露出封面按钮的半胶囊 */
   .music-player--float.music-player--collapsed {
     right: 0;

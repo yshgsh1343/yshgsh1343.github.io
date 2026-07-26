@@ -1,23 +1,8 @@
 <!-- 首页右栏：置顶文章 / 近期文章 / 致谢 / 站点信息（含随机漫游）。 -->
 
-{% assign excluded = '碎碎念|笔记|月报' | split: '|' %}
-
-<!-- 正式文章池：碎碎念 / 笔记 / 月报 有各自的 tab 页，不进首页右栏。
-     近期文章和随机漫游都从这里取，保证两处口径一致。 -->
-{% assign walkable_posts = '' | split: '' %}
-{% for post in site.posts %}
-  {% if post.hidden == true %}{% continue %}{% endif %}
-  {% assign skip = false %}
-  {% for cat in excluded %}
-    {% if post.categories contains cat %}
-      {% assign skip = true %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-  {% unless skip %}
-    {% assign walkable_posts = walkable_posts | push: post %}
-  {% endunless %}
-{% endfor %}
+<!-- 右栏的近期文章和随机漫游不分板块，碎碎念 / 笔记 / 月报都算数，
+     跟首页信息流和归档的排除规则相互独立。 -->
+{% assign panel_posts = site.posts | where_exp: 'item', 'item.hidden != true' %}
 
 <div class="access">
   <!-- 置顶文章：先保留空位，等首页置顶策略确定后再接内容。 -->
@@ -26,11 +11,11 @@
     <div class="content mt-2 mb-0"></div>
   </section>
 
-  <!-- 近期文章：与首页信息流同口径，只列正式文章。 -->
+  <!-- 近期文章：全站最近更新，不分板块。 -->
   <section id="panel-recent">
     <h2 class="panel-heading">近期文章</h2>
     <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
-      {% for post in walkable_posts limit: 5 %}
+      {% for post in panel_posts limit: 5 %}
         <li class="text-truncate lh-lg">
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         </li>
@@ -83,7 +68,7 @@
     }
 
     var urls = [
-      {% for post in walkable_posts %}
+      {% for post in panel_posts %}
         '{{ post.url | relative_url }}'{% unless forloop.last %},{% endunless %}
       {% endfor %}
     ];
