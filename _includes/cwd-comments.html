@@ -1,7 +1,7 @@
 <section id="cwd-comments" class="cwd-comments mt-5" data-api="https://cwd-api.luminaire6699.workers.dev" data-post-slug="{{ page.url | default: '/guestbook/' }}" data-site-id="yshgsh1343.github.io">
   <div class="cwd-comments__header">
-    <h2 class="cwd-comments__title">留言</h2>
-    <p class="cwd-comments__desc">欢迎留下想说的话，昵称、邮箱和内容为必填。</p>
+    <h2 class="cwd-comments__title">{{ include.title | default: '留言' }}</h2>
+    <p class="cwd-comments__desc">{{ include.desc | default: '欢迎留下想说的话，昵称、邮箱和内容为必填。' }}</p>
   </div>
 
   <form id="cwd-comment-form" class="cwd-comments__form">

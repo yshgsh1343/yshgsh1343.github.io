@@ -1182,7 +1182,7 @@ a.post-nav-next:hover .post-nav-arrow {
   text-decoration: underline;
 }
 
-/* Post lists on tab pages (月报 / 碎碎念): date + ruled title links. */
+/* Post lists on tab pages (笔记 / 月报 / 归档): date + title, no rules between rows. */
 .tab-post-list {
   margin-top: 1.25rem;
   margin-bottom: 0;
@@ -1195,7 +1195,6 @@ a.post-nav-next:hover .post-nav-arrow {
   align-items: baseline;
   gap: 1.2rem;
   padding: 0.55rem 0;
-  border-bottom: 1px solid var(--main-border-color);
 }
 
 .tab-post-list .date {

@@ -7,23 +7,20 @@ layout: page
 <!-- 归档只收正式文章：碎碎念 / 笔记 / 月报 不进列表。 -->
 {% assign excluded = '碎碎念|笔记|月报' | split: '|' %}
 
-<div id="page-category" class="archive-post-list">
-  <ul class="content ps-0">
-    {% for post in site.posts %}
-      {% assign skip = false %}
-      {% for cat in excluded %}
-        {% if post.categories contains cat %}
-          {% assign skip = true %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-      {% if skip %}{% continue %}{% endif %}
-
-      <li class="d-flex justify-content-between px-md-3">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <span class="dash flex-grow-1"></span>
-        {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
-      </li>
+<ul class="tab-post-list">
+  {% for post in site.posts %}
+    {% assign skip = false %}
+    {% for cat in excluded %}
+      {% if post.categories contains cat %}
+        {% assign skip = true %}
+        {% break %}
+      {% endif %}
     {% endfor %}
-  </ul>
-</div>
+    {% if skip %}{% continue %}{% endif %}
+
+    <li>
+      <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

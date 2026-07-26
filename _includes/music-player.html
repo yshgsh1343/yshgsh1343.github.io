@@ -54,11 +54,14 @@
     box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.18);
   }
 
+  /* 收起时贴住屏幕右缘，只露出封面按钮的半胶囊 */
   .music-player--float.music-player--collapsed {
+    right: 0;
     width: auto;
     gap: 0;
-    padding: 0.3rem;
-    border-radius: 999px;
+    padding: 0.25rem 0.1rem 0.25rem 0.3rem;
+    border-radius: 999px 0 0 999px;
+    border-right: 0;
   }
 
   .music-player--float.music-player--collapsed .music-player__body,
@@ -249,14 +252,22 @@
     if (!root) return;
 
     /* 关于页放一个 #music-player-dock 占位，播放器就内嵌到那里；
-       其他页面保持悬浮在右下角。
+       其他页面悬浮在右下角，默认收起贴右缘。
+       游客本次会话里从未在关于页点过播放（mp-active-v1 未置位）时，
+       非关于页直接移除播放器，不渲染也不请求歌单。
        注意：这个内联脚本会被 compress_html 压成一行，只能用块注释，
        且每条语句必须带分号。 */
+    const AKEY = 'mp-active-v1';
     const dock = document.getElementById('music-player-dock');
+    let activated = false;
+    try { activated = sessionStorage.getItem(AKEY) === '1'; } catch (_) {}
     if (dock) {
       dock.appendChild(root);
       root.classList.add('music-player--docked');
       root.classList.remove('music-player--collapsed');
+    } else if (!activated) {
+      root.remove();
+      return;
     } else {
       root.classList.add('music-player--float');
     }
@@ -372,7 +383,9 @@
           time: audio.currentTime > 0 ? audio.currentTime : pendingSeek,
           dur: Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : knownDur,
           playing: wantPlaying,
-          open: !root.classList.contains('music-player--collapsed')
+          /* 只有悬浮形态的展开状态才值得记住；关于页内嵌形态永远展开，
+             不能把它当成"用户想展开悬浮球" */
+          open: !dock && !root.classList.contains('music-player--collapsed')
         }));
       } catch (_) {}
     };
@@ -488,6 +501,8 @@
     }
 
     audio.addEventListener('playing', () => {
+      /* 真正播过一次才算激活，之后其他页面才出现悬浮播放器（本会话内） */
+      try { sessionStorage.setItem(AKEY, '1'); } catch (_) {}
       errorStreak = 0;
       wantPlaying = true;
       root.classList.add('music-player--playing');
