@@ -1,0 +1,16 @@
+# 友链列表。每项：
+#   name: 站点名（必填）
+#   url: 链接（必填）
+#   desc: 一句话介绍（可选）
+#   avatar: 头像/图标地址（可选，留空显示首字）
+# 下面两条是占位示例，换成真实友链后删掉。
+
+- name: 示例友链
+  url: https://example.com
+  desc: 这是一条占位示例，换成真实朋友的站点。
+  avatar:
+
+- name: 另一个示例
+  url: https://example.org
+  desc: 友链数据在 _data/friends.yml 里维护。
+  avatar:

@@ -759,6 +759,69 @@ a.post-nav-next:hover .post-nav-arrow {
 .site-heatmap__cell--l3 { background: rgb(47 93 138 / 74%); }
 .site-heatmap__cell--l4 { background: var(--accent); }
 
+/* 友链卡片：两列网格，头像 + 名字 + 一句话。 */
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.9rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--main-border-color) !important;
+  border-left: 3px solid var(--accent) !important;
+  background: var(--card-bg);
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+  transition: border-color 0.18s ease;
+}
+
+.friend-card:hover {
+  border-color: var(--accent) !important;
+}
+
+.friend-card__avatar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50% !important; /* exempt from the global square rule */
+  overflow: hidden;
+  background: rgb(47 93 138 / 12%);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.friend-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.friend-card__body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.friend-card__name {
+  font-weight: 600;
+}
+
+.friend-card__desc {
+  overflow: hidden;
+  color: var(--text-muted-color);
+  font-size: 0.85rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* 碎碎念: timeline of cards — a vertical rail with node dots, each entry
    a stamped card carrying the full short text. */
 .murmur-timeline {
