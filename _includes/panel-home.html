@@ -1,4 +1,4 @@
-<!-- 首页右栏：置顶文章 / 近期文章 / 站点信息（含致谢与随机漫游）。 -->
+<!-- 首页右栏：置顶文章 / 近期文章 / 致谢 / 站点信息（含随机漫游）。 -->
 
 {% assign excluded = '碎碎念|笔记|月报' | split: '|' %}
 {% assign recent_articles = '' | split: '' %}
@@ -36,32 +36,21 @@
     </ul>
   </section>
 
-  <!-- 站点信息：运行时间、不蒜子浏览量、致谢与随机漫游。 -->
+  <!-- 致谢：与置顶文章、近期文章同级，具体框架用纯文本列出。 -->
+  <section id="panel-ack">
+    <h2 class="panel-heading">致谢</h2>
+    <p class="content mt-2 mb-1 text-muted">框架 Jekyll / Chirpy</p>
+    <p class="content mt-1 mb-1 text-muted">字体 Font Awesome / 思源宋体</p>
+    <p class="content mt-1 mb-0 text-muted">部署 GitHub Pages / Cloudflare Workers</p>
+  </section>
+
+  <!-- 站点信息：运行时间、不蒜子浏览量与随机漫游。 -->
   <section id="panel-site-info">
     <h2 class="panel-heading">站点信息</h2>
     <p class="content mt-2 mb-2">
       <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
       <br>
       <span>浏览量 <span id="busuanzi_value_site_pv">…</span> 次</span>
-    </p>
-    <h3 class="panel-subheading">致谢</h3>
-    <h4 class="panel-ack-heading">博客框架模板</h4>
-    <p class="content mt-1 mb-2 text-muted">
-      <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
-      /
-      <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a>
-    </p>
-    <h4 class="panel-ack-heading">字体</h4>
-    <p class="content mt-1 mb-2 text-muted">
-      <a href="https://fontawesome.com" target="_blank" rel="noopener">Font Awesome</a>
-      /
-      <a href="https://fonts.loli.net/noto/specimen/Noto+Serif+SC" target="_blank" rel="noopener">思源宋体</a>
-    </p>
-    <h4 class="panel-ack-heading">部署</h4>
-    <p class="content mt-1 mb-2 text-muted">
-      <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>
-      /
-      <a href="https://workers.cloudflare.com" target="_blank" rel="noopener">Cloudflare Workers</a>
     </p>
     <button type="button" id="random-walk" class="btn random-walk-btn">
       <i class="fas fa-shoe-prints fa-fw me-1"></i>随机漫游

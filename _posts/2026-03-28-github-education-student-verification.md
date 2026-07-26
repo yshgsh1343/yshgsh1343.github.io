@@ -110,11 +110,3 @@ Student xxx,is allowed to study via distance learning in xxx
 [https://linux.do/t/topic/1413847](https://linux.do/t/topic/1413847)
 
 [github 学生认证常见问题解决方案（已 Approved） - Caicaixiong](https://zhaojianjun2004.github.io/2025/09/16/github_student)
-
-与正文无关的哈气
-
-实际上我认为解决在校生也要跑这么远路认证的方法是：
-
-[![Snipaste_2026-03-28_17-43-21](https://cdn3.ldstatic.com/optimized/4X/2/8/1/281645169f6eab1b8209fbdd2ba2303e2aa61643_2_690x375.jpeg)](https://cdn3.ldstatic.com/original/4X/2/8/1/281645169f6eab1b8209fbdd2ba2303e2aa61643.jpeg)
-
-昨晚找 npy 吐槽学生认证的时候，npy 突然说因为我写话题太少了，我昨天那个帖子会被人当成起号，正好我折腾完了学生认证那就发一个吧（）
