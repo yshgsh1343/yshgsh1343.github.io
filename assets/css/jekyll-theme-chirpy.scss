@@ -645,9 +645,23 @@ a.post-nav-next:hover .post-nav-arrow {
   }
 }
 
+/* Home link in the profile block, on the old tagline's spot. */
+#sidebar .sidebar-home-link {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--sidebar-btn-color);
+  font-size: 0.95rem;
+  text-decoration: none !important;
+}
+
+#sidebar .sidebar-home-link:hover,
+#sidebar .sidebar-home-link.active {
+  color: var(--sidebar-active-color);
+}
+
 #sidebar-search-slot {
   width: 100%;
-  margin-top: 1.1rem;
+  margin-top: 0.8rem;
 }
 
 /* The relocated <search> element: full sidebar width, ruled underline

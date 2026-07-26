@@ -12,7 +12,15 @@
     </a>
 
     <a class="site-title d-block" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+
+    <!-- Home link where the tagline used to sit; search right below it. -->
+    <a
+      href="{{ '/' | relative_url }}"
+      class="sidebar-home-link{% if page.layout == 'home' %} active{% endif %}"
+    >
+      <i class="fa-fw fas fa-home"></i>
+      <span>首页</span>
+    </a>
 
     <!-- Desktop home of the theme's #search element (moved here from the topbar). -->
     <div id="sidebar-search-slot" class="d-none d-lg-block"></div>
