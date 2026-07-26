@@ -1,0 +1,51 @@
+<!-- 站点更新热力图：构建时由 Liquid 吐出每篇文章的日期，浏览器端画
+     过去一年的贡献格子。inline script 会被 compress_html 压成一行，
+     只能用块注释。 -->
+<div class="site-heatmap">
+  <p class="site-heatmap__caption" id="site-heatmap-caption"></p>
+  <div class="site-heatmap__grid" id="site-heatmap-grid" aria-label="过去一年的更新热力图"></div>
+</div>
+
+<script>
+  (function () {
+    var counts = {};
+    {% for post in site.posts %}
+    (function (d) { counts[d] = (counts[d] || 0) + 1; })({{ post.date | date: '%Y-%m-%d' | jsonify }});
+    {% endfor %}
+
+    var grid = document.getElementById('site-heatmap-grid');
+    var caption = document.getElementById('site-heatmap-caption');
+    if (!grid) return;
+
+    function key(date) {
+      var m = date.getMonth() + 1;
+      var d = date.getDate();
+      return date.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d);
+    }
+
+    /* 从"本周日"起往前推 52 周，共 53 列 x 7 行。 */
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var end = new Date(today);
+    var start = new Date(today);
+    start.setDate(start.getDate() - start.getDay() - 52 * 7);
+
+    var total = 0;
+    var frag = document.createDocumentFragment();
+    for (var t = new Date(start); t <= end; t.setDate(t.getDate() + 1)) {
+      var k = key(t);
+      var n = counts[k] || 0;
+      total += n;
+      var level = n === 0 ? 0 : n === 1 ? 1 : n === 2 ? 2 : n === 3 ? 3 : 4;
+      var cell = document.createElement('span');
+      cell.className = 'site-heatmap__cell site-heatmap__cell--l' + level;
+      cell.title = k + (n > 0 ? ' · ' + n + ' 篇' : '');
+      frag.appendChild(cell);
+    }
+    grid.appendChild(frag);
+
+    if (caption) {
+      caption.textContent = '过去一年更新了 ' + total + ' 篇。';
+    }
+  })();
+</script>

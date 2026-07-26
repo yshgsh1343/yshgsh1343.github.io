@@ -688,17 +688,37 @@ a.post-nav-next:hover .post-nav-arrow {
   margin-top: 0.25rem;
 }
 
-/* 关于页 GitHub 贡献热力图：通栏、可横向滚动，防小屏挤压。 */
-.gh-heatmap {
+/* 关于页更新热力图：53 列 x 7 行的格子，周为列，可横向滚动。 */
+.site-heatmap {
   margin: 1.75rem 0;
   overflow-x: auto;
 }
 
-.gh-heatmap img {
-  display: block;
-  min-width: 660px;
-  width: 100%;
+.site-heatmap__caption {
+  margin-bottom: 0.6rem;
+  color: var(--text-muted-color);
+  font-size: 0.85rem;
 }
+
+.site-heatmap__grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 11px);
+  grid-auto-columns: 11px;
+  gap: 3px;
+  width: fit-content;
+}
+
+.site-heatmap__cell {
+  width: 11px;
+  height: 11px;
+  background: rgb(47 93 138 / 8%);
+}
+
+.site-heatmap__cell--l1 { background: rgb(47 93 138 / 30%); }
+.site-heatmap__cell--l2 { background: rgb(47 93 138 / 52%); }
+.site-heatmap__cell--l3 { background: rgb(47 93 138 / 74%); }
+.site-heatmap__cell--l4 { background: var(--accent); }
 
 /* 碎碎念: timeline of cards — a vertical rail with node dots, each entry
    a stamped card carrying the full short text. */
@@ -760,20 +780,6 @@ a.post-nav-next:hover .post-nav-arrow {
   border-color: var(--accent);
 }
 
-.murmur-title {
-  margin: 0 0 0.4rem;
-  font-size: 1.02rem;
-}
-
-.murmur-title a {
-  color: var(--heading-color);
-  text-decoration: none !important;
-}
-
-.murmur-title a:hover {
-  color: var(--accent);
-}
-
 .murmur-content {
   color: var(--text-color);
   font-size: 0.95rem;
@@ -782,6 +788,37 @@ a.post-nav-next:hover .post-nav-arrow {
 
 .murmur-content > p:last-child {
   margin-bottom: 0;
+}
+
+/* Collapsed state: clamp the box, fade out the last line. */
+.murmur-content.is-clamped {
+  position: relative;
+  overflow: hidden;
+}
+
+.murmur-content.is-clamped::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1.75em;
+  background: linear-gradient(to bottom, transparent, var(--card-bg));
+  content: "";
+  pointer-events: none;
+}
+
+.murmur-expand {
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.murmur-expand:hover {
+  text-decoration: underline;
 }
 
 /* Post lists on tab pages (月报 / 碎碎念): date + ruled title links. */
