@@ -625,12 +625,14 @@ footer p {
   text-align: left;
 }
 
-/* Tag chips: rounded pill boxes instead of lone underlines. */
+/* Tags use underline rules instead of pill boxes. */
 .tag,
 .post-tags .post-tag,
 #access-tags .post-tag {
-  border: 1px solid var(--tag-border) !important;
-  border-radius: 999px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--tag-border) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
   box-shadow: none !important;
 }
 
@@ -640,8 +642,8 @@ footer p {
 .post-tags .post-tag:focus,
 #access-tags .post-tag:hover,
 #access-tags .post-tag:focus {
-  border-color: var(--accent) !important;
-  background: var(--tag-hover) !important;
+  border-bottom-color: var(--accent) !important;
+  background: transparent !important;
   color: var(--accent) !important;
 }
 
@@ -723,24 +725,14 @@ footer p {
   width: calc(100% + 1ch);
 }
 
-/* 标签胶囊不吃右栏链接的下划线滑动态，保持 pill 语言。
-   右栏链接的 border-bottom: 0 会砍掉 pill 的下边框，这里补回来。 */
-#panel-wrapper .access a.tag::after {
-  content: none;
-}
-
-#panel-wrapper .access a.tag {
-  border-bottom: 1px solid var(--tag-border) !important;
-}
-
-/* 右栏标签云：胶囊缩一号，适配窄列。 */
+/* 右栏标签云：去掉胶囊框，沿用面板链接的横线滑动态。 */
 #panel-wrapper .panel-tag-cloud {
   gap: 0.5rem 0.35rem;
 }
 
 #panel-wrapper .panel-tag-cloud .tag {
   margin-right: 0;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 0;
   font-size: 0.85rem;
   line-height: 1.6;
 }

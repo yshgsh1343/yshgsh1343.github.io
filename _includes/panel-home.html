@@ -1,17 +1,34 @@
-<!-- 首页右栏：近期动态 / 近期留言 / 运行时间 / 致谢与随机漫游。 -->
+<!-- 首页右栏：置顶文章 / 近期文章 / 站点信息（含致谢与随机漫游）。 -->
 
-{% assign recent = '' | split: '' %}
-{% for post in site.posts limit: 5 %}
-  {% assign recent = recent | push: post %}
+{% assign excluded = '碎碎念|笔记|月报' | split: '|' %}
+{% assign recent_articles = '' | split: '' %}
+{% for post in site.posts %}
+  {% if recent_articles.size >= 5 %}{% break %}{% endif %}
+  {% if post.hidden == true %}{% continue %}{% endif %}
+  {% assign skip = false %}
+  {% for cat in excluded %}
+    {% if post.categories contains cat %}
+      {% assign skip = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% unless skip %}
+    {% assign recent_articles = recent_articles | push: post %}
+  {% endunless %}
 {% endfor %}
 
 <div class="access">
-  <!-- 近期动态：全类型混排（正式文章 + 碎碎念 + 笔记 + 月报），
-       与首页信息流的过滤口径刻意相反，是互补不是重复。 -->
+  <!-- 置顶文章：先保留空位，等首页置顶策略确定后再接内容。 -->
+  <section id="panel-pinned">
+    <h2 class="panel-heading">置顶文章</h2>
+    <div class="content mt-2 mb-0"></div>
+  </section>
+
+  <!-- 近期文章：与首页信息流同口径，只列正式文章。 -->
   <section id="panel-recent">
-    <h2 class="panel-heading">近期动态</h2>
+    <h2 class="panel-heading">近期文章</h2>
     <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
-      {% for post in recent %}
+      {% for post in recent_articles %}
         <li class="text-truncate lh-lg">
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
         </li>
@@ -19,28 +36,14 @@
     </ul>
   </section>
 
-  <!-- 近期留言：等 Worker 端"全站最新 N 条评论"接口就绪后接上，
-       接口格式以 Worker 为准，这里先占位。 -->
-  <section id="panel-recent-comments">
-    <h2 class="panel-heading">近期留言</h2>
-    <p class="content mt-2 mb-0 text-muted">
-      这里以后会滚动最新留言，先去<a href="{{ '/guestbook/' | relative_url }}">留言板</a>逛逛。
-    </p>
-  </section>
-
-  <!-- 站点信息：运行时间逐秒走字 + 不蒜子全站浏览量（脚本在 default.html 全站加载）。 -->
+  <!-- 站点信息：运行时间、不蒜子浏览量、致谢与随机漫游。 -->
   <section id="panel-site-info">
     <h2 class="panel-heading">站点信息</h2>
-    <p class="content mt-2 mb-0">
+    <p class="content mt-2 mb-2">
       <span id="site-runtime" data-start="2026-07-22T18:00:00+08:00">已运行 …</span>
       <br>
       <span>浏览量 <span id="busuanzi_value_site_pv">…</span> 次</span>
     </p>
-  </section>
-
-  <!-- 致谢一行小字 + 随机漫游按钮。 -->
-  <section id="panel-colophon">
-    <h2 class="panel-heading">致谢</h2>
     <p class="content mt-2 mb-2 text-muted">
       本站由
       <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
