@@ -606,6 +606,47 @@ a.post-nav-next:hover .post-nav-arrow {
   }
 }
 
+/* Desktop: the topbar retires; search lives in the sidebar under the
+   profile block. Mobile keeps the stock topbar + search-trigger flow. */
+@media (min-width: 992px) {
+  #topbar-wrapper {
+    display: none;
+  }
+
+  /* Compensate the vanished 3rem topbar so content keeps breathing room. */
+  #main-wrapper > .container > .row:first-of-type {
+    padding-top: 2.25rem;
+  }
+
+  #search-result-wrapper {
+    padding-top: 1rem;
+  }
+}
+
+#sidebar-search-slot {
+  width: 100%;
+  margin-top: 1.1rem;
+}
+
+/* The relocated <search> element: full sidebar width, ruled underline
+   instead of the theme's boxed pill; neutralize its topbar margins. */
+#sidebar-search-slot search {
+  max-width: 100%;
+  margin-right: 0;
+  padding: 0 0.1rem;
+  border: 0 !important;
+  border-bottom: 1px solid var(--btn-border-color) !important;
+  background: transparent;
+}
+
+#sidebar-search-slot search:focus-within {
+  border-bottom-color: #9b4141 !important;
+}
+
+#sidebar-search-slot search i {
+  align-self: center;
+}
+
 /* Zishu-style grouped sidebar navigation labels. */
 #sidebar .nav-group-label {
   width: 100%;

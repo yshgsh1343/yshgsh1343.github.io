@@ -13,6 +13,9 @@
 
     <a class="site-title d-block" href="{{ '/' | relative_url }}">{{ site.title }}</a>
     <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+
+    <!-- Desktop home of the theme's #search element (moved here from the topbar). -->
+    <div id="sidebar-search-slot" class="d-none d-lg-block"></div>
   </header>
   <!-- .profile-wrapper -->
 
@@ -153,6 +156,37 @@
 <button type="button" class="sidebar-edge-toggle" aria-label="收起侧边栏" title="收起侧边栏"></button>
 
 <script>
+  /* Desktop: relocate the theme's #search element from the topbar into the
+     sidebar slot. The theme JS holds element references, so the moved node
+     keeps all its behavior; mobile keeps the stock topbar flow. */
+  (function () {
+    var mq = window.matchMedia('(min-width: 992px)');
+
+    function placeSearch() {
+      var search = document.getElementById('search');
+      var slot = document.getElementById('sidebar-search-slot');
+      var topbar = document.getElementById('topbar');
+      if (!search || !slot || !topbar) return;
+
+      if (mq.matches) {
+        if (search.parentElement !== slot) slot.appendChild(search);
+      } else if (search.parentElement === slot) {
+        var cancel = document.getElementById('search-cancel');
+        topbar.insertBefore(search, cancel);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', placeSearch);
+    } else {
+      placeSearch();
+    }
+
+    if (mq.addEventListener) {
+      mq.addEventListener('change', placeSearch);
+    }
+  })();
+
   (function () {
     var KEY = 'sidebar-collapsed';
     var rails = document.querySelectorAll('.sidebar-edge-toggle');
