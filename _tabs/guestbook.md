@@ -40,6 +40,4 @@ comments: true
 
 ## 留言
 
-想对我说些什么？无论是建议、问题，还是随便聊聊，都欢迎。也可以在 [GitHub](https://github.com/{{ site.github.username }}) 上给我提 Issue 或 PR。
-
 {% include cwd-comments.html %}
