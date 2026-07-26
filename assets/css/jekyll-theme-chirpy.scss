@@ -1039,6 +1039,7 @@ a.post-nav-next:hover .post-nav-arrow {
 }
 
 .friend-card__avatar {
+  position: relative;
   display: flex;
   flex: none;
   align-items: center;
@@ -1052,10 +1053,15 @@ a.post-nav-next:hover .post-nav-arrow {
   font-weight: 700;
 }
 
-.friend-card__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* 头像图走 --friend-avatar 背景变量而非 <img>（见 guestbook.md 注释）；
+   画在首字上层，加载失败即透明露出首字。 */
+.friend-card__avatar::after {
+  position: absolute;
+  content: '';
+  inset: 0;
+  background-image: var(--friend-avatar, none);
+  background-position: center;
+  background-size: cover;
 }
 
 .friend-card__body {

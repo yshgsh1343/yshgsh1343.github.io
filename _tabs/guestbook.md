@@ -15,13 +15,12 @@ comments: true
 <div class="friends-grid">
 {% for friend in site.data.friends %}
   <a class="friend-card" href="{{ friend.url }}" target="_blank" rel="noopener noreferrer">
-    <span class="friend-card__avatar">
-      {%- if friend.avatar and friend.avatar != '' -%}
-        <img src="{{ friend.avatar }}" alt="" loading="lazy" onerror="this.remove()">
-      {%- else -%}
-        {{ friend.name | slice: 0 }}
-      {%- endif -%}
-    </span>
+    {%- comment -%}
+      头像不用 <img>：主题 refactor-content 会给正文里的 <img> 自动包一层灯箱 <a>，
+      在卡片 <a> 里造成非法嵌套、把布局拆散。改用 CSS 变量传背景图画在 ::after 上，
+      图加载失败时背景不渲染，底下的首字就是兜底。
+    {%- endcomment -%}
+    <span class="friend-card__avatar"{% if friend.avatar and friend.avatar != '' %} style="--friend-avatar: url('{{ friend.avatar }}')"{% endif %}>{{ friend.name | slice: 0 }}</span>
     <span class="friend-card__body">
       <span class="friend-card__name">{{ friend.name }}</span>
       {%- if friend.desc -%}
