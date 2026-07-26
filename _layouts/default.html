@@ -74,6 +74,9 @@ layout: compress
 
     <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
 
+    <!-- 全站常驻音乐播放器：关于页有 #music-player-dock 时嵌入正文，否则悬浮右下角 -->
+    {% include music-player.html %}
+
     {% if site.pwa.enabled %}
       {% include_cached notification.html lang=lang %}
     {% endif %}

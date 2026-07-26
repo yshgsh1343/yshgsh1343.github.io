@@ -1,13 +1,11 @@
-{% assign mp_src = include.src | default: '/assets/data/music.json' %}
-{% assign mp_autoplay = include.autoplay | default: '' %}
-<div id="music-player" class="music-player" data-src="{{ mp_src | relative_url }}" data-autoplay="{{ mp_autoplay }}">
-  <div class="music-player__cover">
+<div id="music-player" class="music-player music-player--collapsed" data-src="{{ '/assets/data/music.json' | relative_url }}">
+  <button type="button" id="mp-cover-btn" class="music-player__cover" aria-label="展开/收起播放器" title="展开/收起播放器">
     <i class="fas fa-music"></i>
     <!-- src 必须存在且非空：空串会被主题拼成死链 /src（htmlproofer 报错），
          缺失则 refactor-content 处理 img 时把后续正文全部吞掉。
          用 1x1 透明 gif 占位，真实封面由 JS 播放时赋值。 -->
     <img id="mp-cover-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" hidden>
-  </div>
+  </button>
   <div class="music-player__body">
     <div class="music-player__title" id="mp-title">歌单加载中……</div>
     <div class="music-player__artist" id="mp-artist"></div>
@@ -16,11 +14,12 @@
     </div>
     <div class="music-player__meta">
       <span id="mp-time">0:00 / 0:00</span>
-      <span id="mp-mode">随机循环</span>
+      <span id="mp-mode">列表循环</span>
     </div>
     <div class="music-player__status" id="mp-status" hidden></div>
   </div>
   <div class="music-player__controls">
+    <button type="button" id="mp-mode-btn" class="music-player__btn" aria-label="切换播放模式" title="列表循环"><i class="fas fa-retweet" id="mp-mode-icon"></i></button>
     <button type="button" id="mp-prev" class="music-player__btn" aria-label="上一首" title="上一首"><i class="fas fa-step-backward"></i></button>
     <button type="button" id="mp-toggle" class="music-player__btn music-player__btn--main" aria-label="播放" title="播放"><i class="fas fa-play" id="mp-toggle-icon"></i></button>
     <button type="button" id="mp-next" class="music-player__btn" aria-label="下一首" title="下一首"><i class="fas fa-step-forward"></i></button>
@@ -32,11 +31,44 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 2.5rem;
     padding: 1rem 1.1rem;
     border: 1px solid var(--main-border-color, #e5e7eb);
     border-radius: 0.9rem;
     background: var(--card-bg, rgba(255, 255, 255, 0.02));
+  }
+
+  .music-player--docked {
+    margin-top: 2.5rem;
+  }
+
+  /* 非关于页：固定在右下角的悬浮形态 */
+  .music-player--float {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1030;
+    width: min(21rem, calc(100vw - 2rem));
+    margin: 0;
+    padding: 0.7rem 0.85rem;
+    background: var(--main-bg, #fff);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.18);
+  }
+
+  .music-player--float.music-player--collapsed {
+    width: auto;
+    gap: 0;
+    padding: 0.3rem;
+    border-radius: 999px;
+  }
+
+  .music-player--float.music-player--collapsed .music-player__body,
+  .music-player--float.music-player--collapsed .music-player__controls {
+    display: none;
+  }
+
+  /* 悬浮播放器占了右下角，把返回顶部按钮抬高让位 */
+  body:has(#music-player.music-player--float) #back-to-top {
+    bottom: 5.75rem;
   }
 
   .music-player__cover {
@@ -44,6 +76,8 @@
     flex: none;
     width: 3.6rem;
     height: 3.6rem;
+    padding: 0;
+    border: 0;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -51,8 +85,15 @@
     justify-content: center;
     background: var(--main-border-color, #e5e7eb);
     color: var(--text-muted-color, #6b7280);
+    cursor: default;
     animation: mp-spin 24s linear infinite;
     animation-play-state: paused;
+  }
+
+  .music-player--float .music-player__cover {
+    cursor: pointer;
+    width: 3.2rem;
+    height: 3.2rem;
   }
 
   .music-player--playing .music-player__cover {
@@ -86,6 +127,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     min-height: 1.2em;
+  }
+
+  .music-player--float .music-player__artist {
+    display: none;
   }
 
   .music-player__progress {
@@ -177,9 +222,13 @@
   }
 
   @media (max-width: 576px) {
-    .music-player {
+    .music-player--docked {
       gap: 0.75rem;
       padding: 0.85rem 0.9rem;
+    }
+
+    .music-player--float {
+      gap: 0.6rem;
     }
 
     .music-player__btn {
@@ -199,7 +248,21 @@
     const root = document.getElementById('music-player');
     if (!root) return;
 
+    /* 关于页放一个 #music-player-dock 占位，播放器就内嵌到那里；
+       其他页面保持悬浮在右下角。
+       注意：这个内联脚本会被 compress_html 压成一行，只能用块注释，
+       且每条语句必须带分号。 */
+    const dock = document.getElementById('music-player-dock');
+    if (dock) {
+      dock.appendChild(root);
+      root.classList.add('music-player--docked');
+      root.classList.remove('music-player--collapsed');
+    } else {
+      root.classList.add('music-player--float');
+    }
+
     const els = {
+      coverBtn: document.getElementById('mp-cover-btn'),
       cover: document.getElementById('mp-cover-img'),
       title: document.getElementById('mp-title'),
       artist: document.getElementById('mp-artist'),
@@ -208,6 +271,8 @@
       time: document.getElementById('mp-time'),
       mode: document.getElementById('mp-mode'),
       status: document.getElementById('mp-status'),
+      modeBtn: document.getElementById('mp-mode-btn'),
+      modeIcon: document.getElementById('mp-mode-icon'),
       prev: document.getElementById('mp-prev'),
       toggle: document.getElementById('mp-toggle'),
       toggleIcon: document.getElementById('mp-toggle-icon'),
@@ -218,12 +283,31 @@
     audio.preload = 'none';
     audio.volume = 0.8;
 
+    /* 播放进度存 sessionStorage：翻页续播，关标签页自动清零。
+       播放模式存 localStorage：是长期偏好。 */
+    const SKEY = 'mp-session-v1';
+    const MKEY = 'mp-mode';
+    const MODES = ['list', 'shuffle', 'one'];
+    const MODE_META = {
+      list: { icon: 'fas fa-retweet', label: '列表循环' },
+      shuffle: { icon: 'fas fa-random', label: '随机播放' },
+      one: { icon: 'fas fa-redo', label: '单曲循环' }
+    };
+
+    let mode = localStorage.getItem(MKEY);
+    if (MODES.indexOf(mode) === -1) mode = 'list';
+
     let tracks = [];
     let order = [];
     let pos = 0;
     let errorStreak = 0;
     let seeking = false;
     let started = false;
+    let wantPlaying = false;
+    let pendingSeek = 0;
+    let knownDur = 0;
+    let lastSave = 0;
+    let resumeArmed = false;
 
     const setStatus = (message) => {
       els.status.textContent = message || '';
@@ -244,18 +328,70 @@
       return list;
     };
 
-    /* 洗一轮新顺序；avoidFirst 防止新一轮开头正好重复上一首。
-       注意：这个内联脚本会被 compress_html 压成一行，只能用块注释。 */
-    const buildOrder = (avoidFirst) => {
+    /* 按当前模式重排播放顺序；startIdx >= 0 时保证该曲目是当前位置 */
+    const buildOrder = (startIdx) => {
+      order = tracks.map((_, i) => i);
+      pos = 0;
+      if (mode === 'shuffle') {
+        shuffle(order);
+        if (startIdx >= 0) {
+          const k = order.indexOf(startIdx);
+          if (k > 0) {
+            const t = order[0];
+            order[0] = order[k];
+            order[k] = t;
+          }
+        }
+      } else if (startIdx >= 0) {
+        pos = startIdx;
+      }
+    };
+
+    /* 随机模式播完一轮：重新洗牌，避免新一轮开头重复上一首 */
+    const wrapShuffle = () => {
+      const last = order[order.length - 1];
       order = shuffle(tracks.map((_, i) => i));
-      if (order.length > 1 && order[0] === avoidFirst) {
+      if (order.length > 1 && order[0] === last) {
         const j = 1 + Math.floor(Math.random() * (order.length - 1));
-        [order[0], order[j]] = [order[j], order[0]];
+        const t = order[0];
+        order[0] = order[j];
+        order[j] = t;
       }
       pos = 0;
     };
 
     const current = () => tracks[order[pos]];
+
+    const saveState = () => {
+      if (!started) return;
+      try {
+        sessionStorage.setItem(SKEY, JSON.stringify({
+          idx: order[pos],
+          order: order,
+          pos: pos,
+          time: audio.currentTime > 0 ? audio.currentTime : pendingSeek,
+          dur: Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : knownDur,
+          playing: wantPlaying,
+          open: !root.classList.contains('music-player--collapsed')
+        }));
+      } catch (_) {}
+    };
+
+    const readState = () => {
+      try {
+        return JSON.parse(sessionStorage.getItem(SKEY));
+      } catch (_) {
+        return null;
+      }
+    };
+
+    const applyModeUI = () => {
+      const meta = MODE_META[mode];
+      els.modeIcon.className = meta.icon;
+      els.modeBtn.title = meta.label;
+      els.modeBtn.setAttribute('aria-label', meta.label);
+      els.mode.textContent = tracks.length ? `${meta.label} · ${tracks.length} 首` : meta.label;
+    };
 
     const updateMediaSession = (track) => {
       if (!('mediaSession' in navigator)) return;
@@ -273,6 +409,8 @@
       els.time.textContent = '0:00 / 0:00';
       els.cover.hidden = true;
       if (track.pic) els.cover.src = track.pic;
+      pendingSeek = 0;
+      knownDur = 0;
       audio.src = track.url;
       updateMediaSession(track);
     };
@@ -280,42 +418,83 @@
     els.cover.addEventListener('load', () => { els.cover.hidden = false; });
     els.cover.addEventListener('error', () => { els.cover.hidden = true; });
 
+    /* 自动播放被浏览器拦截时，等用户在页面上任意一次交互后立刻续播 */
+    const armResume = () => {
+      if (resumeArmed) return;
+      resumeArmed = true;
+      const kick = () => {
+        document.removeEventListener('pointerdown', kick);
+        document.removeEventListener('keydown', kick);
+        resumeArmed = false;
+        if (started && wantPlaying && audio.paused) {
+          audio.play().catch(() => {});
+        }
+      };
+      document.addEventListener('pointerdown', kick);
+      document.addEventListener('keydown', kick);
+    };
+
     const play = () => {
-      audio.play().catch(() => { /* 自动播放被拦截时保持暂停态；加载失败走 error 事件 */ });
+      audio.play().catch(() => { armResume(); });
     };
 
     const step = (delta, autoplayNext) => {
       if (!tracks.length) return;
       if (delta > 0) {
         pos += 1;
-        if (pos >= order.length) buildOrder(order[order.length - 1]);
+        if (pos >= order.length) {
+          if (mode === 'shuffle') {
+            wrapShuffle();
+          } else {
+            pos = 0;
+          }
+        }
       } else {
         pos = (pos - 1 + order.length) % order.length;
       }
       load(current());
       if (autoplayNext) play();
-    };
-
-    /* 加载完歌单就先随机抽一首停在暂停态，点播放直接播这首 */
-    const prepare = () => {
-      started = true;
-      buildOrder(-1);
-      load(current());
+      saveState();
     };
 
     els.toggle.addEventListener('click', () => {
       if (!started) return;
-      if (audio.paused) play(); else audio.pause();
+      if (audio.paused) {
+        wantPlaying = true;
+        play();
+      } else {
+        wantPlaying = false;
+        audio.pause();
+      }
+      saveState();
     });
-    els.next.addEventListener('click', () => { if (started) step(1, !audio.paused); });
-    els.prev.addEventListener('click', () => { if (started) step(-1, !audio.paused); });
+    els.next.addEventListener('click', () => { if (started) step(1, wantPlaying); });
+    els.prev.addEventListener('click', () => { if (started) step(-1, wantPlaying); });
+
+    els.modeBtn.addEventListener('click', () => {
+      if (!started) return;
+      mode = MODES[(MODES.indexOf(mode) + 1) % MODES.length];
+      try { localStorage.setItem(MKEY, mode); } catch (_) {}
+      buildOrder(order[pos]);
+      applyModeUI();
+      saveState();
+    });
+
+    if (!dock) {
+      els.coverBtn.addEventListener('click', () => {
+        root.classList.toggle('music-player--collapsed');
+        saveState();
+      });
+    }
 
     audio.addEventListener('playing', () => {
       errorStreak = 0;
+      wantPlaying = true;
       root.classList.add('music-player--playing');
       els.toggleIcon.className = 'fas fa-pause';
       els.toggle.setAttribute('aria-label', '暂停');
       setStatus('');
+      saveState();
     });
 
     audio.addEventListener('pause', () => {
@@ -324,7 +503,15 @@
       els.toggle.setAttribute('aria-label', '播放');
     });
 
-    audio.addEventListener('ended', () => step(1, true));
+    /* 播完永不停：单曲循环回到 0，其余模式接着播下一首 */
+    audio.addEventListener('ended', () => {
+      if (mode === 'one') {
+        audio.currentTime = 0;
+        play();
+      } else {
+        step(1, true);
+      }
+    });
 
     audio.addEventListener('error', () => {
       if (!started) return;
@@ -347,8 +534,25 @@
       els.time.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
     };
 
-    audio.addEventListener('timeupdate', () => { if (!seeking) renderProgress(); });
+    audio.addEventListener('timeupdate', () => {
+      if (!seeking) renderProgress();
+      const now = Date.now();
+      if (now - lastSave > 1000) {
+        lastSave = now;
+        saveState();
+      }
+    });
     audio.addEventListener('durationchange', renderProgress);
+
+    audio.addEventListener('loadedmetadata', () => {
+      knownDur = audio.duration;
+      if (pendingSeek > 0 && pendingSeek < audio.duration - 1) {
+        audio.currentTime = pendingSeek;
+      }
+      pendingSeek = 0;
+    });
+
+    window.addEventListener('pagehide', saveState);
 
     const seekRatio = (event) => {
       const rect = els.progress.getBoundingClientRect();
@@ -368,21 +572,32 @@
       if (!seeking) return;
       seeking = false;
       audio.currentTime = seekRatio(event) * audio.duration;
+      saveState();
     });
     els.progress.addEventListener('pointercancel', () => { seeking = false; });
 
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.setActionHandler('play', () => { if (started) play(); });
-      navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+      navigator.mediaSession.setActionHandler('play', () => {
+        if (started) {
+          wantPlaying = true;
+          play();
+        }
+      });
+      navigator.mediaSession.setActionHandler('pause', () => {
+        wantPlaying = false;
+        audio.pause();
+        saveState();
+      });
       navigator.mediaSession.setActionHandler('previoustrack', () => { if (started) step(-1, true); });
       navigator.mediaSession.setActionHandler('nexttrack', () => { if (started) step(1, true); });
     }
 
     const disableButtons = (disabled) => {
-      [els.prev, els.toggle, els.next].forEach((button) => { button.disabled = disabled; });
+      [els.modeBtn, els.prev, els.toggle, els.next].forEach((button) => { button.disabled = disabled; });
     };
 
     disableButtons(true);
+    applyModeUI();
 
     fetch(root.dataset.src)
       .then((response) => {
@@ -394,9 +609,41 @@
         tracks = data.filter((item) => item && item.url);
         if (!tracks.length) throw new Error('歌单是空的');
         disableButtons(false);
-        els.mode.textContent = `随机循环 · ${tracks.length} 首`;
-        prepare();
-        if (root.dataset.autoplay === 'true') play();
+
+        /* 有上一页留下的进度就无缝续播，否则按当前模式备好第一首（暂停态） */
+        const st = readState();
+        let restored = false;
+        if (st && Number.isInteger(st.idx) && st.idx >= 0 && st.idx < tracks.length) {
+          if (Array.isArray(st.order) && st.order.length === tracks.length && st.order[st.pos] === st.idx) {
+            order = st.order;
+            pos = st.pos;
+          } else {
+            buildOrder(st.idx);
+          }
+          started = true;
+          load(current());
+          knownDur = st.dur > 0 ? st.dur : 0;
+          if (st.time > 0) {
+            pendingSeek = st.time;
+            els.time.textContent = `${formatTime(st.time)} / ${formatTime(knownDur > 0 ? knownDur : NaN)}`;
+            if (knownDur > 0) {
+              els.bar.style.width = `${((st.time / knownDur) * 100).toFixed(2)}%`;
+            }
+          }
+          if (!dock && st.open) root.classList.remove('music-player--collapsed');
+          if (st.playing) {
+            wantPlaying = true;
+            play();
+          }
+          restored = true;
+        }
+        if (!restored) {
+          buildOrder(mode === 'shuffle' ? -1 : 0);
+          started = true;
+          load(current());
+        }
+        applyModeUI();
+        saveState();
       })
       .catch((error) => {
         els.title.textContent = '歌单加载失败';

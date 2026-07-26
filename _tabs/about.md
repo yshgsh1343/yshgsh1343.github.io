@@ -25,5 +25,7 @@ CC BY-NC-SA 4.0。
 - [fonts.loli.net](https://fonts.loli.net/) —— Google Fonts 国内镜像。
 - [ghchart](https://ghchart.rshah.org/) —— 上面那张贡献热力图。
 
-<!-- 曲库在 assets/data/music.json，换歌单：node tools/export-playlist.mjs <歌单ID> -->
-{% include music-player.html %}
+<!-- 播放器是全站常驻的（default 布局引入），这里只是个停靠位：
+     在关于页它嵌进正文，其他页面悬浮在右下角。
+     曲库在 assets/data/music.json，换歌单：node tools/export-playlist.mjs <歌单ID> -->
+<div id="music-player-dock"></div>
