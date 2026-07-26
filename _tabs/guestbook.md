@@ -8,6 +8,8 @@ comments: true
 
 ## 友链
 
+这里的友链不代表我和 blog 主双向认识，单向认为此博客 / 站点质量很高就会被收录。同样的，你也可以未经我允许收录我的网站，遵守协议即可。
+
 {% if site.data.friends and site.data.friends.size > 0 %}
 
 <div class="friends-grid">
@@ -38,6 +40,5 @@ comments: true
 
 想交换友链？在下面留言告诉我你的站点，或发邮件到 [{{ site.social.email }}](mailto:{{ site.social.email }})。
 
-## 留言
 
 {% include cwd-comments.html %}

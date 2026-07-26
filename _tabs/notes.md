@@ -9,35 +9,15 @@ layout: notes
 {% assign posts = site.categories["笔记"] %}
 {% if posts.size > 0 %}
 
-{% assign groups = posts | group_by: 'note_category' %}
-
-{% for group in groups %}
-{% if group.name == '' %}{% continue %}{% endif %}
-<h2 id="note-group-{{ group.name | slugify }}" class="note-group">{{ group.name }}</h2>
-
-<ul class="tab-post-list">
-{% for post in group.items %}
-  <li>
+<!-- 中间栏是纯时间流（日期左、标题右），学科归属只在右栏的知识分类里体现。 -->
+<ul class="tab-post-list" id="notes-list">
+{% for post in posts %}
+  <li data-note-category="{{ post.note_category | default: '未分类' }}">
     <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
   </li>
 {% endfor %}
 </ul>
-{% endfor %}
-
-{% assign ungrouped = posts | where_exp: 'item', 'item.note_category == nil' %}
-{% if ungrouped.size > 0 %}
-<h2 id="note-group-misc" class="note-group">未分类</h2>
-
-<ul class="tab-post-list">
-{% for post in ungrouped %}
-  <li>
-    <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
-    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-  </li>
-{% endfor %}
-</ul>
-{% endif %}
 
 {% else %}
 

@@ -16,7 +16,7 @@ BME 本科 → ？，还在持续学习以完成转行。希望可以去偏信�
 
 笔记：学习知识的笔记，涵盖数学、信息科学、少量的电子学、少量的其他自然科学。不出现在首页卡片。
 
-月报：2026的主线就是考研了，主要从2027开始一个月写一篇总结。不出现在首页卡片。
+月报：2026的主线就是考研了，从2027开始一个月写一篇总结。不出现在首页卡片。
 
 归档：非笔记类博客，出现在首页卡片。
 
@@ -41,12 +41,13 @@ BME 本科 → ？，还在持续学习以完成转行。希望可以去偏信�
 
 ## 致谢
 
-这个站点能跑起来，离不开这些项目和服务，排名不分先后：
+这个站点能跑起来离不开这些项目和服务，排名不分先后：
 
 - [Jekyll](https://jekyllrb.com/) 与 [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) —— 骨架与魔改主题
 - [Font Awesome](https://fontawesome.com/) 与 [思源宋体](https://fonts.loli.net/noto/specimen/Noto+Serif+SC) —— 图标与标题字体
 - [GitHub Pages](https://pages.github.com/) —— 托管与自动构建
 - [Cloudflare Workers](https://workers.cloudflare.com/) —— 评论后端
+
 
 啊都看到这里了来听听歌吧
 

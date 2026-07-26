@@ -532,16 +532,22 @@ body.sidebar-collapsed .sidebar-edge-toggle:focus-visible {
   }
 }
 
-/* Bottom-left collapse arrow in the sidebar footer row. The theme's
-   Bootstrap bundle drops the d-xl-* display utilities, so visibility
-   is handled here: desktop only, same breakpoint as the edge rail. */
+/* Collapse arrow, rightmost in the sidebar footer row. Mirrors the
+   theme's 1.75rem bottom-row button metrics so it baselines with the
+   mode toggle and contact icons. The theme's Bootstrap bundle drops
+   the d-xl-* display utilities, so visibility is handled here:
+   desktop only, same breakpoint as the edge rail. */
 #sidebar .sidebar-collapse-btn {
   display: none;
-  padding: 0.25rem 0.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: 0.5rem;
+  padding: 0;
   border: 0 !important;
   color: var(--sidebar-btn-color);
   font-size: 0.95rem;
-  line-height: 1;
+  line-height: 1.75rem;
+  text-align: center;
 }
 
 @media (min-width: 1200px) {
@@ -639,39 +645,51 @@ footer p {
   color: var(--accent) !important;
 }
 
-/* 分类页：横向排列的分类胶囊，细边框卡片样式。 */
-.categories-inline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.5rem;
+/* 分类页：无卡片框的文件夹列表，行间细线分隔；
+   二级分类缩进一层，折叠箭头跟随主题 categories.js 的 rotate 契约。 */
+.categories-plain {
+  margin-top: 1.25rem;
 }
 
-.categories-inline .category-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.05rem;
-  border: 1px solid var(--main-border-color) !important;
-  background: var(--card-bg);
-  box-shadow: none !important;
-  color: var(--text-color) !important;
-  text-decoration: none !important;
-  transition: border-color 0.18s ease, color 0.18s ease;
+.categories-plain .category-row {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--main-border-color);
 }
 
-.categories-inline .category-chip:hover,
-.categories-inline .category-chip:focus {
-  border-color: var(--accent) !important;
-  color: var(--accent) !important;
-}
-
-.categories-inline .category-chip i {
+.categories-plain .category-row i {
   color: var(--accent);
 }
 
-.categories-inline .category-chip .count {
+.categories-plain .count {
   font-size: 0.85em;
+}
+
+.categories-plain .category-sublist {
+  margin-bottom: 0;
+  padding-left: 1.6rem;
+}
+
+.categories-plain .category-sublist li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--main-border-color);
+}
+
+.categories-plain .category-trigger {
+  padding: 0 0.3rem;
+  border-bottom: 0 !important;
+  color: var(--text-muted-color);
+}
+
+.categories-plain .category-trigger:hover {
+  color: var(--accent) !important;
+}
+
+.categories-plain .category-trigger i {
+  transition: transform 0.2s ease;
+}
+
+.categories-plain .category-trigger i.rotate {
+  transform: rotate(-90deg);
 }
 
 /* 右栏（panel_includes）公共语言：链接走下划线滑动态，
@@ -705,9 +723,14 @@ footer p {
   width: calc(100% + 1ch);
 }
 
-/* 标签胶囊不吃右栏链接的下划线滑动态，保持 pill 语言。 */
+/* 标签胶囊不吃右栏链接的下划线滑动态，保持 pill 语言。
+   右栏链接的 border-bottom: 0 会砍掉 pill 的下边框，这里补回来。 */
 #panel-wrapper .access a.tag::after {
   content: none;
+}
+
+#panel-wrapper .access a.tag {
+  border-bottom: 1px solid var(--tag-border) !important;
 }
 
 /* 右栏标签云：胶囊缩一号，适配窄列。 */
@@ -749,16 +772,13 @@ footer p {
   color: var(--accent);
 }
 
-/* 月报页：年份组标题；年终总结在列表里带小徽标、在右栏里高亮直达。
-   笔记页的知识大类标题共用同一套节奏。 */
-.monthly-year,
-.note-group {
+/* 月报页：年份组标题；年终总结在列表里带小徽标、在右栏里高亮直达。 */
+.monthly-year {
   margin-top: 2.25rem;
   font-size: 1.15rem;
 }
 
-.monthly-year:first-of-type,
-.note-group:first-of-type {
+.monthly-year:first-of-type {
   margin-top: 1.25rem;
 }
 
@@ -775,6 +795,12 @@ footer p {
   margin-left: 0.6rem;
   color: var(--accent);
   font-size: 0.9em;
+}
+
+/* 笔记页右栏：当前生效的知识分类筛选项加粗提亮。 */
+#panel-notes-groups .note-filter.active {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* jemoji: keep emojis inline at text size. */

@@ -4,8 +4,17 @@
 #   desc: 一句话介绍（可选）
 #   avatar: 头像/图标地址（可选，留空显示首字）
 
-#
-#-name: 示例友链
-#url: https://example.com
-#desc: 这是一条占位示例，换成真实朋友的站点。
-#avatar:
+- name: CS自学指南
+  url: https://csdiy.wiki/
+  desc: 梦开始的地方
+  avatar: https://favicon.im/csdiy.wiki
+
+- name: 动手学深度学习
+  url: https://zh-v2.d2l.ai/
+  desc: 被诟病过时但质量依然高
+  avatar: https://favicon.im/zh-v2.d2l.ai
+
+- name: LINUX.DO
+  url: https://linux.do
+  desc: 之前常呆的论坛，学 ai 上 L 站
+  avatar: https://favicon.im/linux.do

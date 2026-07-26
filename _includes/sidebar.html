@@ -47,16 +47,6 @@
   </nav>
 
   <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
-    <!-- Collapse arrow: same toggle behavior as the edge rail -->
-    <button
-      type="button"
-      class="btn btn-link nav-link sidebar-collapse-btn"
-      aria-label="收起侧边栏"
-      title="收起侧边栏"
-    >
-      <i class="fa-solid fa-angles-left"></i>
-    </button>
-
     {% unless site.theme_mode == 'light' or site.theme_mode == 'dark' %}
       {%- capture icon_system -%}
         <i class="fa-solid fa-display" data-theme-mode="system"></i>
@@ -157,6 +147,16 @@
         </a>
       {% endif %}
     {% endfor %}
+
+    <!-- Collapse arrow: rightmost of the bottom-row buttons, same toggle as the edge rail -->
+    <button
+      type="button"
+      class="btn btn-link nav-link sidebar-collapse-btn ms-auto"
+      aria-label="收起侧边栏"
+      title="收起侧边栏"
+    >
+      <i class="fa-solid fa-angles-left"></i>
+    </button>
   </div>
   <!-- .sidebar-bottom -->
 </aside>

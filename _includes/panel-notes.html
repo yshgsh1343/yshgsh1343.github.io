@@ -1,5 +1,5 @@
-<!-- 笔记页右栏：知识大类导航。分组来自笔记自己的 note_category 字段，
-     与全站 categories 无关；只列有内容的分组。 -->
+<!-- 笔记页右栏：知识大类。中间栏是纯时间流后，这里从锚点跳转改为
+     点击筛选（读 li 的 data-note-category），"全部"恢复完整列表。 -->
 {% assign posts = site.categories['笔记'] %}
 {% if posts.size > 0 %}
   {% assign groups = posts | group_by: 'note_category' %}
@@ -8,22 +8,46 @@
     <section id="panel-notes-groups">
       <h2 class="panel-heading">知识分类</h2>
       <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+        <li class="lh-lg">
+          <a href="#" class="note-filter active" data-note-filter="">全部</a>
+          <span class="text-muted panel-count">{{ posts | size }}</span>
+        </li>
+
         {% for group in groups %}
-          {% if group.name == '' %}{% continue %}{% endif %}
+          {% assign group_name = group.name | default: '未分类' %}
+          {% if group_name == '' %}{% assign group_name = '未分类' %}{% endif %}
           <li class="lh-lg">
-            <a href="#note-group-{{ group.name | slugify }}">{{ group.name }}</a>
+            <a href="#" class="note-filter" data-note-filter="{{ group_name }}">{{ group_name }}</a>
             <span class="text-muted panel-count">{{ group.items | size }}</span>
           </li>
         {% endfor %}
-
-        {% assign ungrouped = posts | where_exp: 'item', 'item.note_category == nil' %}
-        {% if ungrouped.size > 0 %}
-          <li class="lh-lg">
-            <a href="#note-group-misc">未分类</a>
-            <span class="text-muted panel-count">{{ ungrouped | size }}</span>
-          </li>
-        {% endif %}
       </ul>
     </section>
   </div>
+
+  <script>
+    /* 知识分类筛选：显示/隐藏中间栏 #notes-list 的行。
+       compress_html 会把内联脚本压成一行，只能用块注释。 */
+    (function () {
+      var filters = document.querySelectorAll('.note-filter');
+      var items = document.querySelectorAll('#notes-list > li');
+      if (!filters.length || !items.length) return;
+
+      filters.forEach(function (f) {
+        f.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = f.getAttribute('data-note-filter');
+
+          filters.forEach(function (o) {
+            o.classList.toggle('active', o === f);
+          });
+
+          items.forEach(function (li) {
+            var show = !target || li.getAttribute('data-note-category') === target;
+            li.style.display = show ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
 {% endif %}
